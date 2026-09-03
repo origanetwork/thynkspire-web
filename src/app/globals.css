@@ -1,1 +1,27 @@
+@import url('https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
+
+:root {
+  --primary: #00BF62;
+  --secondary: #F5F5F5;
+  --background: #000000;
+}
+
+body {
+  background-color: #000000;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading, .font-clash {
+  font-family: 'Clash Display', system-ui, -apple-system, sans-serif !important;
+}
+
+.font-poppins {
+  font-family: 'Poppins', sans-serif;
+}

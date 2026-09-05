@@ -76,19 +76,19 @@ export default function ConsultationCTA() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Unknown@gmail.com"
                     required
-                    className="w-full sm:w-[280px] lg:w-[300px] rounded-full border border-white/30 bg-black/60 px-5 py-2.5 pr-20 text-sm font-poppins text-white placeholder-slate-400 focus:outline-none focus:border-[#00BF62] backdrop-blur-md transition-all shadow-inner"
+                    className="w-full sm:w-[280px] lg:w-[300px] rounded-full border-2 border-white/30 bg-white/20 px-5 py-3.5 pr-20 text-sm font-poppins text-white placeholder-slate-200 focus:outline-none focus:border-[#00BF62] backdrop-blur-md transition-all shadow-inner"
                   />
 
                   {/* Dual Green Circle Arrow Action Pill inside Input */}
                   <button
                     type="submit"
-                    className="absolute right-1.5 flex items-center justify-center gap-1 px-2.5 py-1.5 rounded-full bg-[#00BF62] text-black hover:bg-[#00BF62]/90 transition-all shadow-md group"
+                    className="absolute right-1.5 top-1/2 -translate-y-1/2 flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-full bg-white text-black hover:bg-[#00BF62]/90 transition-all shadow-md group"
                     title="Submit Email"
                   >
-                    <div className="w-4 h-4 rounded-full bg-white/30 flex items-center justify-center group-hover:rotate-45 transition-transform">
-                      <FiArrowUpRight className="w-3 h-3 text-black" />
+                    <div className="w-6 h-6 rounded-full bg-[#00BF62] flex items-center justify-center group-hover:rotate-45 transition-transform">
+                      <FiArrowUpRight className="w-3.5 h-3.5 text-white stroke-[2.5]" />
                     </div>
-                    <FiArrowRight className="w-3.5 h-3.5 text-black group-hover:translate-x-0.5 transition-transform" />
+                    <FiArrowRight className="w-4 h-4 text-[#00BF62] group-hover:translate-x-0.5 transition-transform stroke-[2.5]" />
                   </button>
                 </div>
 
@@ -96,7 +96,7 @@ export default function ConsultationCTA() {
                 <Link href="#book-consultation" className="w-full sm:w-auto">
                   <button
                     type="button"
-                    className="w-full sm:w-auto group flex items-center justify-center gap-2.5 pl-5 pr-1.5 py-2.5 rounded-full border border-white/30 bg-black/60 hover:border-[#00BF62] backdrop-blur-md transition-all duration-300 shadow-xl"
+                    className="w-full sm:w-auto group flex items-center justify-center gap-2.5 pl-5 pr-1.5 py-2.5 rounded-full border border-white/30 bg-transparent hover:border-[#00BF62] backdrop-blur-md transition-all duration-300 shadow-xl"
                     style={{
                       borderRadius: "38px",
                     }}

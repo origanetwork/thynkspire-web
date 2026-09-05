@@ -168,7 +168,7 @@ export default function Hero() {
                         {/* Bottom Stats Capsule Bar & Connected Diagonal Vector Line */}
                         <MotionFadeIn delay={0.55} direction="up" distance={30} className="relative flex items-center w-full">
                             <div
-                                className="relative w-full max-w-[656px] lg:max-w-[690px] xl:max-w-[720px] min-h-[96px] lg:h-[122px] rounded-[32px] sm:rounded-[60px] lg:rounded-[94px] overflow-hidden py-4 sm:py-[9px] px-3 sm:px-8 border border-[#00BF62]/30 shadow-2xl flex items-center justify-between mt-2 sm:mt-4 opacity-100 bg-[#030d07]"
+                                className="relative w-full max-w-[656px] lg:max-w-[690px] xl:max-w-[720px] min-h-[96px] lg:h-[122px] rounded-[32px] sm:rounded-[60px] lg:rounded-[94px] overflow-hidden py-4 sm:py-[9px] px-3 sm:px-8 shadow-2xl flex items-center justify-between mt-2 sm:mt-4 opacity-100 bg-[#030d07]"
                                 style={{
                                     background: "linear-gradient(90deg, #010a05 0%, rgba(35, 145, 92, 0.22) 50%, #010a05 100%), linear-gradient(180deg, rgba(0, 25, 12, 0.9) 0%, rgba(0, 5, 2, 0.95) 100%)",
                                 }}
@@ -201,10 +201,6 @@ export default function Hero() {
                                             <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                                 Industry Partners
                                             </span>
-                                            {/* Figma vector indicator stroke after Industry Partners */}
-                                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="inline-block stroke-[#00BF62] opacity-80 mt-1 hidden sm:inline-block">
-                                                <path d="M1 1L11 7" strokeWidth="1.5" strokeLinecap="round" />
-                                            </svg>
                                         </div>
                                     </div>
 

@@ -9,18 +9,18 @@ import { FaLinkedinIn, FaTwitter, FaInstagram } from "react-icons/fa";
 export default function Footer() {
   return (
     <footer 
-      className="relative w-full text-white pt-6 sm:pt-8 pb-4 border-t border-[#00BF63]/10 backdrop-blur-xl"
+      className="relative w-full text-white pt-6 sm:pt-10 lg:pt-16 pb-4 sm:pb-6 lg:pb-10 border-t border-[#00BF63]/10 backdrop-blur-xl"
       style={{
         background: "rgba(255, 255, 255, 0.05)",
         boxShadow: "0px -4px 4px 0px #00BF6347",
       }}
     >
       {/* Content Container matching exact Header & Hero width with compact spacing */}
-      <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 space-y-4 sm:space-y-6">
+      <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 space-y-6 sm:space-y-8 lg:space-y-12">
         
         {/* Top Centered Prominent Logo (Large visual scale with compact container height) */}
         <div className="flex justify-center w-full -mt-2">
-          <div className="relative w-[280px] sm:w-[640px] lg:w-[780px] h-[75px] sm:h-[125px] lg:h-[235px]">
+          <div className="relative w-[280px] sm:w-[640px] lg:w-[840px] h-[75px] sm:h-[135px] lg:h-[260px]">
             <Image
               src="/logo.png"
               alt="ThynkSpire - Think. Inspire. Grow."
@@ -35,7 +35,7 @@ export default function Footer() {
         <div className="w-full h-[1px] bg-white/20" />
 
         {/* Middle Row: Relative Grid Layout ensuring Navigation Links stay DEAD CENTER */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6 py-1 min-h-[60px]">
+        <div className="relative flex flex-col lg:flex-row items-center justify-between gap-6 py-1 lg:py-4 min-h-[60px] lg:min-h-[80px]">
           
           {/* Left Column: Social Media Icons Stack */}
           <div className="flex items-center justify-center gap-3 shrink-0 z-10">
@@ -116,7 +116,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright Text */}
-        <div className="text-center pt-4 pb-1 border-t border-white/10">
+        <div className="text-center pt-4 lg:pt-8 pb-1 lg:pb-3 border-t border-white/10">
           <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
             Copyright © 2026 by Origa Reserved
           </p>

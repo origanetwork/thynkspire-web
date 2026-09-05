@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem, MotionScale } from "./MotionWrapper";
+import { title } from "process";
 
 export default function OurPrograms() {
   const cards = [
@@ -88,17 +89,17 @@ export default function OurPrograms() {
                     className="object-cover object-center group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-700 ease-out"
                     priority
                   />
-                  {/* Subtle dark gradient overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/60 z-0" />
+                  {/* Subtle dark gradient overlay concentrated at bottom */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent z-0" />
                 </div>
 
-                {/* Top Glassmorphic Pill Title Badge */}
+                {/* Top Glassmorphic Pill Title Badge with Pure White Transparent Frosted Glass */}
                 <div className="relative z-10 w-full pt-2">
                   <div
-                    className="w-full p-3 sm:p-3.5 rounded-[16px] sm:rounded-[20px] bg-black/40 border border-white/20 text-center shadow-lg group-hover:border-[#00BF63]/60 transition-colors duration-300"
+                    className="w-full p-3 sm:p-3.5 rounded-[16px] sm:rounded-[20px] bg-white/15 border border-white/30 text-center shadow-lg group-hover:border-[#00BF63]/60 transition-colors duration-300"
                     style={{
-                      backdropFilter: "blur(26px)",
-                      WebkitBackdropFilter: "blur(26px)",
+                      backdropFilter: "blur(16px)",
+                      WebkitBackdropFilter: "blur(16px)",
                     }}
                   >
                     <h4 className="font-poppins text-sm sm:text-base font-semibold text-white leading-tight">

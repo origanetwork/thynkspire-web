@@ -40,9 +40,41 @@ const galleryItems = [
     heightClass: "h-[260px] sm:h-[320px] lg:h-[370px]",
     offsetClass: "lg:-translate-y-6",
   },
+  {
+    id: 5,
+    src: "/hero/f5.jpg",
+    alt: "Cybersecurity Workshop",
+    widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
+    heightClass: "h-[220px] sm:h-[260px] lg:h-[270px]",
+    offsetClass: "lg:translate-y-4",
+  },
+  {
+    id: 6,
+    src: "/hero/f6.jpg",
+    alt: "Tech Conference Crowd",
+    widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
+    heightClass: "h-[260px] sm:h-[320px] lg:h-[360px]",
+    offsetClass: "lg:-translate-y-4",
+  },
+  {
+    id: 7,
+    src: "/hero/f7.jpg",
+    alt: "Hands-on Training Session",
+    widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
+    heightClass: "h-[220px] sm:h-[260px] lg:h-[250px]",
+    offsetClass: "lg:translate-y-6",
+  },
+  {
+    id: 8,
+    src: "/hero/f8.jpg",
+    alt: "Campus Seminar",
+    widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
+    heightClass: "h-[260px] sm:h-[320px] lg:h-[370px]",
+    offsetClass: "lg:-translate-y-6",
+  },
 ];
 
-// Animated count-up component with scroll trigger and ease-out interpolation
+// Animated count up component using requestAnimationFrame with easeOut and viewport trigger
 function CountUp({
   to,
   duration = 2,
@@ -65,7 +97,7 @@ function CountUp({
           setHasAnimated(true);
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.1 }
     );
 
     const currentRef = ref.current;
@@ -87,7 +119,6 @@ function CountUp({
     const animate = (time: number) => {
       if (!startTime) startTime = time;
       const progress = Math.min((time - startTime) / (duration * 1000), 1);
-      // Cubic ease-out
       const easeOut = 1 - Math.pow(1 - progress, 3);
       setCount(Math.floor(easeOut * to));
 
@@ -116,7 +147,7 @@ export default function FeaturedEvents() {
     <section className="relative w-full text-white py-20 overflow-hidden">
       {/* Outer container matching exact Header & Hero max width */}
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 space-y-16">
-        
+
         {/* Section Header Tag & Subtitle */}
         <div className="space-y-3">
           <MotionText delay={0.1} duration={0.6}>
@@ -196,6 +227,7 @@ export default function FeaturedEvents() {
               src="/hero/peoples.png"
               alt="Cyber Defenders Audience"
               fill
+              sizes="(max-width: 1024px) 100vw, 400px"
               className="object-cover object-center"
               priority
             />
@@ -206,7 +238,7 @@ export default function FeaturedEvents() {
 
         {/* Dynamic Infinite Marquee Carousel: Smooth Right to Left flow with 8 items and staggered editorial aesthetic */}
         <div className="relative w-full overflow-hidden py-6 sm:py-10 lg:py-14">
-          
+
           {/* Edge fade gradients for seamless infinite entry and exit */}
           <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-8 sm:w-20 bg-gradient-to-r from-black via-black/80 to-transparent z-20" />
           <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-8 sm:w-20 bg-gradient-to-l from-black via-black/80 to-transparent z-20" />
@@ -215,7 +247,7 @@ export default function FeaturedEvents() {
             className="flex items-center gap-5 sm:gap-7 lg:gap-8 w-max py-6"
             animate={{ x: ["0%", "-50%"] }}
             transition={{
-              duration: 25,
+              duration: 45,
               repeat: Infinity,
               ease: "linear",
             }}
@@ -229,6 +261,7 @@ export default function FeaturedEvents() {
                   src={item.src}
                   alt={item.alt}
                   fill
+                  sizes="(max-width: 640px) 280px, (max-width: 1024px) 340px, 380px"
                   className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
                   priority={idx < 4}
                 />
@@ -245,7 +278,7 @@ export default function FeaturedEvents() {
           </h3>
 
           {/* Impact Stats Capsule Bar */}
-          <div 
+          <div
             className="w-full rounded-[20px] sm:rounded-[32px] border border-[#00BF63]/30 bg-[#030d07] p-5 sm:p-8 lg:p-10 grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 items-center text-center divide-y md:divide-y-0 md:divide-x divide-white/10 shadow-2xl"
             style={{
               background: "linear-gradient(90deg, #010a05 0%, rgba(35, 145, 92, 0.28) 50%, #010a05 100%), linear-gradient(180deg, rgba(0, 25, 12, 0.95) 0%, rgba(0, 5, 2, 0.98) 100%)",
@@ -254,7 +287,7 @@ export default function FeaturedEvents() {
           >
             <div className="flex flex-col items-center justify-center p-2">
               <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={50000} duration={2.5} />
+                <CountUp to={50000} duration={3.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
                 Student Reached
@@ -263,7 +296,7 @@ export default function FeaturedEvents() {
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
               <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={500} duration={2} suffix="+" />
+                <CountUp to={500} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
                 Institution Involved
@@ -272,7 +305,7 @@ export default function FeaturedEvents() {
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
               <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={500} duration={2} suffix="+" />
+                <CountUp to={500} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
                 Institution Involved
@@ -281,7 +314,7 @@ export default function FeaturedEvents() {
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
               <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={1} duration={1} />
+                <CountUp to={1} duration={1.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
                 Mission

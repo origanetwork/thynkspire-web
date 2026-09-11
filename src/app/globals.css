@@ -23,5 +23,5 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-clash {
 }
 
 .font-poppins {
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Poppins', sans-serif !important;
 }

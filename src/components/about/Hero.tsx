@@ -67,13 +67,13 @@ export default function AboutHero() {
 
       {/* Main Container matching Figma 1353px layout grid */}
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative">
-        
+
         {/* Hero Grid: Left Content + Right Tech Frame */}
         <div className="relative flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-6 min-h-[560px]">
-          
+
           {/* Left Column: Heading, Subheading & Paragraph (x: 105, y: 245, w: 591 in Figma) */}
           <div className="w-full lg:max-w-[591px] flex flex-col gap-5 sm:gap-6 pt-4 lg:pt-24 z-20">
-            
+
             {/* Category Subtitle */}
             <MotionFadeIn delay={0.1} direction="up" distance={15}>
               <span
@@ -94,7 +94,7 @@ export default function AboutHero() {
                   Building <span className="text-[#00BF62]">Futures.</span>
                 </span>
               </MotionText>
-              
+
               <MotionText delay={0.35} duration={0.8}>
                 <span
                   className="font-poppins font-medium text-[38px] sm:text-[50px] lg:text-[60px] leading-[1.08] tracking-tight text-white"
@@ -171,7 +171,7 @@ export default function AboutHero() {
           {/* Right Column: Exact Tech Frame 7026 with Students Image, Rotating HUD Arcs & SVG Badges */}
           <div className="w-full lg:w-[684px] relative flex justify-center lg:justify-end shrink-0">
             <div className="relative w-full max-w-[684px] h-[480px] sm:h-[530px] lg:h-[558px]">
-              
+
               {/* Top Connecting HUD Vector Line 1 directly anchored to touch the box's top-left corner (0 gap) */}
               <div className="hidden lg:block absolute right-[100%] top-[-1px] w-[581px] h-[64px] pointer-events-none z-30">
                 <svg width="581" height="64" viewBox="0 0 581 64" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-[581px] h-[64px]">
@@ -338,6 +338,72 @@ export default function AboutHero() {
             </div>
           </div>
 
+        </div>
+
+        {/* Ongoing Flowing Laser Lines - Originating from stat bar and center, curving rightwards */}
+        <div className="relative w-full h-[80px] sm:h-[110px] -mt-4 sm:-mt-8 pointer-events-none z-20 overflow-visible">
+          <svg
+            viewBox="0 0 1440 110"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-full overflow-visible"
+          >
+            <defs>
+              <filter id="aboutFlowGlow1" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+              <filter id="aboutFlowGlow2" x="-30%" y="-30%" width="160%" height="160%">
+                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            {/* Line 1: Stat bar curve moving fully to the right in pure green at reduced speed */}
+            <motion.path
+              d="M 240 15 L 460 15 C 505 15 540 32 580 72 L 625 105 C 660 115 700 115 750 115 L 1440 115"
+              stroke="#00BF62"
+              strokeWidth="3"
+              strokeLinecap="round"
+              strokeDasharray="150 1600"
+              fill="none"
+              filter="url(#aboutFlowGlow1)"
+              animate={{
+                strokeDashoffset: [1750, -1750],
+              }}
+              transition={{
+                duration: 8.5,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            />
+
+            {/* Line 2: Center curve line between stat and hero image flowing to the right in pure green */}
+            <motion.path
+              d="M 420 25 C 480 25 530 45 575 80 L 620 108 C 660 115 710 115 780 115 L 1440 115"
+              stroke="#00BF62"
+              strokeWidth="2.8"
+              strokeLinecap="round"
+              strokeDasharray="120 1450"
+              fill="none"
+              filter="url(#aboutFlowGlow2)"
+              animate={{
+                strokeDashoffset: [1570, -1570],
+              }}
+              transition={{
+                duration: 7.8,
+                repeat: Infinity,
+                ease: "linear",
+                delay: 3.5,
+              }}
+            />
+          </svg>
         </div>
 
       </div>

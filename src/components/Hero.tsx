@@ -37,7 +37,7 @@ function CountUp({ to, duration = 2 }: { to: number; duration?: number }) {
 
 export default function Hero() {
     return (
-        <section className="relative w-full min-h-screen text-white overflow-hidden pt-[115px] sm:pt-[150px] lg:pt-[209px] pb-12 sm:pb-16">
+        <section id="hero" className="relative w-full min-h-screen text-white overflow-hidden pt-[115px] sm:pt-[150px] lg:pt-[209px] pb-12 sm:pb-16">
             {/* Outer container matching header width and padding alignment */}
             <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8">
 
@@ -340,29 +340,74 @@ export default function Hero() {
                             />
                         </div>
 
-                        {/* Vector 5 Bottom Right Decorative Line Graphic */}
-                        <motion.div
-                            className="absolute right-[-20%] bottom-[0px] w-[750px] h-[80px] pointer-events-none z-20 opacity-100"
-                            animate={{
-                                opacity: [1.85, 1, 4.85],
-                            }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 4,
-                                ease: "easeInOut",
-                            }}
-                        >
-                            <Image
-                                src="/vector/Vector5.png"
-                                alt="Vector 5 Line Graphic"
-                                fill
-                                className="object-contain object-right-bottom"
-                                priority
-                            />
-                        </motion.div>
-
                     </div>
 
+                </div>
+
+                {/* Ongoing Flowing Laser Lines - Originating from stat bar and center, curving rightwards */}
+                <div className="relative w-full h-[80px] sm:h-[110px] -mt-6 sm:-mt-10 pointer-events-none z-20 overflow-visible">
+                    <svg
+                        viewBox="0 0 1440 110"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-full h-full overflow-visible"
+                    >
+                        <defs>
+                            <filter id="heroFlowGlow1" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                            <filter id="heroFlowGlow2" x="-30%" y="-30%" width="160%" height="160%">
+                                <feGaussianBlur stdDeviation="3.5" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+
+                        {/* Line 1: Stat bar curve moving fully to the right in pure green at reduced speed */}
+                        <motion.path
+                            d="M 240 15 L 460 15 C 505 15 540 32 580 72 L 625 105 C 660 115 700 115 750 115 L 1440 115"
+                            stroke="#00BF62"
+                            strokeWidth="3"
+                            strokeLinecap="round"
+                            strokeDasharray="150 1600"
+                            fill="none"
+                            filter="url(#heroFlowGlow1)"
+                            animate={{
+                                strokeDashoffset: [1750, -1750],
+                            }}
+                            transition={{
+                                duration: 8.5,
+                                repeat: Infinity,
+                                ease: "linear",
+                            }}
+                        />
+
+                        {/* Line 2: Center curve line between stat and hero image flowing to the right in pure green */}
+                        <motion.path
+                            d="M 420 25 C 480 25 530 45 575 80 L 620 108 C 660 115 710 115 780 115 L 1440 115"
+                            stroke="#00BF62"
+                            strokeWidth="2.8"
+                            strokeLinecap="round"
+                            strokeDasharray="120 1450"
+                            fill="none"
+                            filter="url(#heroFlowGlow2)"
+                            animate={{
+                                strokeDashoffset: [1570, -1570],
+                            }}
+                            transition={{
+                                duration: 7.8,
+                                repeat: Infinity,
+                                ease: "linear",
+                                delay: 3.5,
+                            }}
+                        />
+                    </svg>
                 </div>
 
             </div>

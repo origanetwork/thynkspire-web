@@ -20,7 +20,22 @@ export default function Footer() {
         
         {/* Top Centered Prominent Logo (Large visual scale with compact container height) */}
         <div className="flex justify-center w-full -mt-2">
-          <div className="relative w-[280px] sm:w-[640px] lg:w-[840px] h-[75px] sm:h-[135px] lg:h-[260px]">
+          <Link
+            href="/#hero"
+            onClick={(e) => {
+              if (typeof window !== "undefined" && window.location.pathname === "/") {
+                e.preventDefault();
+                const heroEl = document.getElementById("hero");
+                if (heroEl) {
+                  heroEl.scrollIntoView({ behavior: "smooth" });
+                } else {
+                  window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+              }
+            }}
+            className="relative block w-[280px] sm:w-[640px] lg:w-[840px] h-[75px] sm:h-[135px] lg:h-[260px] cursor-pointer transition-transform duration-300 hover:scale-[1.02] active:scale-[0.99]"
+            aria-label="Navigate to Home Hero Section"
+          >
             <Image
               src="/logo.png"
               alt="ThynkSpire - Think. Inspire. Grow."
@@ -28,7 +43,7 @@ export default function Footer() {
               className="object-contain object-center scale-105 sm:scale-110"
               priority
             />
-          </div>
+          </Link>
         </div>
 
         {/* Thin Horizontal Divider Line */}

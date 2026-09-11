@@ -167,43 +167,45 @@ export default function About() {
         <MotionFadeIn delay={0.1} direction="up" distance={15}>
           <div className="flex items-center gap-3">
             <div className="w-7 h-[2.5px] bg-[#00BF62] rounded-full" />
-            <span className="font-poppins text-white/70 text-base sm:text-lg font-medium tracking-tight">
+            <span className="font-poppins text-white/70 text-base sm:text-xl font-medium tracking-tight">
               About Us
             </span>
           </div>
         </MotionFadeIn>
 
-        {/* Section Main Title and Paragraph */}
-        <div className="mt-8 sm:mt-12 flex flex-col items-center text-center max-w-4xl mx-auto z-20 relative">
-          
-          {/* Main Headline */}
-          <h2 className="flex flex-col gap-1 sm:gap-2">
-            <MotionText delay={0.2} duration={0.8}>
-              <span className="font-poppins font-semibold text-[32px] sm:text-[46px] lg:text-[54px] leading-[1.12] tracking-tight text-white">
-                More Than Education.
-              </span>
-            </MotionText>
+        {/* Section Main Title and Paragraph (Centered on page, text left-aligned) */}
+        <div className="mt-8 sm:mt-12 w-full flex justify-center z-20 relative">
+          <div className="flex flex-col items-start text-left max-w-[880px] w-full">
             
-            <MotionText delay={0.35} duration={0.8}>
-              <span className="font-poppins font-semibold text-[32px] sm:text-[46px] lg:text-[54px] leading-[1.12] tracking-tight text-white">
-                We’re Building an{" "}
-                <span className="text-[#00BF62] drop-shadow-[0_0_35px_rgba(0,191,98,0.5)]">
-                  Ecosystem.
+            {/* Main Headline */}
+            <h2 className="flex flex-col gap-1 sm:gap-2 text-left w-full font-poppins">
+              <MotionText delay={0.2} duration={0.8} className="w-full text-left">
+                <span className="font-poppins font-semibold text-[34px] sm:text-[48px] lg:text-[56px] xl:text-[58px] leading-[1.12] tracking-tight text-white block text-left lg:whitespace-nowrap">
+                  More Than Education.
                 </span>
-              </span>
-            </MotionText>
-          </h2>
+              </MotionText>
+              
+              <MotionText delay={0.35} duration={0.8} className="w-full text-left">
+                <span className="font-poppins font-semibold text-[34px] sm:text-[48px] lg:text-[56px] xl:text-[58px] leading-[1.12] tracking-tight text-white block text-left lg:whitespace-nowrap">
+                  We’re Building an{" "}
+                  <span className="text-[#00BF62]">
+                    Ecosystem.
+                  </span>
+                </span>
+              </MotionText>
+            </h2>
 
-          {/* Subtitle / Paragraph */}
-          <MotionFadeIn delay={0.5} direction="up" distance={20}>
-            <p className="font-poppins font-normal text-white/70 text-sm sm:text-base lg:text-[15.5px] leading-[1.7] max-w-[730px] mx-auto mt-6">
-              Thynkspire is building a connected ecosystem where students can learn,
-              explore, compete, create, and grow. Through career-focused education,
-              national-level competitions, and technology-driven initiatives, we create
-              opportunities that prepare students for the world of tomorrow.
-            </p>
-          </MotionFadeIn>
+            {/* Subtitle / Paragraph */}
+            <MotionFadeIn delay={0.5} direction="up" distance={20} className="w-full text-left">
+              <p className="font-poppins font-normal text-white/70 text-base sm:text-lg lg:text-[18px] leading-[1.65] max-w-[780px] text-left mt-5 sm:mt-6">
+                Thynkspire is building a connected ecosystem where students can learn,
+                explore, compete, create, and grow. Through career-focused education,
+                national-level competitions, and technology-driven initiatives, we create
+                opportunities that prepare students for the world of tomorrow.
+              </p>
+            </MotionFadeIn>
 
+          </div>
         </div>
 
         {/* Pillar Cards & Flowing Electric Current Canvas with Locked Coordinate Grid */}

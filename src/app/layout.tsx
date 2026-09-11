@@ -14,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className="bg-black text-white antialiased selection:bg-[#00BF63] selection:text-black">
         {children}
         <StickyContactWidget />

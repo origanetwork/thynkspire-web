@@ -75,19 +75,19 @@ export default function Footer() {
             <Link href="/" className="text-[#00BF63] font-medium hover:underline">
               Home
             </Link>
-            <Link href="#about" className="text-slate-200 hover:text-white transition-colors">
+            <Link href="/about" className="text-slate-200 hover:text-white transition-colors">
               About Us
             </Link>
-            <Link href="#thynkx" className="text-slate-200 hover:text-white transition-colors">
+            <Link href="/thynkx" className="text-slate-200 hover:text-white transition-colors">
               Thynkx
             </Link>
-            <Link href="#programs" className="text-slate-200 hover:text-white transition-colors">
+            <Link href="/programs" className="text-slate-200 hover:text-white transition-colors">
               Programs
             </Link>
-            <Link href="#blog" className="text-slate-200 hover:text-white transition-colors">
+            <Link href="/blog" className="text-slate-200 hover:text-white transition-colors">
               Blog
             </Link>
-            <Link href="#contact" className="text-slate-200 hover:text-white transition-colors">
+            <Link href="/contact" className="text-slate-200 hover:text-white transition-colors">
               Contact US
             </Link>
           </div>

@@ -5,18 +5,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight, FiMenu, FiX } from "react-icons/fi";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [activeNav, setActiveNav] = useState("Home");
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { name: "Home", href: "#" },
-    { name: "About US", href: "#about" },
-    { name: "Thynkx", href: "#thynkx" },
-    { name: "Programs", href: "#programs" },
-    { name: "Blog", href: "#blog" },
-    { name: "Contact Us", href: "#contact" },
+    { name: "Home", href: "/" },
+    { name: "About US", href: "/about" },
+    { name: "Thynkx", href: "/thynkx" },
+    { name: "Programs", href: "/programs" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact Us", href: "/contact" },
   ];
 
   return (
@@ -45,10 +47,24 @@ export default function Header() {
         {/* Center Desktop Navigation Links from Figma */}
         <nav className="hidden lg:flex items-center gap-8">
           {navItems.map((item) => {
-            const isActive = activeNav === item.name;
+            const isActive = 
+              item.href === "/about" 
+                ? pathname === "/about" 
+                : item.href === "/thynkx"
+                ? pathname.startsWith("/thynkx")
+                : item.href === "/programs"
+                ? pathname.startsWith("/programs")
+                : item.href === "/contact"
+                ? pathname.startsWith("/contact")
+                : item.href === "/blog"
+                ? pathname.startsWith("/blog")
+                : item.href === "/" 
+                ? pathname === "/" 
+                : activeNav === item.name;
             return (
-              <button
+              <Link
                 key={item.name}
+                href={item.href}
                 onClick={() => setActiveNav(item.name)}
                 className={`relative py-1 text-sm font-medium transition-colors duration-200 ${
                   isActive
@@ -64,7 +80,7 @@ export default function Header() {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-              </button>
+              </Link>
             );
           })}
         </nav>
@@ -105,22 +121,39 @@ export default function Header() {
             className="lg:hidden mt-3 p-6 rounded-3xl bg-[#0d100e]/95 border border-white/10 space-y-4 shadow-2xl backdrop-blur-xl"
           >
             <div className="space-y-2">
-              {navItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => {
-                    setActiveNav(item.name);
-                    setMobileMenuOpen(false);
-                  }}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
-                    activeNav === item.name
-                      ? "text-[#00BF62] bg-white/5 font-bold"
-                      : "text-slate-300 hover:text-white"
-                  }`}
-                >
-                  {item.name}
-                </button>
-              ))}
+              {navItems.map((item) => {
+                const isActive = 
+                  item.href === "/about" 
+                    ? pathname === "/about" 
+                    : item.href === "/thynkx"
+                    ? pathname.startsWith("/thynkx")
+                    : item.href === "/programs"
+                    ? pathname.startsWith("/programs")
+                    : item.href === "/contact"
+                    ? pathname.startsWith("/contact")
+                    : item.href === "/blog"
+                    ? pathname.startsWith("/blog")
+                    : item.href === "/" 
+                    ? pathname === "/" 
+                    : activeNav === item.name;
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => {
+                      setActiveNav(item.name);
+                      setMobileMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2.5 rounded-xl text-sm font-semibold transition-colors ${
+                      isActive
+                        ? "text-[#00BF62] bg-white/5 font-bold"
+                        : "text-slate-300 hover:text-white"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
 
             <div className="pt-4 border-t border-white/10">

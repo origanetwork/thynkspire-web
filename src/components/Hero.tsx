@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import HeroCodeAnimate from "./HeroCodeAnimate";
-import { MotionFadeIn, MotionText, MotionScale } from "./MotionWrapper";
+import { MotionFadeIn, MotionText } from "./MotionWrapper";
 
 // Animated count up component using requestAnimationFrame with easeOut
 function CountUp({ to, duration = 2 }: { to: number; duration?: number }) {

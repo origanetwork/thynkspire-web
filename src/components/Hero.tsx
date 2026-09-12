@@ -330,7 +330,7 @@ export default function Hero() {
                                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                                     <div className="flex flex-col items-center justify-center">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={10} duration={1.8} />+
+                                            <CountUp to={45} duration={1.8} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                             Programs Delivered
@@ -339,7 +339,7 @@ export default function Hero() {
 
                                     <div className="flex flex-col items-center justify-center relative">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={25} duration={2} />+
+                                            <CountUp to={30} duration={2} />+
                                         </span>
                                         <div className="flex items-center justify-center gap-1">
                                             <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -354,7 +354,7 @@ export default function Hero() {
 
                                     <div className="flex flex-col items-center justify-center">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={550} duration={2.5} />+
+                                            <CountUp to={650} duration={2.5} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                             Schools & Colleges

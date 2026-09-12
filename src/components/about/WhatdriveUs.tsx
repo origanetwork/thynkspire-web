@@ -112,6 +112,35 @@ export default function WhatDrivesUs() {
                 }`}
               />
 
+              {/* Subtle bottom vignette gradient to ensure label readability */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-500 pointer-events-none ${
+                  hoveredCard === "mission" ? "opacity-0" : "opacity-90"
+                }`}
+              />
+
+              {/* Floating interactive label badge (visible when not active) */}
+              <div
+                className={`absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 flex items-center justify-between backdrop-blur-md bg-black/60 border border-white/20 px-4 py-3 rounded-xl transition-all duration-500 ${
+                  hoveredCard === "mission"
+                    ? "opacity-0 translate-y-3 pointer-events-none"
+                    : "opacity-100 translate-y-0 shadow-lg"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#00BF62] animate-pulse" />
+                  <span className="font-poppins font-semibold text-sm sm:text-base text-white tracking-wide uppercase">
+                    Our Mission
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-white/80 font-medium bg-white/10 hover:bg-white/15 px-2.5 py-1 rounded-full border border-white/10 transition-colors">
+                  <span>Tap to view</span>
+                  <svg className="w-3.5 h-3.5 text-[#00BF62]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+
               {/* Dark Overlay (Dims on hover so text is clear) */}
               <div
                 className={`absolute inset-0 bg-gradient-to-t from-black/95 via-black/60 to-black/30 transition-opacity duration-500 ${
@@ -171,6 +200,35 @@ export default function WhatDrivesUs() {
                   hoveredCard === "vision" ? "scale-105" : "scale-100"
                 }`}
               />
+
+              {/* Subtle bottom vignette gradient to ensure label readability */}
+              <div
+                className={`absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent transition-opacity duration-500 pointer-events-none ${
+                  hoveredCard === "vision" ? "opacity-0" : "opacity-90"
+                }`}
+              />
+
+              {/* Floating interactive label badge (visible when not active) */}
+              <div
+                className={`absolute bottom-4 left-4 right-4 sm:bottom-5 sm:left-5 sm:right-5 flex items-center justify-between backdrop-blur-md bg-black/60 border border-white/20 px-4 py-3 rounded-xl transition-all duration-500 ${
+                  hoveredCard === "vision"
+                    ? "opacity-0 translate-y-3 pointer-events-none"
+                    : "opacity-100 translate-y-0 shadow-lg"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="w-2 h-2 rounded-full bg-[#00BF62] animate-pulse" />
+                  <span className="font-poppins font-semibold text-sm sm:text-base text-white tracking-wide uppercase">
+                    Our Vision
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 text-xs text-white/80 font-medium bg-white/10 hover:bg-white/15 px-2.5 py-1 rounded-full border border-white/10 transition-colors">
+                  <span>Tap to view</span>
+                  <svg className="w-3.5 h-3.5 text-[#00BF62]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
 
               {/* Dark Overlay (Dims on hover so text is clear) */}
               <div

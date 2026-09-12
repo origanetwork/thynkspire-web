@@ -157,7 +157,7 @@ export default function AboutHero() {
                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                   <div className="flex flex-col items-center justify-center">
                     <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                      <CounterNumber value={100} suffix="+" />
+                      <CounterNumber value={650} suffix="+" />
                     </span>
                     <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                       Schools & Colleges
@@ -166,7 +166,7 @@ export default function AboutHero() {
 
                   <div className="flex flex-col items-center justify-center relative">
                     <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                      <CounterNumber value={50} suffix="+" />
+                      <CounterNumber value={45} suffix="+" />
                     </span>
                     <div className="flex items-center justify-center gap-1">
                       <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">

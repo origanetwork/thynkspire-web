@@ -55,8 +55,8 @@ export default function ThynkxBanner() {
             <div className="max-w-2xl space-y-2 sm:space-y-3">
               <MotionText delay={0.1} duration={0.7}>
                 <h2 className="font-clash text-2xl sm:text-4xl lg:text-[52px] font-semibold text-[#00BF63] leading-tight tracking-tight">
-                  South india’s <br />
-                  <span className="text-[#00BF63]">Biggest quiz event</span>
+                  South India’s <br />
+                  <span className="text-[#00BF63]">Biggest Quiz Event</span>
                 </h2>
               </MotionText>
 

@@ -32,7 +32,7 @@ export default function AboutCompany() {
             <div className="flex items-baseline gap-3">
               <span className="font-clash text-2xl sm:text-3xl font-bold text-white leading-none">01</span>
               <h4 className="font-clash text-2xl sm:text-[34px] font-semibold text-[#00BF63] leading-none whitespace-nowrap">
-                Wht We Do
+                What We Do
               </h4>
             </div>
 

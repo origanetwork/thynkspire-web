@@ -296,7 +296,7 @@ export default function FeaturedEvents() {
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
               <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={500} duration={3.2} suffix="+" />
+                <CountUp to={650} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
                 Institution Involved
@@ -305,10 +305,10 @@ export default function FeaturedEvents() {
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
               <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
-                <CountUp to={500} duration={3.2} suffix="+" />
+                <CountUp to={120} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
-                Institution Involved
+                Educational Collaborations
               </span>
             </div>
 

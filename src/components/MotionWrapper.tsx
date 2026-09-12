@@ -127,11 +127,14 @@ export function MotionStaggerItem({
   children,
   className = "",
   duration = 0.6,
+  style,
+  ...props
 }: {
   children: React.ReactNode;
   className?: string;
   duration?: number;
-}) {
+  style?: React.CSSProperties;
+} & HTMLMotionProps<"div">) {
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 30, scale: 0.96 },
     show: {
@@ -146,7 +149,7 @@ export function MotionStaggerItem({
   };
 
   return (
-    <motion.div variants={itemVariants} className={className}>
+    <motion.div variants={itemVariants} className={className} style={style} {...props}>
       {children}
     </motion.div>
   );

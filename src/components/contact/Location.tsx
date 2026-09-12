@@ -76,33 +76,32 @@ export default function Location() {
               </div>
             </div>
 
-            {/* Floating Glassmorphic Location Info Card on Bottom-Left (Clean border, no glow shadow) */}
-            <div className="absolute left-4 sm:left-8 lg:left-10 bottom-4 sm:bottom-6 lg:bottom-8 z-20 max-w-[320px] sm:max-w-[370px] w-full">
+            {/* Floating Glassmorphic Location Info Card on Bottom-Left (Compact on mobile) */}
+            <div className="absolute left-3 sm:left-8 lg:left-10 bottom-3 sm:bottom-6 lg:bottom-8 z-20 max-w-[260px] xs:max-w-[300px] sm:max-w-[370px] w-full">
               <motion.div
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 0.15 }}
-                className="p-5 sm:p-6 rounded-[20px] sm:rounded-[22px] bg-[#0e1210]/95 border border-[#00BF62] backdrop-blur-xl space-y-3.5"
+                className="p-3.5 sm:p-6 rounded-[16px] sm:rounded-[22px] bg-[#0e1210]/95 border border-[#00BF62] backdrop-blur-xl space-y-2 sm:space-y-3.5 shadow-xl"
               >
-                <div className="space-y-1">
-                  <h3 className="font-clash text-base sm:text-lg font-bold text-white leading-snug">
-                    Thynkspire Edu Experience <br />
-                    Hub
+                <div className="space-y-0.5 sm:space-y-1">
+                  <h3 className="font-clash text-xs sm:text-base lg:text-lg font-bold text-white leading-tight">
+                    Thynkspire Edu Experience Hub
                   </h3>
-                  <p className="font-poppins text-xs text-slate-300 font-normal leading-relaxed">
+                  <p className="font-poppins text-[11px] sm:text-xs text-slate-300 font-normal leading-tight">
                     Kathrikadavu, Ernakulam, Kerala 682017
                   </p>
                 </div>
 
                 {/* Get Directions Action Button */}
-                <div className="pt-1">
+                <div className="pt-0.5 sm:pt-1">
                   <Link
                     href="https://www.google.com/maps/dir/?api=1&destination=Kathrikadavu,+Ernakulam,+Kerala+682017"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <button className="flex items-center justify-center px-5 py-2 rounded-full border border-white/20 bg-transparent text-white hover:border-[#00BF62] hover:bg-[#00BF62] hover:text-black font-poppins text-xs font-medium transition-all duration-300 cursor-pointer">
+                    <button className="flex items-center justify-center px-3.5 py-1 sm:px-5 sm:py-2 rounded-full border border-white/20 bg-transparent text-white hover:border-[#00BF62] hover:bg-[#00BF62] hover:text-black font-poppins text-[11px] sm:text-xs font-medium transition-all duration-300 cursor-pointer">
                       <span>Get Directions</span>
                     </button>
                   </Link>

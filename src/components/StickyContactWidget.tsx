@@ -12,7 +12,7 @@ export default function StickyContactWidget() {
       className="fixed right-2 sm:right-4 lg:right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col items-center"
     >
       <div 
-        className="flex flex-col items-center justify-center gap-5 sm:gap-7 py-5 sm:py-7 px-3 sm:px-3.5 w-[52px] sm:w-[62px] rounded-[14px] sm:rounded-[18px] bg-[#161616] border border-white/40 shadow-2xl shadow-black/80 backdrop-blur-md transition-all duration-300 hover:border-[#00BF63]/60"
+        className="flex flex-col items-center justify-center gap-5 sm:gap-7 py-5 sm:py-7 px-3 sm:px-3.5 w-[62px] rounded-[14px] sm:rounded-[18px] bg-[#161616] border border-white/40 shadow-2xl shadow-black/80 backdrop-blur-md transition-all duration-300 hover:border-[#00BF63]/60"
         style={{
           boxShadow: "0px 8px 30px rgba(0, 0, 0, 0.7), 0 0 15px rgba(0, 191, 99, 0.08)",
         }}

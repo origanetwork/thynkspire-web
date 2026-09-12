@@ -51,7 +51,7 @@ export default function WhatDrivesUs() {
   const [hoveredCard, setHoveredCard] = useState<"mission" | "vision" | null>(null);
 
   return (
-    <section className="relative w-full text-white py-16 sm:py-24 lg:py-32 overflow-hidden">
+    <section className="relative w-full text-white pt-4 pb-14 sm:py-24 lg:py-32 overflow-hidden">
       {/* Background Ambient Glows matching Figma */}
       <div className="absolute top-[20%] left-[-10%] w-[500px] lg:w-[700px] h-[500px] lg:h-[700px] bg-radial from-[#00BF62]/14 via-[#00BF62]/3 to-transparent blur-[140px] pointer-events-none -z-10" />
       <div className="absolute bottom-[10%] right-[-10%] w-[450px] lg:w-[650px] h-[450px] lg:h-[650px] bg-radial from-[#00BF62]/12 via-[#00BF62]/2 to-transparent blur-[150px] pointer-events-none -z-10" />

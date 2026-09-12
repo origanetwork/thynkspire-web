@@ -43,7 +43,7 @@ export default function ThynkxHero() {
               {/* Headings */}
               <div className="space-y-2">
                 <MotionText delay={0.15}>
-                  <h1 className="font-clash text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
+                  <h1 className="font-clash text-2xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
                     India&apos;s Biggest <br />
                     <span className="text-[#00BF62]">Quizzing Event.</span>
                   </h1>
@@ -56,13 +56,37 @@ export default function ThynkxHero() {
                 </MotionFadeIn>
               </div>
 
-              {/* 4 Feature Badges Row in 1 line on large screen */}
-              <MotionFadeIn delay={0.25} direction="up">
-                <div className="flex flex-wrap lg:flex-nowrap items-center gap-2 sm:gap-3">
+              {/* Feature Badges: Automatically scrolling in 1 line on mobile, static row on desktop */}
+              <MotionFadeIn delay={0.25} direction="up" className="w-full">
+                {/* Mobile: Infinite smooth auto-scrolling ticker in one single line */}
+                <div className="w-full overflow-hidden relative block lg:hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
+                  <motion.div
+                    className="flex items-center gap-2.5 shrink-0 w-max"
+                    animate={{ x: ["0%", "-50%"] }}
+                    transition={{
+                      duration: 14,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  >
+                    {[...FEATURE_PILLS, ...FEATURE_PILLS, ...FEATURE_PILLS, ...FEATURE_PILLS].map((pill, idx) => (
+                      <div
+                        key={idx}
+                        className="shrink-0 whitespace-nowrap rounded-[12px] bg-black/60 border border-[#00BF62]/50 backdrop-blur-md px-3.5 py-2 text-xs font-poppins text-white font-medium shadow-[0_0_15px_rgba(0,0,0,0.5)]"
+                      >
+                        {pill}
+                      </div>
+                    ))}
+                  </motion.div>
+                </div>
+
+                {/* Desktop: Static 1-line flex row */}
+                <div className="hidden lg:flex items-center gap-3">
                   {FEATURE_PILLS.map((pill, idx) => (
                     <div
                       key={idx}
-                      className="shrink-0 whitespace-nowrap rounded-[12px] sm:rounded-[16px] bg-black/60 border border-[#00BF62]/50 backdrop-blur-md px-3.5 sm:px-4 lg:px-5 py-2 sm:py-2.5 text-xs sm:text-sm font-poppins text-white font-medium shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:border-[#00BF62] hover:bg-black/80 transition-all"                    >
+                      className="shrink-0 whitespace-nowrap rounded-[16px] bg-black/60 border border-[#00BF62]/50 backdrop-blur-md px-5 py-2.5 text-sm font-poppins text-white font-medium shadow-[0_0_15px_rgba(0,0,0,0.5)] hover:border-[#00BF62] hover:bg-black/80 transition-all"
+                    >
                       {pill}
                     </div>
                   ))}

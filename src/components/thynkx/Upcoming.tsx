@@ -108,9 +108,40 @@ export default function Upcoming() {
           </div>
         </MotionFadeIn>
 
-        {/* Bottom 5 Feature Icon Badges Row */}
-        <MotionFadeIn delay={0.4} direction="up">
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 pt-4 sm:pt-6">
+        {/* Bottom 5 Feature Icon Badges Row: Auto-scroll on Mobile, Grid on Desktop */}
+        <MotionFadeIn delay={0.4} direction="up" className="w-full">
+          {/* Mobile View: Infinite continuous 1-line auto-scrolling marquee */}
+          <div className="w-full overflow-hidden relative block sm:hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)] pt-2">
+            <motion.div
+              className="flex items-start gap-6 shrink-0 w-max"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                duration: 16,
+                repeat: Infinity,
+                ease: "linear",
+              }}
+            >
+              {[...FEATURE_BADGES, ...FEATURE_BADGES, ...FEATURE_BADGES, ...FEATURE_BADGES].map((badge, idx) => (
+                <div
+                  key={idx}
+                  className="flex flex-col items-center text-center shrink-0 w-[130px]"
+                >
+                  {/* Rounded Square Icon Box */}
+                  <div className="w-14 h-14 rounded-[18px] bg-[#0A100C]/90 border border-[#00BF62]/35 flex items-center justify-center shadow-[0_8px_20px_rgba(0,0,0,0.6)]">
+                    {badge.icon}
+                  </div>
+
+                  {/* Feature Label */}
+                  <span className="font-poppins text-xs text-white/80 font-medium text-center mt-3 max-w-[125px] leading-snug">
+                    {badge.label}
+                  </span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+
+          {/* Desktop & Tablet View: 5 Icon Badges Grid */}
+          <div className="hidden sm:grid sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 pt-4 sm:pt-6">
             {FEATURE_BADGES.map((badge) => (
               <motion.div
                 key={badge.id}

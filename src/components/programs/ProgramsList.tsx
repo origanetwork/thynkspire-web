@@ -164,24 +164,26 @@ export default function ProgramsList() {
         </div>
 
         {/* Category Filter Tabs Capsule */}
-        <MotionFadeIn delay={0.25} direction="up" className="flex flex-col items-center gap-4 lg:gap-5">
-          <div className="inline-flex flex-wrap items-center justify-center gap-2 sm:gap-4 lg:gap-6 p-2 sm:p-2.5 lg:p-3.5 lg:px-5 rounded-full bg-[#111413]/90 border border-white/10 backdrop-blur-xl shadow-2xl max-w-full">
-            {CATEGORIES.map((category) => {
-              const isSelected = selectedCategory === category;
-              return (
-                <button
-                  key={category}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`relative px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-full font-poppins text-xs sm:text-sm lg:text-base font-medium transition-all duration-300 cursor-pointer ${
-                    isSelected
-                      ? "text-white bg-[#00BF62]/20 border border-[#00BF62] shadow-[0_0_20px_rgba(0,191,98,0.45)]"
-                      : "text-slate-300 hover:text-white bg-transparent border border-transparent hover:bg-white/5"
-                  }`}
-                >
-                  {category}
-                </button>
-              );
-            })}
+        <MotionFadeIn delay={0.25} direction="up" className="flex flex-col items-center gap-4 lg:gap-5 w-full">
+          <div className="w-full max-w-full overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden py-1 px-1 flex justify-start sm:justify-center">
+            <div className="flex items-center gap-2 sm:gap-4 lg:gap-6 p-1.5 sm:p-2.5 lg:p-3.5 lg:px-5 rounded-full bg-[#111413]/90 border border-white/10 backdrop-blur-xl shadow-2xl shrink-0 mx-auto sm:mx-0">
+              {CATEGORIES.map((category) => {
+                const isSelected = selectedCategory === category;
+                return (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`shrink-0 whitespace-nowrap relative px-4 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 rounded-full font-poppins text-xs sm:text-sm lg:text-base font-medium transition-all duration-300 cursor-pointer ${
+                      isSelected
+                        ? "text-white bg-[#00BF62]/20 border border-[#00BF62] shadow-[0_0_20px_rgba(0,191,98,0.45)]"
+                        : "text-slate-300 hover:text-white bg-transparent border border-transparent hover:bg-white/5"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
           {/* Dynamic Program Counter Text */}

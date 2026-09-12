@@ -144,7 +144,7 @@ export default function About() {
     "C 775,905 825,950 860,1000";
 
   return (
-    <section className="relative w-full text-white py-16 sm:py-24 lg:py-28 overflow-hidden">
+    <section className="relative w-full text-white pt-12 pb-6 sm:py-24 lg:py-28 overflow-hidden">
       {/* Background Ambient Radial Glows */}
       <div className="absolute top-[5%] left-[-10%] w-[550px] lg:w-[750px] h-[550px] lg:h-[750px] bg-radial from-[#00BF62]/18 via-[#00BF62]/4 to-transparent blur-[140px] pointer-events-none" />
       <div className="absolute top-[40%] right-[-10%] w-[500px] lg:w-[700px] h-[500px] lg:h-[700px] bg-radial from-[#00BF62]/14 via-[#00BF62]/3 to-transparent blur-[150px] pointer-events-none" />
@@ -209,7 +209,7 @@ export default function About() {
         </div>
 
         {/* Pillar Cards & Flowing Electric Current Canvas with Locked Coordinate Grid */}
-        <div className="relative mt-16 sm:mt-24 lg:mt-28 w-full max-w-[1000px] mx-auto min-h-[880px] lg:h-[860px]">
+        <div className="relative mt-12 sm:mt-24 lg:mt-28 w-full max-w-[1000px] mx-auto min-h-0 lg:h-[860px]">
           
           {/* Flowing Energy / Electric Current SVG Canvas */}
           <div className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-visible">

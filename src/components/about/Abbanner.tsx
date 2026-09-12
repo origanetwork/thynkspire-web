@@ -156,11 +156,11 @@ export default function Abbanner() {
           <div className="absolute top-0 left-0 w-[450px] h-[450px] bg-radial from-[#00BF62]/12 via-transparent to-transparent blur-[120px] pointer-events-none" />
           <div className="absolute bottom-0 right-0 w-[450px] h-[450px] bg-radial from-[#00BF62]/10 via-transparent to-transparent blur-[120px] pointer-events-none" />
 
-          {/* Two-Column Layout: Left Text & CTA, Right Vector Illustration */}
-          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-12">
+          {/* Two-Column Layout: Illustration on Top Center for Mobile, Right on Desktop */}
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8 sm:gap-10 lg:gap-12">
             
-            {/* Left Column: Heading, Subtitle & CTA Button */}
-            <div className="flex-1 max-w-[760px] flex flex-col items-start gap-4 sm:gap-6">
+            {/* Left Column: Heading, Subtitle & CTA Button (Below image on mobile, left on desktop) */}
+            <div className="flex-1 max-w-[760px] flex flex-col items-start gap-4 sm:gap-6 w-full lg:w-auto order-2 lg:order-1">
               
               {/* Main Headline */}
               <MotionText delay={0.1} duration={0.8}>
@@ -177,8 +177,8 @@ export default function Abbanner() {
                 </p>
               </MotionFadeIn>
 
-              {/* CTA Action Button */}
-              <MotionFadeIn delay={0.4} direction="up" distance={20} className="pt-2 sm:pt-3">
+              {/* CTA Action Button (Centered on mobile, start-aligned on desktop) */}
+              <MotionFadeIn delay={0.4} direction="up" distance={20} className="pt-2 sm:pt-3 w-full flex justify-center sm:justify-start">
                 <Link href="#join-mission">
                   <button
                     type="button"
@@ -196,8 +196,8 @@ export default function Abbanner() {
 
             </div>
 
-            {/* Right Column: High-Fidelity Neon Green Team Vector Illustration */}
-            <MotionScale delay={0.3} duration={0.8} className="shrink-0 flex items-center justify-center">
+            {/* Right Column: Neon Green Team Vector Illustration (Top center on mobile, right on desktop) */}
+            <MotionScale delay={0.3} duration={0.8} className="shrink-0 flex items-center justify-center w-full lg:w-auto order-1 lg:order-2">
               <TeamVectorIllustration />
             </MotionScale>
 

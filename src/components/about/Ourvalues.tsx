@@ -1,7 +1,7 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Lightbulb,
   Star,
@@ -130,13 +130,13 @@ function ValueCard({
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.65, delay, ease: [0.21, 0.47, 0.32, 0.98] }}
       whileHover={{ y: -6, transition: { duration: 0.3 } }}
-      className="relative w-full rounded-[18px] bg-[#020703]/90 border border-[#00BF62]/30 p-6 sm:p-7 backdrop-blur-md overflow-hidden transition-all duration-400 hover:border-[#00BF62] hover:shadow-[0_0_30px_rgba(0,191,98,0.22)] group flex flex-col justify-between min-h-[220px]"
+      className="relative w-full rounded-[18px] bg-[#020703]/90 border border-[#00BF62]/30 p-6 sm:p-7 backdrop-blur-md overflow-hidden transition-all duration-400 hover:border-[#00BF62] hover:shadow-[0_0_30px_rgba(0,191,98,0.22)] group flex flex-col items-center justify-center text-center min-h-[220px]"
     >
       {/* Subtle hover gradient illumination */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#00BF62]/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none" />
 
-      {/* Animated Icon: Fully shakes simultaneously across all cards with a 3s pause */}
-      <div className="relative w-full h-11 mb-3.5 flex items-center">
+      {/* Animated Icon: Centered */}
+      <div className="relative w-full h-11 mb-3.5 flex items-center justify-center">
         <motion.div
           animate={{
             x: [0, -8, 12, -10, 10, -6, 6, -3, 3, 0],
@@ -156,12 +156,12 @@ function ValueCard({
         </motion.div>
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 flex flex-col gap-2">
+      {/* Content: Centered */}
+      <div className="relative z-10 flex flex-col items-center text-center gap-2">
         <h4 className="font-poppins font-semibold text-xl sm:text-[22px] lg:text-[24px] text-white tracking-tight leading-tight">
           {item.title}
         </h4>
-        <p className="font-poppins font-normal text-white/75 text-sm sm:text-[15px] lg:text-[15.5px] leading-[1.6]">
+        <p className="font-poppins font-normal text-white/75 text-sm sm:text-[15px] lg:text-[15.5px] leading-[1.6] max-w-xs mx-auto">
           {item.description}
         </p>
       </div>
@@ -170,8 +170,19 @@ function ValueCard({
 }
 
 export default function OurValues() {
+  const [activeMobileIdx, setActiveMobileIdx] = useState(0);
+
   const row1 = valuesList.slice(0, 4); // Innovation, Excellence, Integrity, Student First
   const row2 = valuesList.slice(4, 7); // Collaboration, Curiosity, Impact
+
+  // Automatically cycle through cards on mobile every 3.2 seconds
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveMobileIdx((prev) => (prev + 1) % valuesList.length);
+    }, 3200);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <section className="relative w-full text-white py-16 sm:py-24 lg:py-32 overflow-hidden">
@@ -213,18 +224,67 @@ export default function OurValues() {
           </MotionText>
         </div>
 
-        {/* 7 Cards Grid Layout: 4 on Row 1, 3 Centered on Row 2 */}
-        <div className="mt-14 sm:mt-20 max-w-[1280px] mx-auto flex flex-col gap-6 sm:gap-7">
+        {/* Mobile View: Single Auto-Changing Card without indicator dots */}
+        <div className="block sm:hidden mt-10">
+          <div className="relative min-h-[230px] flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={valuesList[activeMobileIdx].id}
+                initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: -15 }}
+                transition={{ duration: 0.45, ease: "easeInOut" }}
+                className="w-full max-w-[340px] mx-auto rounded-[18px] bg-[#020703]/90 border border-[#00BF62]/30 p-7 backdrop-blur-md overflow-hidden flex flex-col items-center justify-center text-center shadow-[0_0_25px_rgba(0,191,98,0.18)] min-h-[220px]"
+              >
+                {/* Animated Icon: Centered */}
+                <div className="relative w-full h-11 mb-3.5 flex items-center justify-center">
+                  <motion.div
+                    animate={{
+                      x: [0, -8, 12, -10, 10, -6, 6, -3, 3, 0],
+                      y: [0, -3, 2, -2, 2, -1, 1, 0],
+                      rotate: [0, -12, 14, -10, 12, -6, 6, -2, 2, 0],
+                      scale: [1, 1.15, 1.12, 1.15, 1.1, 1],
+                    }}
+                    transition={{
+                      duration: 0.8,
+                      repeat: Infinity,
+                      repeatDelay: 2.5,
+                      ease: "easeInOut",
+                    }}
+                    className="relative text-[#00BF62] shrink-0"
+                  >
+                    {React.createElement(valuesList[activeMobileIdx].icon, {
+                      className: "w-10 h-10 stroke-[1.8]",
+                    })}
+                  </motion.div>
+                </div>
+
+                {/* Content: Centered */}
+                <div className="relative z-10 flex flex-col items-center text-center gap-2">
+                  <h4 className="font-poppins font-semibold text-xl text-white tracking-tight leading-tight">
+                    {valuesList[activeMobileIdx].title}
+                  </h4>
+                  <p className="font-poppins font-normal text-white/75 text-sm leading-[1.6]">
+                    {valuesList[activeMobileIdx].description}
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Desktop / Tablet View: 7 Cards Grid Layout (4 on Row 1, 3 Centered on Row 2) */}
+        <div className="hidden sm:flex flex-col gap-6 sm:gap-7 mt-14 sm:mt-20 max-w-[1280px] mx-auto">
           
           {/* Row 1: 4 Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7">
             {row1.map((item, idx) => (
               <ValueCard key={item.id} item={item} delay={0.15 + idx * 0.1} />
             ))}
           </div>
 
           {/* Row 2: 3 Cards Centered */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 max-w-[960px] mx-auto w-full">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7 max-w-[960px] mx-auto w-full">
             {row2.map((item, idx) => (
               <ValueCard key={item.id} item={item} delay={0.45 + idx * 0.1} />
             ))}

@@ -17,7 +17,7 @@ export default function AboutCompany() {
         <MotionText delay={0.1} duration={0.6}>
           <div className="flex items-center gap-3">
             <div className="w-7 h-[3px] bg-[#00BF63] rounded-full" />
-            <h3 className="font-clash text-xl sm:text-2xl font-bold tracking-tight text-white/60">
+            <h3 className="font-clash text-xl sm:text-2xl font-bold tracking-tight text-white/70">
               About Company
             </h3>
           </div>
@@ -89,7 +89,7 @@ export default function AboutCompany() {
             </motion.div>
 
             {/* Center Graduation Photo (Exact Figma 427x468 dimension with rounded corners) */}
-            <div className="relative w-[300px] sm:w-[380px] lg:w-[427px] h-[320px] sm:h-[400px] lg:h-[468px] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-white/10 shadow-2xl z-10 bg-neutral-900">
+            <div className="relative w-[250px] sm:w-[380px] lg:w-[427px] h-[320px] sm:h-[400px] lg:h-[468px] rounded-[16px] sm:rounded-[20px] overflow-hidden border border-white/10 shadow-2xl z-10 bg-neutral-900">
               <Image
                 src="/hero/about.jpg"
                 alt="Graduation Celebration"

@@ -286,7 +286,7 @@ export default function FeaturedEvents() {
             }}
           >
             <div className="flex flex-col items-center justify-center p-2">
-              <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
                 <CountUp to={50000} duration={3.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -295,7 +295,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
                 <CountUp to={500} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -304,7 +304,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
                 <CountUp to={500} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -313,7 +313,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-2xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
                 <CountUp to={1} duration={1.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">

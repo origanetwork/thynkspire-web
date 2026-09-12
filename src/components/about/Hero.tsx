@@ -68,11 +68,11 @@ export default function AboutHero() {
       {/* Main Container matching Figma 1353px layout grid */}
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative">
 
-        {/* Hero Grid: Left Content + Right Tech Frame */}
-        <div className="relative flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-6 min-h-[560px]">
+        {/* Hero Grid: Tech Frame on Top for Mobile, Side-by-Side for Desktop */}
+        <div className="relative flex flex-col lg:flex-row items-center lg:items-start justify-between gap-8 sm:gap-10 lg:gap-6 min-h-[560px]">
 
-          {/* Left Column: Heading, Subheading & Paragraph (x: 105, y: 245, w: 591 in Figma) */}
-          <div className="w-full lg:max-w-[591px] flex flex-col gap-5 sm:gap-6 pt-4 lg:pt-24 z-20">
+          {/* Column 1 (order-2 on mobile, order-1 on desktop): Heading, Subheading & Paragraph */}
+          <div className="w-full lg:max-w-[591px] flex flex-col gap-5 sm:gap-6 pt-2 sm:pt-4 lg:pt-24 z-20 order-2 lg:order-1">
 
             {/* Category Subtitle */}
             <MotionFadeIn delay={0.1} direction="up" distance={15}>
@@ -105,14 +105,35 @@ export default function AboutHero() {
               </MotionText>
             </h1>
 
-            {/* Paragraph Description */}
-            <MotionFadeIn delay={0.5} direction="up" distance={20}>
+            {/* Paragraph Description & Vector 1 Line Graphic */}
+            <MotionFadeIn delay={0.5} direction="up" distance={20} className="flex flex-col relative">
               <p
                 className="font-poppins font-normal text-white/70 text-base sm:text-lg lg:text-[21px] leading-[1.55] max-w-[520px]"
                 style={{ fontFamily: "'Poppins', sans-serif" }}
               >
                 Thynkspire India Pvt. Ltd. is an innovation-driven education and technology company preparing students for future careers through practical learning, industry exposure, and large-scale engagement platforms.
               </p>
+
+              {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
+              <motion.div
+                className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
+                animate={{
+                  opacity: [0.85, 1, 0.85],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 3.5,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src="/vector/Vector1.png"
+                  alt="Decorative Line Graphic"
+                  fill
+                  className="object-contain object-left-top"
+                  priority
+                />
+              </motion.div>
             </MotionFadeIn>
 
             {/* Bottom Stats Capsule Bar matching Home Hero Section Model */}
@@ -135,7 +156,7 @@ export default function AboutHero() {
                 {/* 3 Stats Columns with dynamic count increase animation */}
                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-clash text-2xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                       <CounterNumber value={100} suffix="+" />
                     </span>
                     <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -144,7 +165,7 @@ export default function AboutHero() {
                   </div>
 
                   <div className="flex flex-col items-center justify-center relative">
-                    <span className="font-clash text-2xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                       <CounterNumber value={50} suffix="+" />
                     </span>
                     <div className="flex items-center justify-center gap-1">
@@ -155,7 +176,7 @@ export default function AboutHero() {
                   </div>
 
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-clash text-2xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                       <CounterNumber value={30} suffix="+" />
                     </span>
                     <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -168,9 +189,9 @@ export default function AboutHero() {
 
           </div>
 
-          {/* Right Column: Exact Tech Frame 7026 with Students Image, Rotating HUD Arcs & SVG Badges */}
-          <div className="w-full lg:w-[684px] relative flex justify-center lg:justify-end shrink-0">
-            <div className="relative w-full max-w-[684px] h-[480px] sm:h-[530px] lg:h-[558px]">
+          {/* Column 2 (order-1 on mobile, order-2 on desktop): Tech Frame with Students Image & Centered Animated BG */}
+          <div className="w-full lg:w-[684px] relative flex justify-center lg:justify-end shrink-0 order-1 lg:order-2">
+            <div className="relative w-full max-w-[340px] sm:max-w-[480px] lg:max-w-[684px] h-[340px] sm:h-[460px] lg:h-[558px] mx-auto lg:mx-0">
 
               {/* Top Connecting HUD Vector Line 1 directly anchored to touch the box's top-left corner (0 gap) */}
               <div className="hidden lg:block absolute right-[100%] top-[-1px] w-[581px] h-[64px] pointer-events-none z-30">
@@ -184,11 +205,11 @@ export default function AboutHero() {
                 </svg>
               </div>
 
-              {/* Frame 7026 Exact Green Outline Frame (684x558 with stroke #00BF63/25) */}
+              {/* Frame 7026 Exact Green Outline Frame */}
               <div className="absolute inset-0 border-2 border-[#00BF63]/25 pointer-events-none z-30">
                 {/* Vector 12 Notch at Bottom-Left of Frame (Figma 3311:1021) */}
-                <div className="absolute bottom-[20px] left-[20px] w-[59px] h-[25px] pointer-events-none">
-                  <svg width="59" height="25" viewBox="0 0 59 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <div className="absolute bottom-[10px] left-[10px] sm:bottom-[20px] sm:left-[20px] w-[42px] sm:w-[59px] h-[18px] sm:h-[25px] pointer-events-none">
+                  <svg width="100%" height="100%" viewBox="0 0 59 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                       d="M45.5 24H64.5L66 23.5H66.5L68.5 23L73 22.5L78.5 23.5L80 27.5L80.5 31L75 35.5L66.5 39.5L51 41.5L42.5 35L41.2 28H36L34 25L25 20.5C22.3 19.2 18.4 16.5 24 16.5C29.6 16.5 33.7 18.5 35 19.5L34 24L41 27L41.2 28H41.5L45.5 24Z"
                       transform="translate(-23, -16)"
@@ -198,7 +219,7 @@ export default function AboutHero() {
                 </div>
               </div>
 
-              {/* Vector 4 Exit Step Line on Right Edge (Figma Vector 4 - id: 3311:976) */}
+              {/* Vector 4 Exit Step Line on Right Edge */}
               <div className="hidden lg:block absolute -right-[144px] bottom-[28px] w-[146px] h-[31px] pointer-events-none z-30">
                 <svg width="146" height="31" viewBox="0 0 146 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -210,16 +231,16 @@ export default function AboutHero() {
                 </svg>
               </div>
 
-              {/* Behind Students: HUD Rotating Concentric Laser Arcs & Grid (Figma code animate 3311:950) */}
+              {/* Behind Students: Centered HUD Rotating Concentric Laser Arcs & Grid */}
               <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0 overflow-hidden">
-                <HeroCodeAnimate className="scale-[0.85] sm:scale-100 lg:scale-[1.02]" />
+                <HeroCodeAnimate className="scale-[0.72] sm:scale-[0.9] lg:scale-[1.02]" />
               </div>
 
-              {/* 3 Floating Tech Diamond Badges with Connected Arrow Vectors matching Home Hero Model */}
+              {/* 3 Floating Tech Diamond Badges with Connected Arrow Vectors */}
 
               {/* Badge 1: Code Badge </> with Vector-3 Loop Stroke */}
               <motion.div
-                className="absolute top-[48px] sm:top-[58px] left-[150px] sm:left-[160px] z-20 pointer-events-none"
+                className="absolute top-[8%] sm:top-[12%] lg:top-[14%] left-[4%] sm:left-[10%] lg:left-[22%] z-20 pointer-events-none"
                 animate={{
                   y: [0, -10, 0],
                   rotate: [0, 4, -4, 0],
@@ -230,7 +251,7 @@ export default function AboutHero() {
                   ease: "easeInOut",
                 }}
               >
-                <div className="relative w-[50px] sm:w-[57px] h-[50px] sm:h-[57px] drop-shadow-[0_0_15px_rgba(0,191,99,0.6)]">
+                <div className="relative w-[36px] sm:w-[48px] lg:w-[57px] h-[36px] sm:h-[48px] lg:h-[57px] drop-shadow-[0_0_15px_rgba(0,191,99,0.6)]">
                   <Image
                     src="/vector/hero_vec_1082_18642.png"
                     alt="Code Badge"
@@ -240,7 +261,7 @@ export default function AboutHero() {
                   />
 
                   {/* Vector-3 loop connector stroke attached beneath the badge */}
-                  <div className="absolute top-[34px] left-[22px] lg:top-[36px] lg:left-[24px] w-[62px] h-[42px] pointer-events-none">
+                  <div className="absolute top-[24px] left-[14px] sm:top-[30px] sm:left-[18px] lg:top-[36px] lg:left-[24px] w-[42px] sm:w-[52px] lg:w-[62px] h-[28px] sm:h-[35px] lg:h-[42px] pointer-events-none">
                     <Image
                       src="/vector/Vector-3.png"
                       alt="Vector 3 Loop Stroke"
@@ -253,7 +274,7 @@ export default function AboutHero() {
 
               {/* Badge 2: Brain AI Badge with Looped Arrow Stroke */}
               <motion.div
-                className="absolute top-[8px] sm:top-[12px] right-[180px] sm:right-[200px] z-20 pointer-events-none"
+                className="absolute top-[2%] sm:top-[4%] lg:top-[6%] right-[22%] sm:right-[26%] lg:right-[30%] z-20 pointer-events-none"
                 animate={{
                   y: [0, 12, 0],
                   rotate: [0, -5, 5, 0],
@@ -265,7 +286,7 @@ export default function AboutHero() {
                   delay: 0.4,
                 }}
               >
-                <div className="relative w-[50px] sm:w-[61px] h-[50px] sm:h-[61px] drop-shadow-[0_0_18px_rgba(0,191,99,0.7)]">
+                <div className="relative w-[36px] sm:w-[50px] lg:w-[61px] h-[36px] sm:h-[50px] lg:h-[61px] drop-shadow-[0_0_18px_rgba(0,191,99,0.7)]">
                   <Image
                     src="/vector/hero_vec_1082_18647.png"
                     alt="Brain Badge"
@@ -275,7 +296,7 @@ export default function AboutHero() {
                   />
 
                   {/* Looped Arrow Stroke pointing to the Brain Badge */}
-                  <div className="absolute -left-[54px] top-[18px] w-[65px] h-[65px] pointer-events-none">
+                  <div className="absolute -left-[36px] sm:-left-[46px] lg:-left-[54px] top-[10px] sm:top-[14px] lg:top-[18px] w-[42px] sm:w-[54px] lg:w-[65px] h-[42px] sm:h-[54px] lg:h-[65px] pointer-events-none">
                     <Image
                       src="/vector/hero_codeline_1082_18639.png"
                       alt="Looped Arrow Stroke"
@@ -288,7 +309,7 @@ export default function AboutHero() {
 
               {/* Badge 3: Team / Users Badge with Arrow Pointer */}
               <motion.div
-                className="absolute top-[75px] sm:top-[82px] right-[25px] sm:right-[35px] z-20 pointer-events-none"
+                className="absolute top-[18%] sm:top-[20%] lg:top-[22%] right-[3%] sm:right-[4%] lg:right-[5%] z-20 pointer-events-none"
                 animate={{
                   y: [0, -8, 0],
                   x: [0, 4, 0],
@@ -301,7 +322,7 @@ export default function AboutHero() {
                   delay: 0.8,
                 }}
               >
-                <div className="relative w-[50px] h-[50px] drop-shadow-[0_0_14px_rgba(0,191,99,0.6)]">
+                <div className="relative w-[34px] sm:w-[44px] lg:w-[50px] h-[34px] sm:h-[44px] lg:h-[50px] drop-shadow-[0_0_14px_rgba(0,191,99,0.6)]">
                   <Image
                     src="/vector/hero_vec_1082_18665.png"
                     alt="Community Badge"
@@ -311,7 +332,7 @@ export default function AboutHero() {
                   />
 
                   {/* Straight Arrow Pointer pointing left */}
-                  <div className="absolute -left-[70px] top-[32px] w-[79px] h-[27px] pointer-events-none">
+                  <div className="absolute -left-[44px] sm:-left-[58px] lg:-left-[70px] top-[20px] sm:top-[26px] lg:top-[32px] w-[48px] sm:w-[64px] lg:w-[79px] h-[16px] sm:h-[22px] lg:h-[27px] pointer-events-none">
                     <Image
                       src="/vector/hero_vec_1082_18640.png"
                       alt="Arrow Pointer"
@@ -322,8 +343,8 @@ export default function AboutHero() {
                 </div>
               </motion.div>
 
-              {/* Foreground Students Collaboration Photo (Figma 3311:1022 - exact 680x453 at bottom of frame) */}
-              <div className="absolute bottom-[2px] left-[2px] right-[2px] h-[370px] sm:h-[415px] lg:h-[453px] z-20 pointer-events-none">
+              {/* Foreground Students Collaboration Photo (Figma 3311:1022) */}
+              <div className="absolute bottom-[2px] left-[2px] right-[2px] h-[260px] sm:h-[370px] lg:h-[453px] z-20 pointer-events-none">
                 <div className="relative w-full h-full">
                   <Image
                     src="/about/hero_students.png"
@@ -334,6 +355,27 @@ export default function AboutHero() {
                   />
                 </div>
               </div>
+
+              {/* Vector 5 Bottom Right Decorative Line Graphic */}
+              <motion.div
+                className="absolute -right-4 sm:right-[-10%] lg:right-[-20%] bottom-[0px] w-[260px] xs:w-[320px] sm:w-[500px] lg:w-[750px] h-[36px] sm:h-[60px] lg:h-[80px] pointer-events-none z-20 opacity-100"
+                animate={{
+                  opacity: [1.85, 1, 4.85],
+                }}
+                transition={{
+                  repeat: Infinity,
+                  duration: 4,
+                  ease: "easeInOut",
+                }}
+              >
+                <Image
+                  src="/vector/Vector5.png"
+                  alt="Vector 5 Line Graphic"
+                  fill
+                  className="object-contain object-right-bottom"
+                  priority
+                />
+              </motion.div>
 
             </div>
           </div>

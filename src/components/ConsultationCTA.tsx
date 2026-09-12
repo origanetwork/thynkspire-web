@@ -42,8 +42,8 @@ export default function ConsultationCTA() {
             }}
           />
 
-          {/* Left Column Content */}
-          <div className="relative z-10 space-y-4 max-w-2xl">
+          {/* Left Column Content (Placed below image on mobile, left on desktop) */}
+          <div className="relative z-10 space-y-4 max-w-2xl w-full lg:w-auto order-2 lg:order-1">
             
             {/* Heading & Subtitle */}
             <div className="space-y-1">
@@ -115,14 +115,14 @@ export default function ConsultationCTA() {
 
           </div>
 
-          {/* Right Column: Woman Trophy Winner Vector Illustration with compact height */}
-          <MotionScale delay={0.3} duration={0.8} className="relative z-10 shrink-0 flex justify-center w-full lg:w-auto">
-            <div className="relative w-[260px] sm:w-[320px] lg:w-[360px] h-[200px] sm:h-[250px] lg:h-[270px]">
+          {/* Right Column: Woman Trophy Winner Vector Illustration (Top center on mobile, right on desktop) */}
+          <MotionScale delay={0.3} duration={0.8} className="relative z-10 shrink-0 flex justify-center items-center w-full lg:w-auto order-1 lg:order-2">
+            <div className="relative w-[220px] sm:w-[280px] lg:w-[360px] h-[190px] sm:h-[230px] lg:h-[270px]">
               <Image
                 src="/hero/girl.png"
                 alt="Winner Woman Holding Trophy"
                 fill
-                className="object-contain object-right"
+                className="object-contain object-center lg:object-right"
                 priority
               />
             </div>

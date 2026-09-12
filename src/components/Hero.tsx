@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import HeroCodeAnimate from "./HeroCodeAnimate";
-import { MotionFadeIn, MotionText } from "./MotionWrapper";
+import { MotionFadeIn, MotionText, MotionScale } from "./MotionWrapper";
 
 // Animated count up component using requestAnimationFrame with easeOut
 function CountUp({ to, duration = 2 }: { to: number; duration?: number }) {
@@ -37,7 +37,7 @@ function CountUp({ to, duration = 2 }: { to: number; duration?: number }) {
 
 export default function Hero() {
     return (
-        <section id="hero" className="relative w-full min-h-screen text-white overflow-hidden pt-[115px] sm:pt-[150px] lg:pt-[209px] pb-12 sm:pb-16">
+        <section className="relative w-full min-h-screen text-white overflow-hidden pt-[115px] sm:pt-[150px] lg:pt-[209px] pb-12 sm:pb-16">
             {/* Outer container matching header width and padding alignment */}
             <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8">
 
@@ -94,7 +94,7 @@ export default function Hero() {
 
                                 {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
                                 <motion.div
-                                    className="relative w-full sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[50px] sm:h-[74px] mt-[-5px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
+                                    className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
                                     animate={{
                                         opacity: [0.85, 1, 0.85],
                                     }}
@@ -113,6 +113,150 @@ export default function Hero() {
                                     />
                                 </motion.div>
                             </MotionFadeIn>
+                        </div>
+
+                        {/* Hero Person Image + Figma HUD Arc Rings & Vector Badges (Positioned in normal flow on mobile, absolute on desktop) */}
+                        <div className="w-full max-w-[320px] xs:max-w-[360px] sm:max-w-[460px] lg:max-w-none lg:w-[798px] h-[280px] xs:h-[320px] sm:h-[420px] lg:h-[532px] relative z-10 lg:absolute lg:right-0 lg:top-[-60px] mx-auto lg:mx-0 my-2 sm:my-4 lg:my-0">
+
+                            {/* Animated Glowing Green HUD Arc Lines & Laser Scanline (Figma code animate) */}
+                            <div className="absolute left-1/2 -translate-x-1/2 lg:translate-x-0 lg:left-[18%] top-1/2 -translate-y-1/2 lg:translate-y-0 lg:top-[-40px] w-[290px] xs:w-[330px] sm:w-[450px] lg:w-[580px] h-[290px] xs:h-[330px] sm:h-[450px] lg:h-[580px] pointer-events-none z-0">
+                                <HeroCodeAnimate />
+                            </div>
+
+                            {/* Top Left Floating Code Badge with Vector-3.png Loop Connector */}
+                            <motion.div
+                                className="absolute left-[6%] sm:left-[16%] lg:left-[28%] top-[6%] sm:top-[8%] lg:top-[10%] pointer-events-none z-20"
+                                animate={{
+                                    y: [0, -10, 0],
+                                    rotate: [0, 4, -4, 0],
+                                }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 4,
+                                    ease: "easeInOut",
+                                }}
+                            >
+                                <div className="relative w-[34px] xs:w-[38px] sm:w-[44px] lg:w-[50px] h-[34px] xs:h-[38px] sm:h-[44px] lg:h-[50px]">
+                                    <Image
+                                        src="/vector/hero_vec_1082_18642.png"
+                                        alt="Code Badge"
+                                        fill
+                                        className="object-contain"
+                                    />
+
+                                    {/* Vector-3 loop connector stroke attached beneath the badge */}
+                                    <div className="absolute top-[22px] xs:top-[25px] sm:top-[30px] lg:top-[36px] left-[14px] xs:left-[16px] sm:left-[18px] lg:left-[24px] w-[42px] xs:w-[48px] sm:w-[54px] lg:w-[62px] h-[28px] xs:h-[32px] sm:h-[36px] lg:h-[42px] pointer-events-none">
+                                        <Image
+                                            src="/vector/Vector-3.png"
+                                            alt="Vector 3 Loop Stroke"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Top Right Floating Brain Badge with Looped Arrow Stroke */}
+                            <motion.div
+                                className="absolute right-[14%] sm:right-[18%] lg:right-[20%] top-[4px] sm:top-[12px] lg:top-[20px] pointer-events-none z-20"
+                                animate={{
+                                    y: [0, 12, 0],
+                                    rotate: [0, -5, 5, 0],
+                                }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 4.8,
+                                    ease: "easeInOut",
+                                    delay: 0.4,
+                                }}
+                            >
+                                <div className="relative w-[34px] xs:w-[38px] sm:w-[44px] lg:w-[50px] h-[34px] xs:h-[38px] sm:h-[44px] lg:h-[50px]">
+                                    <Image
+                                        src="/vector/hero_vec_1082_18647.png"
+                                        alt="Brain Badge"
+                                        fill
+                                        className="object-contain"
+                                    />
+
+                                    {/* Looped Arrow Stroke pointing to the Brain Badge */}
+                                    <div className="absolute -left-[36px] xs:-left-[42px] sm:-left-[48px] lg:-left-[54px] top-[10px] sm:top-[14px] lg:top-[18px] md:mt-8 w-[42px] xs:w-[48px] sm:w-[56px] lg:w-[65px] h-[42px] xs:h-[48px] sm:h-[56px] lg:h-[65px] pointer-events-none">
+                                        <Image
+                                            src="/vector/hero_codeline_1082_18639.png"
+                                            alt="Looped Arrow Stroke"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Middle Right Community Badge with Arrow Pointer */}
+                            <motion.div
+                                className="absolute right-[2%] sm:right-[3%] lg:right-[4%] top-[22%] sm:top-[26%] lg:top-[30%] pointer-events-none z-20"
+                                animate={{
+                                    y: [0, -8, 0],
+                                    x: [0, 4, 0],
+                                    scale: [1, 1.05, 1],
+                                }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 3.6,
+                                    ease: "easeInOut",
+                                    delay: 0.8,
+                                }}
+                            >
+                                <div className="relative w-[34px] xs:w-[38px] sm:w-[44px] lg:w-[50px] h-[34px] xs:h-[38px] sm:h-[44px] lg:h-[50px]">
+                                    <Image
+                                        src="/vector/hero_vec_1082_18665.png"
+                                        alt="Community Badge"
+                                        fill
+                                        className="object-contain"
+                                    />
+
+                                    {/* Straight Arrow Pointer pointing left to the person */}
+                                    <div className="absolute -left-[46px] xs:-left-[54px] sm:-left-[62px] lg:-left-[70px] top-[20px] sm:top-[26px] lg:top-[32px] w-[52px] xs:w-[60px] sm:w-[68px] lg:w-[79px] h-[18px] xs:h-[21px] sm:h-[24px] lg:h-[27px] pointer-events-none">
+                                        <Image
+                                            src="/vector/hero_vec_1082_18640.png"
+                                            alt="Arrow Pointer"
+                                            fill
+                                            className="object-contain"
+                                        />
+                                    </div>
+                                </div>
+                            </motion.div>
+
+                            {/* Main Hero Person Image */}
+                            <div className="relative w-full h-full z-10">
+                                <Image
+                                    src="/hero/hero-person.png"
+                                    alt="ThynkSpire Hero Person"
+                                    fill
+                                    className="object-contain object-bottom drop-shadow-2xl"
+                                    priority
+                                />
+                            </div>
+
+                            {/* Vector 5 Bottom Right Decorative Line Graphic */}
+                            <motion.div
+                                className="absolute -right-4 sm:right-[-10%] lg:right-[-20%] bottom-[0px] w-[260px] xs:w-[320px] sm:w-[500px] lg:w-[750px] h-[36px] sm:h-[60px] lg:h-[80px] pointer-events-none z-20 opacity-100"
+                                animate={{
+                                    opacity: [1.85, 1, 4.85],
+                                }}
+                                transition={{
+                                    repeat: Infinity,
+                                    duration: 4,
+                                    ease: "easeInOut",
+                                }}
+                            >
+                                <Image
+                                    src="/vector/Vector5.png"
+                                    alt="Vector 5 Line Graphic"
+                                    fill
+                                    className="object-contain object-right-bottom"
+                                    priority
+                                />
+                            </motion.div>
+
                         </div>
 
                         {/* Action Row Container */}
@@ -168,7 +312,7 @@ export default function Hero() {
                         {/* Bottom Stats Capsule Bar & Connected Diagonal Vector Line */}
                         <MotionFadeIn delay={0.55} direction="up" distance={30} className="relative flex items-center w-full">
                             <div
-                                className="relative w-full max-w-[656px] lg:max-w-[690px] xl:max-w-[720px] min-h-[96px] lg:h-[122px] rounded-[32px] sm:rounded-[60px] lg:rounded-[94px] overflow-hidden py-4 sm:py-[9px] px-3 sm:px-8 shadow-2xl flex items-center justify-between mt-2 sm:mt-4 opacity-100 bg-[#030d07]"
+                                className="relative w-full max-w-[656px] lg:max-w-[690px] xl:max-w-[720px] min-h-[96px] lg:h-[122px] rounded-[32px] sm:rounded-[60px] lg:rounded-[94px] overflow-hidden py-4 sm:py-[9px] px-3 sm:px-8 border border-[#00BF62]/30 shadow-2xl flex items-center justify-between mt-2 sm:mt-4 opacity-100 bg-[#030d07]"
                                 style={{
                                     background: "linear-gradient(90deg, #010a05 0%, rgba(35, 145, 92, 0.22) 50%, #010a05 100%), linear-gradient(180deg, rgba(0, 25, 12, 0.9) 0%, rgba(0, 5, 2, 0.95) 100%)",
                                 }}
@@ -185,7 +329,7 @@ export default function Hero() {
                                 {/* 3 Stats Columns with dynamic count increase animation */}
                                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                                     <div className="flex flex-col items-center justify-center">
-                                        <span className="font-clash text-2xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                                        <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                                             <CountUp to={10} duration={1.8} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -194,18 +338,22 @@ export default function Hero() {
                                     </div>
 
                                     <div className="flex flex-col items-center justify-center relative">
-                                        <span className="font-clash text-2xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                                        <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                                             <CountUp to={25} duration={2} />+
                                         </span>
                                         <div className="flex items-center justify-center gap-1">
                                             <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                                 Industry Partners
                                             </span>
+                                            {/* Figma vector indicator stroke after Industry Partners */}
+                                            <svg width="12" height="8" viewBox="0 0 12 8" fill="none" className="inline-block stroke-[#00BF62] opacity-80 mt-1 hidden sm:inline-block">
+                                                <path d="M1 1L11 7" strokeWidth="1.5" strokeLinecap="round" />
+                                            </svg>
                                         </div>
                                     </div>
 
                                     <div className="flex flex-col items-center justify-center">
-                                        <span className="font-clash text-2xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                                        <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-semibold text-[#00BF62] tracking-tight leading-tight">
                                             <CountUp to={550} duration={2.5} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -219,133 +367,10 @@ export default function Hero() {
 
                     </div>
 
-                    {/* Right Column: Hero Person Image + Figma HUD Arc Rings & Vector Badges */}
-                    <div className="w-full lg:w-[798px] h-[340px] sm:h-[440px] lg:h-[532px] relative z-10 lg:absolute lg:right-0 lg:top-[-60px] mt-6 lg:mt-0">
-
-                        {/* Animated Glowing Green HUD Arc Lines & Laser Scanline (Figma code animate) */}
-                        <div className="absolute left-[12%] sm:left-[16%] lg:left-[18%] top-[-40px] w-[580px] h-[580px] pointer-events-none z-0">
-                            <HeroCodeAnimate />
-                        </div>
-
-                        {/* Top Left Floating Code Badge with Vector-3.png Loop Connector */}
-                        <motion.div
-                            className="absolute left-[28%] top-[10%] pointer-events-none z-20"
-                            animate={{
-                                y: [0, -10, 0],
-                                rotate: [0, 4, -4, 0],
-                            }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 4,
-                                ease: "easeInOut",
-                            }}
-                        >
-                            <div className="relative w-[50px] h-[50px]">
-                                <Image
-                                    src="/vector/hero_vec_1082_18642.png"
-                                    alt="Code Badge"
-                                    fill
-                                    className="object-contain"
-                                />
-
-                                {/* Vector-3 loop connector stroke attached beneath the badge */}
-                                <div className="absolute top-[34px] left-[22px] lg:top-[36px] lg:left-[24px] w-[62px] h-[42px] pointer-events-none">
-                                    <Image
-                                        src="/vector/Vector-3.png"
-                                        alt="Vector 3 Loop Stroke"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Top Right Floating Brain Badge with Looped Arrow Stroke */}
-                        <motion.div
-                            className="absolute right-[20%] top-[20px] pointer-events-none z-20"
-                            animate={{
-                                y: [0, 12, 0],
-                                rotate: [0, -5, 5, 0],
-                            }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 4.8,
-                                ease: "easeInOut",
-                                delay: 0.4,
-                            }}
-                        >
-                            <div className="relative w-[50px] h-[50px]">
-                                <Image
-                                    src="/vector/hero_vec_1082_18647.png"
-                                    alt="Brain Badge"
-                                    fill
-                                    className="object-contain"
-                                />
-
-                                {/* Looped Arrow Stroke pointing to the Brain Badge */}
-                                <div className="absolute -left-[54px] mt-0 md:mt-8 top-[18px] w-[65px] h-[65px] pointer-events-none">
-                                    <Image
-                                        src="/vector/hero_codeline_1082_18639.png"
-                                        alt="Looped Arrow Stroke"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Middle Right Community Badge with Arrow Pointer */}
-                        <motion.div
-                            className="absolute right-[4%] top-[30%] pointer-events-none z-20"
-                            animate={{
-                                y: [0, -8, 0],
-                                x: [0, 4, 0],
-                                scale: [1, 1.05, 1],
-                            }}
-                            transition={{
-                                repeat: Infinity,
-                                duration: 3.6,
-                                ease: "easeInOut",
-                                delay: 0.8,
-                            }}
-                        >
-                            <div className="relative w-[50px] h-[50px]">
-                                <Image
-                                    src="/vector/hero_vec_1082_18665.png"
-                                    alt="Community Badge"
-                                    fill
-                                    className="object-contain"
-                                />
-
-                                {/* Straight Arrow Pointer pointing left to the person */}
-                                <div className="absolute -left-[70px] top-[32px] w-[79px] h-[27px] pointer-events-none">
-                                    <Image
-                                        src="/vector/hero_vec_1082_18640.png"
-                                        alt="Arrow Pointer"
-                                        fill
-                                        className="object-contain"
-                                    />
-                                </div>
-                            </div>
-                        </motion.div>
-
-                        {/* Main Hero Person Image */}
-                        <div className="relative w-full h-full z-10">
-                            <Image
-                                src="/hero/hero-person.png"
-                                alt="ThynkSpire Hero Person"
-                                fill
-                                className="object-contain object-bottom drop-shadow-2xl"
-                                priority
-                            />
-                        </div>
-
-                    </div>
-
                 </div>
 
                 {/* Ongoing Flowing Laser Lines - Originating from stat bar and center, curving rightwards */}
-                <div className="relative w-full h-[80px] sm:h-[110px] -mt-6 sm:-mt-10 pointer-events-none z-20 overflow-visible">
+                <div className="relative w-full h-[80px] sm:h-[110px] -mt-4 sm:-mt-8 pointer-events-none z-20 overflow-visible">
                     <svg
                         viewBox="0 0 1440 110"
                         fill="none"

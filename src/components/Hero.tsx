@@ -78,7 +78,7 @@ export default function Hero() {
                                 </MotionText>
                             </h1>
 
-                            {/* Subtitle Paragraph & Vector 1 Group */}
+                            {/* Subtitle Paragraph */}
                             <MotionFadeIn delay={0.35} direction="up" distance={20} className="flex flex-col relative">
                                 <p
                                     className="font-poppins font-normal text-base sm:text-lg lg:text-[22px] leading-relaxed lg:leading-[100%] text-[#FFFFFFB2]"
@@ -91,27 +91,6 @@ export default function Hero() {
                                 >
                                     Industry-focused programs, real-world <br className="hidden sm:inline" /> experience, and a platform to grow.
                                 </p>
-
-                                {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
-                                <motion.div
-                                    className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
-                                    animate={{
-                                        opacity: [0.85, 1, 0.85],
-                                    }}
-                                    transition={{
-                                        repeat: Infinity,
-                                        duration: 3.5,
-                                        ease: "easeInOut",
-                                    }}
-                                >
-                                    <Image
-                                        src="/vector/Vector1.png"
-                                        alt="Decorative Line Graphic"
-                                        fill
-                                        className="object-contain object-left-top"
-                                        priority
-                                    />
-                                </motion.div>
                             </MotionFadeIn>
                         </div>
 

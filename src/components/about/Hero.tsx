@@ -113,27 +113,6 @@ export default function AboutHero() {
               >
                 Thynkspire India Pvt. Ltd. is an innovation-driven education and technology company preparing students for future careers through practical learning, industry exposure, and large-scale engagement platforms.
               </p>
-
-              {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
-              <motion.div
-                className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
-                animate={{
-                  opacity: [0.85, 1, 0.85],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3.5,
-                  ease: "easeInOut",
-                }}
-              >
-                <Image
-                  src="/vector/Vector1.png"
-                  alt="Decorative Line Graphic"
-                  fill
-                  className="object-contain object-left-top"
-                  priority
-                />
-              </motion.div>
             </MotionFadeIn>
 
             {/* Bottom Stats Capsule Bar matching Home Hero Section Model */}

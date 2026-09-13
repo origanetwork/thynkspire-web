@@ -97,7 +97,7 @@ export default function Getintouch() {
                 <span className="block text-xs text-slate-400 font-medium tracking-wider uppercase">
                   PHONE
                 </span>
-                <span className="text-sm sm:text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
+                <span className="text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
                   +91 790 767 2043
                 </span>
               </div>
@@ -115,7 +115,7 @@ export default function Getintouch() {
                 <span className="block text-xs text-slate-400 font-medium tracking-wider uppercase">
                   EMAIL
                 </span>
-                <span className="text-sm sm:text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
+                <span className="text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
                   hello@thynkspire.com
                 </span>
               </div>
@@ -132,7 +132,7 @@ export default function Getintouch() {
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <MotionScale delay={0.2} duration={0.7} className="relative w-full max-w-[380px] sm:max-w-[440px] h-[300px] sm:h-[380px]">
               <Image
-                src="/contact/get.gif"
+                src="/contact/illustration.png"
                 alt="Thynkspire Coding Desk Animation"
                 fill
                 className="object-contain object-center drop-shadow-2xl"

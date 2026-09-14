@@ -153,7 +153,7 @@ export default function FeaturedEvents() {
           <MotionText delay={0.1} duration={0.6}>
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-[#00BF63]" />
-              <h3 className="font-clash text-xl sm:text-2xl font-bold tracking-tight text-white">
+              <h3 className="font-clash text-xl sm:text-2xl font-normal tracking-tight text-white">
                 Featured Events & Initiatives
               </h3>
             </div>
@@ -192,7 +192,13 @@ export default function FeaturedEvents() {
 
             <div className="space-y-3 sm:space-y-4 relative z-10">
               <MotionText delay={0.15}>
-                <h2 className="font-clash text-2xl sm:text-3xl lg:text-[38px] xl:text-[42px] font-semibold text-white tracking-tight leading-tight">
+                <h2
+                  className="font-clash text-2xl sm:text-3xl md:text-4xl lg:text-[50px] font-normal text-white tracking-[0px] leading-tight lg:leading-[41.6px]"
+                  style={{
+                    fontFamily: "'Clash Display', sans-serif",
+                    fontWeight: 400,
+                  }}
+                >
                   1000 Cyber Defenders Program
                 </h2>
               </MotionText>
@@ -207,13 +213,13 @@ export default function FeaturedEvents() {
             <div className="pt-2 relative z-10">
               <Link href="#join-mission">
                 <button
-                  className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/20 bg-black/40 hover:border-[#00BF63] backdrop-blur-md transition-all duration-300 shadow-lg"
+                  className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[190px] sm:w-[204px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl cursor-pointer"
                 >
-                  <span className="font-poppins text-sm font-medium text-white tracking-wide">
+                  <span className="font-poppins text-sm sm:text-base font-medium text-white tracking-wide whitespace-nowrap">
                     Join the Mission
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-[#00BF63] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                    <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                  <div className="w-[36px] h-[36px] md:w-[32px] md:h-[32px] rounded-full bg-[#00BF63] text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300">
+                    <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
                   </div>
                 </button>
               </Link>
@@ -273,7 +279,7 @@ export default function FeaturedEvents() {
 
         {/* Our Impact, By The Numbers Section */}
         <MotionFadeIn direction="up" distance={30} className="space-y-6 sm:space-y-8 pt-8 sm:pt-12">
-          <h3 className="font-clash text-2xl sm:text-3xl font-bold tracking-tight text-white text-center">
+          <h3 className="font-clash text-2xl sm:text-3xl font-normal tracking-tight text-white text-center">
             Our impact, by the numbers
           </h3>
 
@@ -286,7 +292,7 @@ export default function FeaturedEvents() {
             }}
           >
             <div className="flex flex-col items-center justify-center p-2">
-              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-normal text-white tracking-tight">
                 <CountUp to={50000} duration={3.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -295,7 +301,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-normal text-white tracking-tight">
                 <CountUp to={650} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -304,7 +310,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-normal text-white tracking-tight">
                 <CountUp to={120} duration={3.2} suffix="+" />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">
@@ -313,7 +319,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="flex flex-col items-center justify-center p-2 pt-3 md:pt-2">
-              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-bold text-white tracking-tight">
+              <span className="font-clash text-3xl sm:text-4xl lg:text-6xl font-normal text-white tracking-tight">
                 <CountUp to={1} duration={1.8} />
               </span>
               <span className="font-poppins text-xs sm:text-sm text-slate-300 font-normal mt-1 sm:mt-2 whitespace-nowrap">

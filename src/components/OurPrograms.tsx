@@ -54,7 +54,7 @@ export default function OurPrograms() {
         <MotionText delay={0.1} duration={0.6}>
           <div className="flex items-center gap-3">
             <div className="w-6 h-[2px] bg-[#00BF63]" />
-            <h3 className="font-clash text-2xl font-bold tracking-tight text-white/70">
+            <h3 className="font-clash text-2xl font-normal tracking-tight text-white/70">
               Our Programs
             </h3>
           </div>
@@ -132,16 +132,13 @@ export default function OurPrograms() {
         <MotionFadeIn delay={0.2} direction="up" className="flex justify-center pt-2">
           <Link href="/programs">
             <button
-              className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/30 bg-black/80 hover:border-[#00BF63] transition-all duration-300 shadow-xl"
-              style={{
-                borderRadius: "38px",
-              }}
+              className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[150px] sm:w-[161px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl cursor-pointer"
             >
-              <span className="font-poppins text-sm font-semibold text-white tracking-wide">
+              <span className="font-poppins text-sm sm:text-base font-medium text-white tracking-wide whitespace-nowrap">
                 View More
               </span>
-              <div className="w-8 h-8 rounded-full bg-[#00BF63] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              <div className="w-[36px] h-[36px] rounded-full bg-[#00BF63] text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300">
+                <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
               </div>
             </button>
           </Link>
@@ -152,7 +149,7 @@ export default function OurPrograms() {
 
           {/* Left Title */}
           <div className="shrink-0 lg:ml-50 text-center md:text-left">
-            <h3 className="font-clash text-2xl sm:text-3xl font-bold tracking-tight text-white/70 whitespace-nowrap">
+            <h3 className="font-clash text-2xl sm:text-3xl font-normal tracking-tight text-white/70 whitespace-nowrap">
               Our Initiatives
             </h3>
           </div>

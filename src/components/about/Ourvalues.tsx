@@ -139,18 +139,17 @@ function ValueCard({
       <div className="relative w-full h-11 mb-3.5 flex items-center justify-center">
         <motion.div
           animate={{
-            x: [0, -8, 12, -10, 10, -6, 6, -3, 3, 0],
-            y: [0, -3, 2, -2, 2, -1, 1, 0],
-            rotate: [0, -12, 14, -10, 12, -6, 6, -2, 2, 0],
-            scale: [1, 1.15, 1.12, 1.15, 1.1, 1],
+            y: [0, 12, 18, 5, -2, 0],
+            x: [0, 12, 18, 6, -2, 0],
+            rotate: [0, 35, 45, 14, -3, 0],
           }}
           transition={{
-            duration: 0.8,
+            duration: 1.1,
             repeat: Infinity,
-            repeatDelay: 3,
+            repeatDelay: 2,
             ease: "easeInOut",
           }}
-          className="relative text-[#00BF62] group-hover:scale-125 group-hover:drop-shadow-[0_0_18px_rgba(0,191,98,0.9)] transition-all duration-300 shrink-0"
+          className="relative text-[#00BF62] group-hover:scale-110 group-hover:drop-shadow-[0_0_18px_rgba(0,191,98,0.9)] transition-all duration-300 shrink-0 origin-bottom"
         >
           <Icon className="w-9 h-9 sm:w-10 sm:h-10 stroke-[1.8]" />
         </motion.div>
@@ -240,18 +239,17 @@ export default function OurValues() {
                 <div className="relative w-full h-11 mb-3.5 flex items-center justify-center">
                   <motion.div
                     animate={{
-                      x: [0, -8, 12, -10, 10, -6, 6, -3, 3, 0],
-                      y: [0, -3, 2, -2, 2, -1, 1, 0],
-                      rotate: [0, -12, 14, -10, 12, -6, 6, -2, 2, 0],
-                      scale: [1, 1.15, 1.12, 1.15, 1.1, 1],
+                      y: [0, 12, 18, 5, -2, 0],
+                      x: [0, 12, 18, 6, -2, 0],
+                      rotate: [0, 35, 45, 14, -3, 0],
                     }}
                     transition={{
-                      duration: 0.8,
+                      duration: 1.1,
                       repeat: Infinity,
-                      repeatDelay: 2.5,
+                      repeatDelay: 2,
                       ease: "easeInOut",
                     }}
-                    className="relative text-[#00BF62] shrink-0"
+                    className="relative text-[#00BF62] shrink-0 origin-bottom"
                   >
                     {React.createElement(valuesList[activeMobileIdx].icon, {
                       className: "w-10 h-10 stroke-[1.8]",

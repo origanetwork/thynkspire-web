@@ -78,7 +78,7 @@ export default function Hero() {
                                 </MotionText>
                             </h1>
 
-                            {/* Subtitle Paragraph */}
+                            {/* Subtitle Paragraph & Vector 1 Group */}
                             <MotionFadeIn delay={0.35} direction="up" distance={20} className="flex flex-col relative">
                                 <p
                                     className="font-poppins font-normal text-base sm:text-lg lg:text-[22px] leading-relaxed lg:leading-[100%] text-[#FFFFFFB2]"
@@ -91,6 +91,27 @@ export default function Hero() {
                                 >
                                     Industry-focused programs, real-world <br className="hidden sm:inline" /> experience, and a platform to grow.
                                 </p>
+
+                                {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
+                                <motion.div
+                                    className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
+                                    animate={{
+                                        opacity: [0.85, 1, 0.85],
+                                    }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        duration: 3.5,
+                                        ease: "easeInOut",
+                                    }}
+                                >
+                                    <Image
+                                        src="/vector/Vector1.png"
+                                        alt="Decorative Line Graphic"
+                                        fill
+                                        className="object-contain object-left-top"
+                                        priority
+                                    />
+                                </motion.div>
                             </MotionFadeIn>
                         </div>
 
@@ -309,7 +330,7 @@ export default function Hero() {
                                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                                     <div className="flex flex-col items-center justify-center">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-normal text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={45} duration={1.8} />+
+                                            <CountUp to={10} duration={1.8} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                             Programs Delivered
@@ -318,7 +339,7 @@ export default function Hero() {
 
                                     <div className="flex flex-col items-center justify-center relative">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-normal text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={30} duration={2} />+
+                                            <CountUp to={25} duration={2} />+
                                         </span>
                                         <div className="flex items-center justify-center gap-1">
                                             <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -333,7 +354,7 @@ export default function Hero() {
 
                                     <div className="flex flex-col items-center justify-center">
                                         <span className="font-clash text-4xl sm:text-[40px] lg:text-[50px] xl:text-[54px] font-normal text-[#00BF62] tracking-tight leading-tight">
-                                            <CountUp to={650} duration={2.5} />+
+                                            <CountUp to={550} duration={2.5} />+
                                         </span>
                                         <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                                             Schools & Colleges

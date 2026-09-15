@@ -69,7 +69,7 @@ export default function ThynkxBanner() {
 
             {/* Bottom Right Register Now CTA Button */}
             <MotionFadeIn delay={0.3} direction="up" distance={20} className="shrink-0">
-              <Link href="#register">
+              <Link href="/contact">
                 <button
                   className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[165px] sm:w-[183px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black/60 hover:border-[#00BF63] backdrop-blur-md transition-all duration-300 shadow-xl cursor-pointer"
                 >

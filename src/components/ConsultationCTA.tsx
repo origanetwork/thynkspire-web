@@ -93,7 +93,7 @@ export default function ConsultationCTA() {
                 </div>
 
                 {/* Book Consultation Button */}
-                <Link href="#book-consultation" className="w-full sm:w-auto">
+                <Link href="/contact" className="w-full sm:w-auto">
                   <button
                     type="button"
                     className="w-full sm:w-auto group flex items-center justify-center gap-2.5 pl-5 pr-1.5 py-2.5 rounded-full border border-white/30 bg-transparent hover:border-[#00BF62] backdrop-blur-md transition-all duration-300 shadow-xl"

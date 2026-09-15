@@ -95,7 +95,7 @@ export default function ThynkxHero() {
 
               {/* CTA Button */}
               <MotionFadeIn delay={0.3} direction="up" className="pt-0.5">
-                <Link href="#register">
+                <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}

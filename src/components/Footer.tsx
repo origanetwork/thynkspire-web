@@ -3,10 +3,21 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
 import { FaLinkedinIn, FaTwitter, FaInstagram } from "react-icons/fa";
 
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About Us", href: "/about" },
+  { name: "Thynkx", href: "/thynkx" },
+  { name: "Programs", href: "/programs" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact Us", href: "/contact" },
+];
+
 export default function Footer() {
+  const pathname = usePathname();
   return (
     <footer 
       className="relative w-full text-white pt-6 sm:pt-10 lg:pt-16 pb-4 sm:pb-6 lg:pb-10 border-t border-[#00BF63]/10 backdrop-blur-xl"
@@ -87,24 +98,22 @@ export default function Footer() {
 
           {/* Center Column: Perfectly Centered Navigation Menu */}
           <div className="lg:absolute lg:left-1/2 lg:-translate-x-1/2 flex flex-wrap items-center justify-center gap-4 sm:gap-8 font-poppins text-xs sm:text-base font-normal z-10">
-            <Link href="/" className="text-[#00BF63] font-medium hover:underline">
-              Home
-            </Link>
-            <Link href="/about" className="text-slate-200 hover:text-white transition-colors">
-              About Us
-            </Link>
-            <Link href="/thynkx" className="text-slate-200 hover:text-white transition-colors">
-              Thynkx
-            </Link>
-            <Link href="/programs" className="text-slate-200 hover:text-white transition-colors">
-              Programs
-            </Link>
-            <Link href="/blog" className="text-slate-200 hover:text-white transition-colors">
-              Blog
-            </Link>
-            <Link href="/contact" className="text-slate-200 hover:text-white transition-colors">
-              Contact US
-            </Link>
+            {navItems.map((item) => {
+              const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={
+                    isActive
+                      ? "text-[#00BF63] font-medium hover:underline"
+                      : "text-slate-200 hover:text-white transition-colors"
+                  }
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
           </div>
 
           {/* Right Column: Contact Details with line breaks for location */}

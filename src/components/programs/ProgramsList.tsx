@@ -24,7 +24,7 @@ export const PROGRAM_CARDS: ProgramItem[] = [
     duration: "5 Months",
     type: "Internship",
     image: "/hero/1.png",
-    href: "#apply",
+    href: "/programs/ai-cyber-security",
   },
   {
     id: 2,
@@ -33,7 +33,7 @@ export const PROGRAM_CARDS: ProgramItem[] = [
     duration: "2 Months",
     type: "Internship",
     image: "/hero/2.png",
-    href: "#apply",
+    href: "/programs/working-professionals-cybersecurity",
   },
   {
     id: 3,
@@ -42,7 +42,7 @@ export const PROGRAM_CARDS: ProgramItem[] = [
     duration: "4 Months",
     type: "Internship",
     image: "/hero/3.png",
-    href: "#apply",
+    href: "/programs/robotics-iot",
   },
   {
     id: 4,
@@ -51,7 +51,7 @@ export const PROGRAM_CARDS: ProgramItem[] = [
     duration: "3 Months",
     type: "Internship",
     image: "/hero/4.png",
-    href: "#apply",
+    href: "/programs/entrepreneurship-innovation",
   },
   {
     id: 5,
@@ -60,7 +60,7 @@ export const PROGRAM_CARDS: ProgramItem[] = [
     duration: "3 Months",
     type: "Internship",
     image: "/hero/5.png",
-    href: "#apply",
+    href: "/programs/digital-marketing",
   },
 ];
 

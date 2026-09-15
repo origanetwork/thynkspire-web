@@ -211,7 +211,7 @@ export default function FeaturedEvents() {
             </div>
 
             <div className="pt-2 relative z-10">
-              <Link href="#join-mission">
+              <Link href="/programs">
                 <button
                   className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[190px] sm:w-[204px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl cursor-pointer"
                 >

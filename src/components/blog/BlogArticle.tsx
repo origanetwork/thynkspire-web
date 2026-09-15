@@ -2,11 +2,18 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { FiCheck, FiShare2 } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
+import { BlogPost, getDefaultPost } from "@/data/blogPosts";
 
-export default function BlogArticle() {
+interface BlogArticleProps {
+  post?: BlogPost;
+}
+
+export default function BlogArticle({ post }: BlogArticleProps) {
   const [copied, setCopied] = useState(false);
+  const article = post || getDefaultPost();
 
   const handleShare = () => {
     if (typeof window !== "undefined") {
@@ -16,20 +23,9 @@ export default function BlogArticle() {
     }
   };
 
-  const keyPoints = [
-    {
-      title: "Behavioral Analysis:",
-      desc: "Rather than looking for known bad code, AI establishes baselines of normal network behavior and flags anomalies in real-time.",
-    },
-    {
-      title: "Automated Response:",
-      desc: "When a threat is detected, AI systems can isolate compromised endpoints instantly, minimizing lateral movement before a human analyst even receives an alert.",
-    },
-    {
-      title: "Phishing Detection:",
-      desc: "Advanced natural language processing (NLP) models analyze email context and sender behavior to intercept sophisticated spear-phishing attempts that bypass standard filters.",
-    },
-  ];
+  const titleWords = article.title.split(" ");
+  const lastWord = titleWords.pop();
+  const mainTitle = titleWords.join(" ");
 
   return (
     <article className="relative z-10 pt-32 sm:pt-40 pb-16 px-4 sm:px-6 md:px-8 lg:px-10 max-w-[1353px] 2xl:max-w-[1440px] mx-auto">
@@ -95,18 +91,18 @@ export default function BlogArticle() {
           {/* Category & Date Meta Tag */}
           <MotionText delay={0.1} duration={0.5}>
             <div className="flex items-center gap-2.5 font-poppins text-xs sm:text-sm font-medium tracking-wide">
-              <span className="text-[#00BF63] font-semibold">Technology</span>
+              <span className="text-[#00BF63] font-semibold">{article.category}</span>
               <span className="text-zinc-600">|</span>
-              <span className="text-zinc-300">March 20, 2024</span>
+              <span className="text-zinc-300">{article.date}</span>
             </div>
           </MotionText>
 
           {/* Main Article Title */}
           <MotionText delay={0.2} duration={0.6}>
             <h1 className="font-clash text-3xl sm:text-5xl md:text-[54px] lg:text-[60px] font-bold text-white tracking-tight leading-[1.14]">
-              How AI is Transforming{" "}
+              {mainTitle}{" "}
               <span className="text-[#00BF63] inline-block drop-shadow-[0_0_24px_rgba(0,191,99,0.35)]">
-                Cybersecurity
+                {lastWord}
               </span>
             </h1>
           </MotionText>
@@ -114,7 +110,7 @@ export default function BlogArticle() {
           {/* Lead Summary Subtitle */}
           <MotionText delay={0.3} duration={0.6}>
             <p className="font-poppins text-zinc-300 text-sm sm:text-base md:text-lg font-light leading-relaxed">
-              As cyber threats evolve into sophisticated automated attacks, artificial intelligence has emerged not just as a tool, but as the foundational defense architecture of the modern digital enterprise.
+              {article.subtitle}
             </p>
           </MotionText>
         </div>
@@ -125,22 +121,29 @@ export default function BlogArticle() {
 
             {/* Author Info */}
             <div className="flex items-center gap-3.5 sm:gap-4">
-              <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#00BF63]/40 shadow-[0_0_15px_rgba(0,191,99,0.2)] shrink-0">
-                <Image
-                  src="/blog/elena-rostova.jpg"
-                  alt="Dr. Elena Rostova"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <h4 className="font-clash text-sm sm:text-base font-semibold text-white tracking-tight">
-                  Dr. Elena Rostova
-                </h4>
-                <p className="font-poppins text-xs text-zinc-400">
-                  Head of Threat Intelligence, ThynkEdge
-                </p>
-              </div>
+              <Link
+                href={article.author.linkedinUrl || "https://linkedin.com"}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group/author flex items-center gap-3.5 sm:gap-4 hover:opacity-95 transition-opacity"
+              >
+                <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#00BF63]/40 shadow-[0_0_15px_rgba(0,191,99,0.2)] shrink-0 group-hover/author:border-[#00BF63] group-hover/author:shadow-[0_0_20px_rgba(0,191,99,0.4)] transition-all">
+                  <Image
+                    src={article.author.avatar}
+                    alt={article.author.name}
+                    fill
+                    className="object-cover group-hover/author:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div>
+                  <h4 className="font-clash text-sm sm:text-base font-semibold text-white tracking-tight group-hover/author:text-[#00BF63] transition-colors">
+                    {article.author.name}
+                  </h4>
+                  <p className="font-poppins text-xs text-zinc-400">
+                    {article.author.role}
+                  </p>
+                </div>
+              </Link>
             </div>
 
             {/* Share Button */}
@@ -171,8 +174,8 @@ export default function BlogArticle() {
         <MotionFadeIn delay={0.4} direction="up" distance={25} className="w-full">
           <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] md:aspect-[16/8] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <Image
-              src="/blog/blog.jpeg"
-              alt="AI in Cybersecurity and Advanced Robotics"
+              src={article.heroImage || article.image}
+              alt={article.title}
               fill
               priority
               className="object-cover object-center"
@@ -184,62 +187,60 @@ export default function BlogArticle() {
         {/* Article Main Body Text Content - Left & Right Padding applied to bottom content without changing image */}
         <div className="max-w-[860px] mx-auto px-3 sm:px-8 md:px-12 lg:px-16 pt-4 sm:pt-6 space-y-6 sm:space-y-8 font-poppins text-zinc-300 text-sm sm:text-base font-light leading-[1.8] sm:leading-[1.9]">
 
-          <MotionFadeIn delay={0.2} direction="up">
-            <p>
-              The landscape of digital security has fundamentally shifted. Gone are the days when static firewalls and signature-based antivirus software could provide adequate protection. Today&apos;s threat actors utilize automated tools, polymorphic malware, and sophisticated social engineering tactics that bypass traditional defenses with alarming ease. In this high-stakes environment, artificial intelligence (AI) and machine learning (ML) have become critical imperatives.
-            </p>
-          </MotionFadeIn>
+          {article.paragraphs.intro.map((p, idx) => (
+            <MotionFadeIn key={`intro-${idx}`} delay={0.2} direction="up">
+              <p>{p}</p>
+            </MotionFadeIn>
+          ))}
 
-          {/* Section Heading: The Shift from Reactive to Predictive */}
-          <MotionFadeIn delay={0.2} direction="up">
-            <div className="pt-4 pb-1">
-              <h2 className="font-clash text-2xl sm:text-3xl font-bold text-[#00BF63] tracking-tight">
-                The Shift from Reactive to Predictive
-              </h2>
-            </div>
-          </MotionFadeIn>
+          {/* Section Heading */}
+          {article.paragraphs.sectionHeading && (
+            <MotionFadeIn delay={0.2} direction="up">
+              <div className="pt-4 pb-1">
+                <h2 className="font-clash text-2xl sm:text-3xl font-bold text-[#00BF63] tracking-tight">
+                  {article.paragraphs.sectionHeading}
+                </h2>
+              </div>
+            </MotionFadeIn>
+          )}
 
-          <MotionFadeIn delay={0.2} direction="up">
-            <p>
-              Historically, cybersecurity was a reactive discipline. A threat was identified, a signature was created, and systems were updated to block future occurrences. This model is fatally flawed in an era of zero-day exploits. AI flips this paradigm by enabling predictive security.
-            </p>
-          </MotionFadeIn>
+          {article.paragraphs.sectionIntro && (
+            <MotionFadeIn delay={0.2} direction="up">
+              <p>{article.paragraphs.sectionIntro}</p>
+            </MotionFadeIn>
+          )}
 
           {/* Key Points Bullet List with Green Check Circles */}
-          <div className="space-y-4 pt-2 pb-2">
-            {keyPoints.map((point, index) => (
-              <MotionFadeIn
-                key={index}
-                delay={0.15 * (index + 1)}
-                direction="up"
-                className="flex items-start gap-3.5 sm:gap-4 group p-3 sm:p-4 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5 transition-colors"
-              >
-                <div className="mt-1 shrink-0 w-5 h-5 rounded-full border border-[#00BF63] bg-[#00BF63]/10 flex items-center justify-center text-[#00BF63]">
-                  <FiCheck className="w-3 h-3 stroke-[3]" />
-                </div>
-                <div>
-                  <p className="font-poppins text-sm sm:text-base text-zinc-300 leading-relaxed">
-                    <strong className="font-semibold text-white mr-1.5 font-clash">
-                      {point.title}
-                    </strong>
-                    {point.desc}
-                  </p>
-                </div>
-              </MotionFadeIn>
-            ))}
-          </div>
+          {article.paragraphs.keyPoints && article.paragraphs.keyPoints.length > 0 && (
+            <div className="space-y-4 pt-2 pb-2">
+              {article.paragraphs.keyPoints.map((point, index) => (
+                <MotionFadeIn
+                  key={index}
+                  delay={0.15 * (index + 1)}
+                  direction="up"
+                  className="flex items-start gap-3.5 sm:gap-4 group p-3 sm:p-4 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5 transition-colors"
+                >
+                  <div className="mt-1 shrink-0 w-5 h-5 rounded-full border border-[#00BF63] bg-[#00BF63]/10 flex items-center justify-center text-[#00BF63]">
+                    <FiCheck className="w-3 h-3 stroke-[3]" />
+                  </div>
+                  <div>
+                    <p className="font-poppins text-sm sm:text-base text-zinc-300 leading-relaxed">
+                      <strong className="font-semibold text-white mr-1.5 font-clash">
+                        {point.title}
+                      </strong>
+                      {point.desc}
+                    </p>
+                  </div>
+                </MotionFadeIn>
+              ))}
+            </div>
+          )}
 
-          <MotionFadeIn delay={0.2} direction="up">
-            <p>
-              While AI empowers defenders, it also equips adversaries. Cybercriminals are now leveraging generative AI to craft highly convincing phishing lures, write polymorphic malware that evades detection, and automate the discovery of vulnerabilities at scale. This creates an ongoing &ldquo;arms race&rdquo; between defensive AI and offensive AI.
-            </p>
-          </MotionFadeIn>
-
-          <MotionFadeIn delay={0.2} direction="up">
-            <p>
-              To maintain the upper hand, organizations must continuously train their models on diverse, high-quality datasets and employ &ldquo;red teaming&rdquo; exercises where ethical hackers use adversarial AI techniques to test the resilience of existing defenses.
-            </p>
-          </MotionFadeIn>
+          {article.paragraphs.conclusion.map((p, idx) => (
+            <MotionFadeIn key={`concl-${idx}`} delay={0.2} direction="up">
+              <p>{p}</p>
+            </MotionFadeIn>
+          ))}
 
         </div>
 

@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "./MotionWrapper";
 
+import { blogPosts } from "@/data/blogPosts";
+
 interface LatestBlogProps {
   title?: string;
   subtitle?: string;
@@ -24,32 +26,14 @@ export default function LatestBlog({
 }: LatestBlogProps) {
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
-  const posts = [
-    {
-      id: 1,
-      image: "/hero/b1.jpg",
-      category: "Cyber Security",
-      date: "June 10 2026",
-      title: "Industry-Oriented Cybersecurity & Data Privacy Workshop for College Students",
-      link: "/blog",
-    },
-    {
-      id: 2,
-      image: "/hero/b2.jpg",
-      category: "AI & Technology",
-      date: "May 08 2026",
-      title: "How AI Transforming the Future",
-      link: "/blog",
-    },
-    {
-      id: 3,
-      image: "/hero/b3.jpg",
-      category: "Events",
-      date: "June 10 2026",
-      title: "THYNK X 2026 - A Quiz Experience Like Never Before",
-      link: "/blog",
-    },
-  ];
+  const posts = blogPosts.map((post) => ({
+    id: post.id,
+    image: post.image,
+    category: post.category,
+    date: post.date,
+    title: post.title,
+    link: `/blog/${post.slug}`,
+  }));
 
   // Auto cycle cards on mobile every 3.5 seconds
   useEffect(() => {

@@ -15,6 +15,7 @@ export default function OurPrograms() {
       duration: "5 Months",
       type: "Internship",
       image: "/hero/1.png",
+      href: "/programs/ai-cyber-security",
     },
     {
       id: 2,
@@ -22,6 +23,7 @@ export default function OurPrograms() {
       duration: "2 Months",
       type: "Internship",
       image: "/hero/2.png",
+      href: "/programs/working-professionals-cybersecurity",
     },
     {
       id: 3,
@@ -29,6 +31,7 @@ export default function OurPrograms() {
       duration: "4 Months",
       type: "Internship",
       image: "/hero/3.png",
+      href: "/programs/robotics-iot",
     },
     {
       id: 4,
@@ -36,6 +39,7 @@ export default function OurPrograms() {
       duration: "3 Months",
       type: "Internship",
       image: "/hero/4.png",
+      href: "/programs/entrepreneurship-innovation",
     },
   ];
 
@@ -84,36 +88,38 @@ export default function OurPrograms() {
                 zIndex: 10 + idx,
               }}
             >
-              {/* Card Container */}
-              <div className="relative w-full h-[380px] lg:h-[420px] rounded-[20px] overflow-hidden border border-white/10 group-hover:border-[#00BF63] p-4 flex flex-col justify-between transition-all duration-500 shadow-2xl group-hover:shadow-[#00BF63]/30 bg-black">
-                {/* Background Image filling the card */}
-                <div className="absolute inset-0 z-0 overflow-hidden">
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    className="object-cover object-center group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-700 ease-out"
-                    priority
-                  />
-                  {/* Subtle dark gradient overlay concentrated at bottom */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent z-0" />
-                </div>
+              <Link href={item.href} className="block w-full">
+                {/* Card Container */}
+                <div className="relative w-full h-[380px] lg:h-[420px] rounded-[20px] overflow-hidden border border-white/10 group-hover:border-[#00BF63] p-4 flex flex-col justify-between transition-all duration-500 shadow-2xl group-hover:shadow-[#00BF63]/30 bg-black">
+                  {/* Background Image filling the card */}
+                  <div className="absolute inset-0 z-0 overflow-hidden">
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      className="object-cover object-center group-hover:scale-110 group-hover:-rotate-2 transition-transform duration-700 ease-out"
+                      priority
+                    />
+                    {/* Subtle dark gradient overlay concentrated at bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent z-0" />
+                  </div>
 
-                {/* Top Glassmorphic Pill Title Badge with Pure White Transparent Frosted Glass */}
-                <div className="relative z-10 w-full pt-2">
-                  <div
-                    className="w-full p-3 sm:p-3.5 rounded-[16px] sm:rounded-[20px] bg-white/15 border border-white/30 text-center shadow-lg group-hover:border-[#00BF63]/60 transition-colors duration-300"
-                    style={{
-                      backdropFilter: "blur(16px)",
-                      WebkitBackdropFilter: "blur(16px)",
-                    }}
-                  >
-                    <h4 className="font-poppins text-sm sm:text-base font-semibold text-white leading-tight">
-                      {item.title}
-                    </h4>
+                  {/* Top Glassmorphic Pill Title Badge with Pure White Transparent Frosted Glass */}
+                  <div className="relative z-10 w-full pt-2">
+                    <div
+                      className="w-full p-3 sm:p-3.5 rounded-[16px] sm:rounded-[20px] bg-white/15 border border-white/30 text-center shadow-lg group-hover:border-[#00BF63]/60 transition-colors duration-300"
+                      style={{
+                        backdropFilter: "blur(16px)",
+                        WebkitBackdropFilter: "blur(16px)",
+                      }}
+                    >
+                      <h4 className="font-poppins text-sm sm:text-base font-semibold text-white leading-tight">
+                        {item.title}
+                      </h4>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
 
               {/* Text outside below the card: animates on hover */}
               <div className="flex items-center justify-between px-3 pt-1 sm:pt-2 text-xs sm:text-sm font-poppins transition-all duration-300 ease-out transform -translate-y-2 opacity-0 group-hover:translate-y-0 group-hover:opacity-100">

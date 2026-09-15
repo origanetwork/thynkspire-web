@@ -7,6 +7,7 @@ import StickyContactWidget from "@/components/StickyContactWidget";
 import ProgramHero from "@/components/programs/ProgramHero";
 import WhyLearnProgram from "@/components/programs/WhyLearnProgram";
 import CourseRoadmap from "@/components/programs/CourseRoadmap";
+import CourseRoadmapTimeline from "@/components/programs/CourseRoadmapTimeline";
 import ProgramModules from "@/components/programs/ProgramModules";
 import ToolsMastered from "@/components/programs/ToolsMastered";
 import StudentBenefits from "@/components/programs/StudentBenefits";
@@ -71,8 +72,13 @@ export default async function ProgramDetailPage({ params }: ProgramDetailPagePro
         {/* Why Learn & Who Can Participate Section */}
         <WhyLearnProgram program={program} />
 
+           {/* 6-Month Course Roadmap Timeline Section */}
+        <CourseRoadmapTimeline program={program} />
+
+
         {/* The Syllabus Module Interactive Deck Section */}
         <ProgramModules program={program} />
+
 
         {/* Tools You'll Master Section */}
         <ToolsMastered />
@@ -83,7 +89,7 @@ export default async function ProgramDetailPage({ params }: ProgramDetailPagePro
         {/* 1-Month Industry Internship Section */}
         <IndustryInternship program={program} />
 
-        {/* 6-Month Course Roadmap Timeline Section */}
+        {/* Where Can This Program Take You Career Outcomes Section */}
         <CourseRoadmap program={program} />
 
         {/* Admission Process / Enrollment Section */}

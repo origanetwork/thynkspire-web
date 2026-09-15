@@ -7,8 +7,8 @@ import {
   FiSettings,
   FiBriefcase,
   FiUserCheck,
-  FiSend,
 } from "react-icons/fi";
+import { Rocket, Brain } from "lucide-react";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "@/components/MotionWrapper";
 import { ProgramDetail, getDefaultProgram } from "@/data/programsData";
 
@@ -43,7 +43,7 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
   ];
 
   const cardIcons = [
-    <FiZap key={1} className="w-5 h-5 text-[#00BF63]" />,
+    <Brain key={1} className="w-5 h-5 text-[#00BF63]" />,
     <FiSettings key={2} className="w-5 h-5 text-[#00BF63]" />,
     <FiBriefcase key={3} className="w-5 h-5 text-[#00BF63]" />,
     <FiUserCheck key={4} className="w-5 h-5 text-[#00BF63]" />,
@@ -129,7 +129,7 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
                   transition={{ duration: 0.4, ease: "easeOut" }}
                   className="rounded-[28px] p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[240px] border border-[#00BF63]/40 shadow-[0_0_20px_rgba(0,191,99,0.15)] bg-black/60 backdrop-blur-xl"
                 >
-                  <div className="w-11 h-11 rounded-full border border-[#00BF63]/40 bg-[#00BF63]/10 flex items-center justify-center shrink-0">
+                  <div className="w-11 h-11 rounded-2xl border border-[#00BF63]/40 bg-black shadow-[0_0_15px_rgba(0,191,99,0.25)] flex items-center justify-center shrink-0">
                     {cardIcons[mobileIdx] || cardIcons[0]}
                   </div>
 
@@ -152,8 +152,8 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
                   className="rounded-[28px] p-6 sm:p-8 flex flex-col justify-between gap-5 min-h-[240px] border border-[#00BF63]/40 shadow-[0_0_20px_rgba(0,191,99,0.15)] bg-black/60 backdrop-blur-xl"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-11 h-11 rounded-full border border-[#00BF63]/40 bg-[#00BF63]/10 flex items-center justify-center shrink-0">
-                      <FiSend className="w-5 h-5 text-[#00BF63]" />
+                    <div className="w-11 h-11 rounded-2xl border border-[#00BF63]/40 bg-black shadow-[0_0_15px_rgba(0,191,99,0.25)] flex items-center justify-center shrink-0">
+                      <Rocket className="w-5 h-5 text-[#00BF63]" />
                     </div>
                     <h3 className="font-clash text-xl font-bold text-white tracking-tight leading-snug">
                       Future Skills
@@ -209,7 +209,7 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
                     boxShadow: "0px 0px 4px 0px #00BF63",
                   }}
                 >
-                  <div className="w-11 h-11 rounded-full border border-[#00BF63]/40 bg-[#00BF63]/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,191,99,0.5)] transition-all">
+                  <div className="w-11 h-11 rounded-2xl border border-[#00BF63]/40 bg-black shadow-[0_0_15px_rgba(0,191,99,0.25)] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,191,99,0.5)] transition-all">
                     {cardIcons[idx] || cardIcons[0]}
                   </div>
 
@@ -239,7 +239,7 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
                     boxShadow: "0px 0px 4px 0px #00BF63",
                   }}
                 >
-                  <div className="w-11 h-11 rounded-full border border-[#00BF63]/40 bg-[#00BF63]/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,191,99,0.5)] transition-all">
+                  <div className="w-11 h-11 rounded-2xl border border-[#00BF63]/40 bg-black shadow-[0_0_15px_rgba(0,191,99,0.25)] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,191,99,0.5)] transition-all">
                     {cardIcons[3]}
                   </div>
 
@@ -267,8 +267,8 @@ export default function WhyLearnProgram({ program: initialProgram }: WhyLearnPro
                 >
                   {/* Left inside card: Icon & Title */}
                   <div className="space-y-4 shrink-0">
-                    <div className="w-11 h-11 rounded-full border border-[#00BF63]/40 bg-[#00BF63]/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_15px_rgba(0,191,99,0.5)] transition-all">
-                      <FiSend className="w-5 h-5 text-[#00BF63]" />
+                    <div className="w-11 h-11 rounded-2xl border border-[#00BF63]/40 bg-black shadow-[0_0_15px_rgba(0,191,99,0.25)] flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:shadow-[0_0_20px_rgba(0,191,99,0.5)] transition-all">
+                      <Rocket className="w-5 h-5 text-[#00BF63]" />
                     </div>
                     <h3 className="font-clash text-xl sm:text-[22px] font-bold text-white tracking-tight leading-snug group-hover:text-[#00BF63] transition-colors">
                       Future Skills

@@ -17,81 +17,16 @@ interface CareerNode {
 }
 
 const CAREER_NODES: CareerNode[] = [
-  {
-    id: 1,
-    role: "Cyber Security Analyst",
-    x: 110,
-    y: 430,
-    labelOffsetX: -20,
-    labelOffsetY: -35,
-    rotate: "0deg",
-  },
-  {
-    id: 2,
-    role: "SOC Analyst (L1)",
-    x: 260,
-    y: 330,
-    labelOffsetX: -110,
-    labelOffsetY: -35,
-    rotate: "-14deg",
-  },
-  {
-    id: 3,
-    role: "Information Security Associate",
-    x: 350,
-    y: 325,
-    labelOffsetX: -30,
-    labelOffsetY: 25,
-    rotate: "0deg",
-  },
-  {
-    id: 4,
-    role: "Junior VAPT Analyst",
-    x: 365,
-    y: 210,
-    labelOffsetX: -60,
-    labelOffsetY: -35,
-    rotate: "0deg",
-  },
-  {
-    id: 5,
-    role: "Security Operations Associate",
-    x: 495,
-    y: 175,
-    labelOffsetX: 10,
-    labelOffsetY: -32,
-    rotate: "-20deg",
-  },
-  {
-    id: 6,
-    role: "Cloud Security Associate (Entry Level)",
-    x: 595,
-    y: 275,
-    labelOffsetX: -30,
-    labelOffsetY: 25,
-    rotate: "-12deg",
-  },
-  {
-    id: 7,
-    role: "IT Security Support Engineer",
-    x: 755,
-    y: 195,
-    labelOffsetX: -60,
-    labelOffsetY: -35,
-    rotate: "0deg",
-  },
-  {
-    id: 8,
-    role: "IT Security Support Engineer",
-    x: 870,
-    y: 130,
-    labelOffsetX: -120,
-    labelOffsetY: -35,
-    rotate: "0deg",
-  },
+  { id: 1, role: "Cyber Security Analyst", x: 110, y: 430, labelOffsetX: -20, labelOffsetY: -35, rotate: "0deg" },
+  { id: 2, role: "SOC Analyst (L1)", x: 260, y: 330, labelOffsetX: -110, labelOffsetY: -35, rotate: "-14deg" },
+  { id: 3, role: "Information Security Associate", x: 350, y: 325, labelOffsetX: -30, labelOffsetY: 25, rotate: "0deg" },
+  { id: 4, role: "Junior VAPT Analyst", x: 365, y: 210, labelOffsetX: -60, labelOffsetY: -35, rotate: "0deg" },
+  { id: 5, role: "Security Operations Associate", x: 495, y: 175, labelOffsetX: 10, labelOffsetY: -32, rotate: "-20deg" },
+  { id: 6, role: "Cloud Security Associate (Entry Level)", x: 595, y: 275, labelOffsetX: -30, labelOffsetY: 25, rotate: "-12deg" },
+  { id: 7, role: "IT Security Support Engineer", x: 755, y: 195, labelOffsetX: -60, labelOffsetY: -35, rotate: "0deg" },
+  { id: 8, role: "IT Security Support Engineer", x: 870, y: 130, labelOffsetX: -120, labelOffsetY: -35, rotate: "0deg" },
 ];
 
-// Continuous SVG Dotted Path mathematically connecting Node 1 -> Node 8 dead-center
 const PATH_DATA = `
   M 110 430
   C 160 435, 210 390, 260 330

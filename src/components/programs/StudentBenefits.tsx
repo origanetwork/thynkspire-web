@@ -48,11 +48,11 @@ const BENEFITS_PILLS = [
     duration: 4.2,
   },
 
-  // Right side pills (spread outward for breathing room around the student)
+  // Right side pills (spread outward matching left side layout on large screens)
   {
     id: 6,
     label: "Weekly Assignments",
-    position: "top-[8%] right-[8%] sm:right-[12%] lg:right-[16%]",
+    position: "top-[4%] right-[2%] sm:right-[4%] lg:right-[8%]",
     rotate: "12deg",
     delay: 0.15,
     duration: 4.7,
@@ -60,7 +60,7 @@ const BENEFITS_PILLS = [
   {
     id: 7,
     label: "Lifetime LMS Access",
-    position: "top-[24%] right-[-2%] sm:right-[2%] lg:right-[6%]",
+    position: "top-[20%] right-[6%] sm:right-[10%] lg:right-[14%]",
     rotate: "-35deg",
     delay: 0.25,
     duration: 5.0,
@@ -68,7 +68,7 @@ const BENEFITS_PILLS = [
   {
     id: 8,
     label: "Resume Building",
-    position: "top-[42%] right-[2%] sm:right-[4%] lg:right-[8%]",
+    position: "top-[38%] right-[-2%] sm:right-[2%] lg:right-[4%]",
     rotate: "16deg",
     delay: 0.35,
     duration: 4.6,
@@ -76,7 +76,7 @@ const BENEFITS_PILLS = [
   {
     id: 9,
     label: "Career Guidance",
-    position: "top-[56%] right-[8%] sm:right-[12%] lg:right-[16%]",
+    position: "top-[48%] right-[8%] sm:right-[12%] lg:right-[16%]",
     rotate: "-22deg",
     delay: 0.45,
     duration: 5.3,
@@ -84,7 +84,7 @@ const BENEFITS_PILLS = [
   {
     id: 10,
     label: "Placement Assistance",
-    position: "top-[70%] right-[-2%] sm:right-[2%] lg:right-[5%]",
+    position: "top-[66%] right-[-2%] sm:right-[2%] lg:right-[6%]",
     rotate: "16deg",
     delay: 0.55,
     duration: 4.4,
@@ -177,12 +177,12 @@ export default function StudentBenefits() {
     <section className="relative w-full bg-black text-white py-20 sm:py-28 overflow-hidden">
       {/* Container */}
       <div className="relative max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-6 sm:px-12 lg:px-16 xl:px-20 z-10">
-        
+
         {/* ============================================================ */}
         {/* PART 1: STUDENT BENEFITS                                     */}
         {/* ============================================================ */}
         <div className="relative pb-24 sm:pb-32">
-          
+
           {/* Section Header */}
           <div className="relative text-center max-w-xl mx-auto pb-12 sm:pb-16">
             <MotionText delay={0.1} duration={0.6}>
@@ -215,7 +215,7 @@ export default function StudentBenefits() {
 
           {/* Interactive Student Center Visual with Floating Pills */}
           <div className="relative max-w-[1140px] 2xl:max-w-[1240px] h-[580px] sm:h-[660px] md:h-[720px] lg:h-[800px] mx-auto flex items-end justify-center">
-            
+
             {/* Ambient Back Glow */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-[#00BF63]/10 rounded-full blur-[100px] pointer-events-none" />
 
@@ -294,7 +294,7 @@ export default function StudentBenefits() {
         {/* PART 2: LEARNING METHODOLOGY                                 */}
         {/* ============================================================ */}
         <div className="relative pt-12 sm:pt-16 border-t border-white/5">
-          
+
           {/* Section Heading */}
           <div className="text-center max-w-4xl mx-auto pb-14 sm:pb-20">
             <MotionText delay={0.1} duration={0.6}>

@@ -12,7 +12,7 @@ const CATEGORIES = ["All", "News", "Awareness", "Success Stories", "Updates"];
 
 export default function BlogGridSection() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(3);
 
   // Filter posts based on selected category
   const filteredPosts = blogPosts.filter((post) => {
@@ -25,9 +25,9 @@ export default function BlogGridSection() {
 
   const handleToggleLoad = () => {
     if (hasMore) {
-      setVisibleCount((prev) => prev + 6);
+      setVisibleCount(filteredPosts.length);
     } else {
-      setVisibleCount(6);
+      setVisibleCount(3);
     }
   };
 
@@ -53,7 +53,7 @@ export default function BlogGridSection() {
                     key={category}
                     onClick={() => {
                       setSelectedCategory(category);
-                      setVisibleCount(6);
+                      setVisibleCount(3);
                     }}
                     className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-poppins text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
                       isActive
@@ -72,7 +72,7 @@ export default function BlogGridSection() {
         {/* Blog Cards Grid */}
         <AnimatePresence mode="wait">
           <motion.div
-            key={selectedCategory}
+            key={`${selectedCategory}-${visibleCount}`}
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
@@ -145,7 +145,7 @@ export default function BlogGridSection() {
         </AnimatePresence>
 
         {/* Load More / Read More Button */}
-        {filteredPosts.length > 6 && (
+        {filteredPosts.length > 3 && (
           <MotionFadeIn delay={0.2} direction="up" className="flex justify-center pt-8">
             <button
               onClick={handleToggleLoad}

@@ -3,15 +3,14 @@ import type { Metadata } from "next";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyContactWidget from "@/components/StickyContactWidget";
-import LatestBlog from "@/components/LatestBlog";
-import BlogArticle from "@/components/blog/BlogArticle";
-import { getDefaultPost } from "@/data/blogPosts";
-
-const defaultPost = getDefaultPost();
+import BlogHeroSection from "@/components/blog/BlogHeroSection";
+import BlogGridSection from "@/components/blog/BlogGridSection";
+import BlogSubscribeSection from "@/components/blog/BlogSubscribeSection";
 
 export const metadata: Metadata = {
-  title: `${defaultPost.title} | Thynkspire`,
-  description: defaultPost.subtitle,
+  title: "Blog & Insights | Thynkspire",
+  description:
+    "Explore the latest news, awareness content, success stories, and updates from Thynkspire.",
 };
 
 export default function BlogPage() {
@@ -23,23 +22,19 @@ export default function BlogPage() {
 
       {/* Main Content Wrapper with ambient gradient matching Figma canvas */}
       <div
-        className="w-full relative"
+        className="w-full relative pb-16"
         style={{
           background: "linear-gradient(289.27deg, #000000 71.78%, #00BF62 174.87%)",
         }}
       >
-        {/* Main Blog Article Component */}
-        <BlogArticle post={defaultPost} />
+        {/* Top Hero with Featured Blog Card */}
+        <BlogHeroSection />
 
-        {/* Related Articles Section (Calling LatestBlog Component as 'Related Articles') */}
-        <div className="border-t border-white/10 mt-8">
-          <LatestBlog
-            title="Related Articles"
-            showSubtitle={false}
-            showButton={false}
-            className="pt-12 pb-24"
-          />
-        </div>
+        {/* Blog Posts Grid with Category Filter */}
+        <BlogGridSection />
+
+        {/* Stay Updated Newsletter Subscription */}
+        <BlogSubscribeSection />
       </div>
 
       {/* Footer */}

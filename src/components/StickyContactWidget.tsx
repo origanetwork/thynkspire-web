@@ -19,7 +19,7 @@ export default function StickyContactWidget() {
       >
         {/* Phone Call Link */}
         <Link
-          href="tel:+919876543210"
+          href="tel:+917907672043"
           aria-label="Call Us"
           className="group relative flex items-center justify-center text-white/90 hover:text-[#00BF63] transition-colors duration-300"
         >
@@ -28,7 +28,7 @@ export default function StickyContactWidget() {
 
         {/* WhatsApp Link */}
         <Link
-          href="https://wa.me/919876543210"
+          href="https://wa.me/917907672043"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Chat on WhatsApp"

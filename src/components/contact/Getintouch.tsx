@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { FiPhone, FiMail, FiArrowUpRight, FiCheck } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiPhone, FiMail, FiArrowUpRight, FiCheck, FiCheckCircle, FiX } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionScale } from "../MotionWrapper";
 
 export default function Getintouch() {
@@ -14,19 +14,85 @@ export default function Getintouch() {
     email: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSubmitted(true);
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({ fullName: "", phone: "", email: "", message: "" });
-    }, 4000);
+    setErrorMsg("");
+
+    // Phone number numeric validation
+    const phoneDigits = formData.phone.replace(/\D/g, "");
+    if (!phoneDigits || phoneDigits.length < 7 || phoneDigits.length > 15) {
+      setErrorMsg("Please enter a valid phone number (digits only, 7-15 numbers).");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Primary: Server API route
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          phone: formData.phone,
+          email: formData.email,
+          message: formData.message,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setIsSubmitted(true);
+        setFormData({ fullName: "", phone: "", email: "", message: "" });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+        return;
+      }
+
+      // Fallback: Direct Browser FormSubmit AJAX call (Browser supplies native web server origin/referer headers)
+      const directRes = await fetch("https://formsubmit.co/ajax/shamiloriga@gmail.com", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          Name: formData.fullName,
+          Phone: formData.phone,
+          Email: formData.email,
+          Message: formData.message,
+          _subject: `[Thynkspire Contact] New Enquiry from ${formData.fullName}`,
+        }),
+      });
+
+      const directData = await directRes.json();
+
+      if (directRes.ok && (directData.success === "true" || directData.success === true)) {
+        setIsSubmitted(true);
+        setFormData({ fullName: "", phone: "", email: "", message: "" });
+        setTimeout(() => {
+          setIsSubmitted(false);
+        }, 5000);
+      } else {
+        setErrorMsg(directData.message || data.error || "Failed to submit message.");
+      }
+    } catch (err) {
+      setErrorMsg("Network error. Please check your connection and try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
-    <section 
+    <section
       id="contact"
       className="relative w-full text-white pt-28 sm:pt-36 lg:pt-44 xl:pt-48 pb-20 lg:pb-32 overflow-hidden"
       style={{
@@ -56,10 +122,10 @@ export default function Getintouch() {
       </div>
 
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 relative z-10 space-y-12 lg:space-y-16">
-        
+
         {/* Top Header Row: Left Title/Subtitle & Right Phone/Email Badges */}
         <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-8 lg:gap-12">
-          
+
           {/* Left Title Area */}
           <div className="space-y-4 max-w-2xl">
             <MotionFadeIn delay={0.1} direction="left">
@@ -84,10 +150,10 @@ export default function Getintouch() {
 
           {/* Right Direct Contact Info Cards */}
           <MotionFadeIn delay={0.25} direction="right" className="flex flex-col sm:flex-row lg:flex-col gap-5 sm:gap-8 shrink-0 w-full sm:w-auto lg:pb-1">
-            
+
             {/* Phone Card */}
-            <Link 
-              href="tel:+917907672043" 
+            <Link
+              href="tel:+917907672043"
               className="flex items-center gap-4 group transition-all"
             >
               <div className="w-12 h-12 rounded-[14px] border border-[#00BF62]/50 bg-[#00BF62]/10 flex items-center justify-center text-[#00BF62] shadow-[0_0_18px_rgba(0,191,98,0.2)] group-hover:border-[#00BF62] group-hover:scale-105 transition-all">
@@ -104,8 +170,8 @@ export default function Getintouch() {
             </Link>
 
             {/* Email Card */}
-            <Link 
-              href="mailto:hello@thynkspire.com" 
+            <Link
+              href="mailto:shamiloriga@gmail.com"
               className="flex items-center gap-4 group transition-all"
             >
               <div className="w-12 h-12 rounded-[14px] border border-[#00BF62]/50 bg-[#00BF62]/10 flex items-center justify-center text-[#00BF62] shadow-[0_0_18px_rgba(0,191,98,0.2)] group-hover:border-[#00BF62] group-hover:scale-105 transition-all">
@@ -116,7 +182,7 @@ export default function Getintouch() {
                   EMAIL
                 </span>
                 <span className="text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
-                  hello@thynkspire.com
+                  shamiloriga@gmail.com
                 </span>
               </div>
             </Link>
@@ -127,7 +193,7 @@ export default function Getintouch() {
 
         {/* Bottom Split Row: Left Illustration GIF & Right Contact Form */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          
+
           {/* Left GIF Illustration */}
           <div className="lg:col-span-5 flex justify-center lg:justify-start">
             <MotionScale delay={0.2} duration={0.7} className="relative w-full max-w-[380px] sm:max-w-[440px] h-[300px] sm:h-[380px]">
@@ -145,26 +211,32 @@ export default function Getintouch() {
           {/* Right Contact Form */}
           <div className="lg:col-span-7 w-full">
             <MotionFadeIn delay={0.3} direction="up">
-              <form onSubmit={handleSubmit} className="space-y-5">
-                
+              <form
+                action="https://formsubmit.co/shamiloriga@gmail.com"
+                method="POST"
+                onSubmit={handleSubmit}
+                className="space-y-5"
+              >
+
                 {/* Full Name */}
                 <div className="space-y-2 font-poppins">
                   <label className="block text-xs sm:text-sm font-medium text-slate-200">
-                    Full Name
+                    Full Name <span className="text-[#00BF62]">*</span>
                   </label>
                   <input
                     type="text"
+                    name="name"
                     required
                     value={formData.fullName}
                     onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
-                    placeholder="Unknown@gmail.com"
+                    placeholder="John Doe"
                     className="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-[14px] sm:rounded-[16px] bg-[#111413]/90 border border-white/50 focus:border-[#00BF62] focus:outline-none focus:ring-1 focus:ring-[#00BF62] text-white placeholder:text-slate-600 text-xs sm:text-sm transition-all shadow-inner"
                   />
                 </div>
 
                 {/* 2-Column Phone Number & Email Address */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 font-poppins">
-                  
+
                   {/* Phone Number */}
                   <div className="space-y-2">
                     <label className="block text-xs sm:text-sm font-medium text-slate-200">
@@ -172,10 +244,16 @@ export default function Getintouch() {
                     </label>
                     <input
                       type="tel"
+                      name="phone"
                       required
+                      pattern="[0-9+\s\-()]{7,15}"
                       value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="Unknown@gmail.com"
+                      onChange={(e) => {
+                        // Allow only digits, plus, hyphens, spaces, and parentheses
+                        const cleaned = e.target.value.replace(/[^0-9+\s\-()]/g, "");
+                        setFormData({ ...formData, phone: cleaned });
+                      }}
+                      placeholder="+91 98765 43210"
                       className="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-[14px] sm:rounded-[16px] bg-[#111413]/90 border border-white/50 focus:border-[#00BF62] focus:outline-none focus:ring-1 focus:ring-[#00BF62] text-white placeholder:text-slate-600 text-xs sm:text-sm transition-all shadow-inner"
                     />
                   </div>
@@ -187,10 +265,11 @@ export default function Getintouch() {
                     </label>
                     <input
                       type="email"
+                      name="email"
                       required
                       value={formData.email}
                       onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="Unknown@gmail.com"
+                      placeholder="your.email@example.com"
                       className="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-[14px] sm:rounded-[16px] bg-[#111413]/90 border border-white/50 focus:border-[#00BF62] focus:outline-none focus:ring-1 focus:ring-[#00BF62] text-white placeholder:text-slate-600 text-xs sm:text-sm transition-all shadow-inner"
                     />
                   </div>
@@ -200,17 +279,44 @@ export default function Getintouch() {
                 {/* Message */}
                 <div className="space-y-2 font-poppins">
                   <label className="block text-xs sm:text-sm font-medium text-slate-200">
-                    Message
+                    Message <span className="text-[#00BF62]">*</span>
                   </label>
                   <textarea
                     rows={4}
+                    name="message"
                     required
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Unknown@gmail.com"
+                    placeholder="Tell us about your requirements or questions..."
                     className="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-[14px] sm:rounded-[16px] bg-[#111413]/90 border border-white/50 focus:border-[#00BF62] focus:outline-none focus:ring-1 focus:ring-[#00BF62] text-white placeholder:text-slate-600 text-xs sm:text-sm resize-none transition-all shadow-inner"
                   />
                 </div>
+
+                {errorMsg && (
+                  <p className="text-red-400 text-xs sm:text-sm font-poppins">
+                    {errorMsg}
+                  </p>
+                )}
+
+                {/* Inline Animated Success Alert Banner */}
+                <AnimatePresence>
+                  {isSubmitted && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0, y: -10 }}
+                      animate={{ opacity: 1, height: "auto", y: 0 }}
+                      exit={{ opacity: 0, height: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="overflow-hidden"
+                    >
+                      <div className="p-4 rounded-[14px] bg-[#00BF62]/15 border border-[#00BF62]/50 flex items-center gap-3 text-[#00BF62]">
+                        <FiCheckCircle className="w-5 h-5 shrink-0" />
+                        <span className="text-xs sm:text-sm font-medium font-poppins">
+                          Message sent! We will contact you shortly.
+                        </span>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 {/* Submit Button */}
                 <div className="pt-2">
@@ -218,11 +324,11 @@ export default function Getintouch() {
                     type="submit"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    disabled={isSubmitted}
-                    className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/50 bg-black/80 hover:border-[#00BF62] transition-all duration-300 shadow-xl cursor-pointer"
+                    disabled={isSubmitting || isSubmitted}
+                    className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/50 bg-black/80 hover:border-[#00BF62] transition-all duration-300 shadow-xl cursor-pointer disabled:opacity-60"
                   >
                     <span className="font-poppins text-xs sm:text-sm font-semibold text-white tracking-wide">
-                      {isSubmitted ? "Enquiry Sent!" : "Sent Enquiry"}
+                      {isSubmitting ? "Sending..." : isSubmitted ? "Enquiry Sent!" : "Send Enquiry"}
                     </span>
                     <div className="w-8 h-8 rounded-full bg-[#00BF62] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
                       {isSubmitted ? (
@@ -241,6 +347,39 @@ export default function Getintouch() {
         </div>
 
       </div>
+
+      {/* Floating Animated Success Toast Notification */}
+      <AnimatePresence>
+        {isSubmitted && (
+          <motion.div
+            initial={{ opacity: 0, y: 40, scale: 0.85 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 450, damping: 25 }}
+            className="fixed bottom-6 right-6 z-50 max-w-md w-[calc(100%-3rem)] sm:w-auto"
+          >
+            <div className="flex items-start gap-4 p-5 rounded-2xl bg-[#08140e]/95 border border-[#00BF62] shadow-[0_10px_40px_rgba(0,191,98,0.35)] backdrop-blur-xl text-white">
+              <div className="w-10 h-10 rounded-full bg-[#00BF62] text-black flex items-center justify-center shrink-0 shadow-[0_0_20px_rgba(0,191,98,0.7)] animate-pulse">
+                <FiCheckCircle className="w-6 h-6 stroke-[2.5]" />
+              </div>
+              <div className="flex-1 font-poppins pr-2">
+                <h4 className="text-sm sm:text-base font-semibold text-white tracking-tight">
+                  Enquiry Submitted Successfully!
+                </h4>
+                <p className="text-xs text-slate-300 mt-1 leading-relaxed">
+                  Thank you for reaching out! Our team will review your message and reply within one business day.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsSubmitted(false)}
+                className="text-slate-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-white/10 shrink-0"
+              >
+                <FiX className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

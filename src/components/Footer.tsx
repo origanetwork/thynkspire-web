@@ -5,7 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { FiPhone, FiMail, FiMapPin } from "react-icons/fi";
-import { FaLinkedinIn, FaTwitter, FaInstagram } from "react-icons/fa";
+import { FaLinkedinIn, FaInstagram } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -66,7 +67,7 @@ export default function Footer() {
           {/* Left Column: Social Media Icons Stack */}
           <div className="flex items-center justify-center gap-3 shrink-0 z-10">
             <Link
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/company/thynkspire-india-pvt-ltd/home/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-black/80 hover:border-[#00BF63] text-slate-200 hover:text-[#00BF63] flex items-center justify-center transition-all shadow-md"
@@ -80,13 +81,13 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-black/80 hover:border-[#00BF63] text-slate-200 hover:text-[#00BF63] flex items-center justify-center transition-all shadow-md"
-              aria-label="Twitter"
+              aria-label="X (Twitter)"
             >
-              <FaTwitter className="w-4 h-4" />
+              <FaXTwitter className="w-4 h-4" />
             </Link>
 
             <Link
-              href="https://instagram.com"
+              href="https://www.instagram.com/thynkspire.ind/"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-black/80 hover:border-[#00BF63] text-slate-200 hover:text-[#00BF63] flex items-center justify-center transition-all shadow-md"
@@ -142,7 +143,7 @@ export default function Footer() {
         {/* Bottom Copyright Text */}
         <div className="text-center pt-4 lg:pt-8 pb-1 lg:pb-3 border-t border-white/10">
           <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
-            Copyright © 2026 by Origa Reserved
+            © 2026 Thynkspire India Pvt.Ltd. All rights reserved
           </p>
         </div>
 

@@ -179,7 +179,7 @@ export default function Abbanner() {
 
               {/* CTA Action Button (Centered on mobile, start-aligned on desktop) */}
               <MotionFadeIn delay={0.4} direction="up" distance={20} className="pt-2 sm:pt-3 w-full flex justify-center sm:justify-start">
-                <Link href="#join-mission">
+                <Link href="/contact">
                   <button
                     type="button"
                     className="group flex items-center justify-between gap-3 pl-6 pr-2 py-2 rounded-full border border-white/35 bg-black/60 hover:border-[#00BF62] hover:bg-black/90 backdrop-blur-md transition-all duration-300 shadow-xl"

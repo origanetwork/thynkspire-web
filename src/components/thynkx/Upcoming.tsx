@@ -87,7 +87,7 @@ export default function Upcoming() {
 
               {/* CTA Button: Book Now */}
               <MotionFadeIn delay={0.35} direction="up" className="pt-2">
-                <Link href="#book">
+                <Link href="/contact">
                   <motion.button
                     whileHover={{ scale: 1.04 }}
                     whileTap={{ scale: 0.96 }}

@@ -54,9 +54,9 @@ export default function ThynkxBanner() {
             {/* Left Content */}
             <div className="max-w-2xl space-y-2 sm:space-y-3">
               <MotionText delay={0.1} duration={0.7}>
-                <h2 className="font-clash text-2xl sm:text-4xl lg:text-[52px] font-semibold text-[#00BF63] leading-tight tracking-tight">
-                  South india’s <br />
-                  <span className="text-[#00BF63]">Biggest quiz event</span>
+                <h2 className="font-clash text-2xl sm:text-4xl lg:text-[52px] font-normal text-[#00BF63] leading-tight tracking-tight">
+                  South India’s <br />
+                  <span className="text-[#00BF63]">Biggest Quiz Event</span>
                 </h2>
               </MotionText>
 
@@ -69,18 +69,15 @@ export default function ThynkxBanner() {
 
             {/* Bottom Right Register Now CTA Button */}
             <MotionFadeIn delay={0.3} direction="up" distance={20} className="shrink-0">
-              <Link href="#register">
+              <Link href="/contact">
                 <button
-                  className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/30 bg-black/60 hover:border-[#00BF63] backdrop-blur-md transition-all duration-300 shadow-xl"
-                  style={{
-                    borderRadius: "38px",
-                  }}
+                  className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[165px] sm:w-[183px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black/60 hover:border-[#00BF63] backdrop-blur-md transition-all duration-300 shadow-xl cursor-pointer"
                 >
-                  <span className="font-poppins text-sm font-semibold text-white tracking-wide">
+                  <span className="font-poppins text-sm sm:text-base font-medium text-white tracking-wide whitespace-nowrap">
                     Register Now
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-[#00BF63] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                    <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                  <div className="w-[36px] h-[36px] rounded-full bg-[#00BF63] text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300">
+                    <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
                   </div>
                 </button>
               </Link>

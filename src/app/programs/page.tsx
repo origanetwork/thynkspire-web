@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import StickyContactWidget from "@/components/StickyContactWidget";
 import ProgramsList from "@/components/programs/ProgramsList";
-import ProgramCTA from "@/components/programs/ProgramCTA";
+import ProgramFitsYouCTA from "@/components/programs/ProgramFitsYouCTA";
 
 export const metadata: Metadata = {
   title: "Our Programs | Thynkspire - School of Emerging Career",
@@ -32,7 +32,7 @@ export default function ProgramsPage() {
         <ProgramsList />
 
         {/* Not sure which program fits you? CTA */}
-        <ProgramCTA />
+        <ProgramFitsYouCTA />
       </div>
 
       {/* Footer */}

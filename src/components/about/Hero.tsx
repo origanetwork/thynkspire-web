@@ -113,27 +113,6 @@ export default function AboutHero() {
               >
                 Thynkspire India Pvt. Ltd. is an innovation-driven education and technology company preparing students for future careers through practical learning, industry exposure, and large-scale engagement platforms.
               </p>
-
-              {/* Vector 1 Line Graphic seamlessly extending to touch green HUD arcs */}
-              <motion.div
-                className="relative w-full max-w-[340px] sm:max-w-none sm:w-[850px] lg:w-[980px] xl:w-[1100px] h-[36px] sm:h-[74px] mt-[-2px] sm:mt-[-15px] opacity-100 transition-all pointer-events-none z-10"
-                animate={{
-                  opacity: [0.85, 1, 0.85],
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3.5,
-                  ease: "easeInOut",
-                }}
-              >
-                <Image
-                  src="/vector/Vector1.png"
-                  alt="Decorative Line Graphic"
-                  fill
-                  className="object-contain object-left-top"
-                  priority
-                />
-              </motion.div>
             </MotionFadeIn>
 
             {/* Bottom Stats Capsule Bar matching Home Hero Section Model */}
@@ -156,8 +135,8 @@ export default function AboutHero() {
                 {/* 3 Stats Columns with dynamic count increase animation */}
                 <div className="relative z-10 w-full grid grid-cols-3 items-center text-center gap-1 sm:gap-2">
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                      <CounterNumber value={100} suffix="+" />
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-normal text-[#00BF62] tracking-tight leading-tight">
+                      <CounterNumber value={650} suffix="+" />
                     </span>
                     <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
                       Schools & Colleges
@@ -165,8 +144,8 @@ export default function AboutHero() {
                   </div>
 
                   <div className="flex flex-col items-center justify-center relative">
-                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
-                      <CounterNumber value={50} suffix="+" />
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-normal text-[#00BF62] tracking-tight leading-tight">
+                      <CounterNumber value={45} suffix="+" />
                     </span>
                     <div className="flex items-center justify-center gap-1">
                       <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">
@@ -176,7 +155,7 @@ export default function AboutHero() {
                   </div>
 
                   <div className="flex flex-col items-center justify-center">
-                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-semibold text-[#00BF62] tracking-tight leading-tight">
+                    <span className="font-clash text-4xl sm:text-[40px] lg:text-[48px] xl:text-[52px] font-normal text-[#00BF62] tracking-tight leading-tight">
                       <CounterNumber value={30} suffix="+" />
                     </span>
                     <span className="font-poppins text-[10px] sm:text-xs lg:text-[15px] text-slate-200 font-normal mt-0.5 sm:mt-1 whitespace-nowrap">

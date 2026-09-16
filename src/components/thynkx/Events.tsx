@@ -58,10 +58,10 @@ function AnimatedStat({
 
 export default function ThynkxEvents() {
   const stats = [
-    { value: 150, suffix: "+", label: "Schools" },
-    { value: 300, suffix: "+", label: "Teams" },
+    { value: 500, suffix: "+", label: "Schools" },
+    { value: 20000, suffix: "+", label: "Teams" },
     { value: 3, suffix: "", label: "Levels" },
-    { prefix: "₹", value: 5, suffix: "L+", label: "Prizes" },
+    { prefix: "₹", value: 10, suffix: "L+", label: "Prizes" },
   ];
 
   return (
@@ -137,8 +137,8 @@ export default function ThynkxEvents() {
               />
             </div>
 
-            {/* Full Width Glassmorphic Overlay Panel at Bottom (reduced height & reduced thickness) */}
-            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 flex flex-col gap-3 sm:gap-4 bg-black/35 sm:bg-black/30 backdrop-blur-md border-t border-white/20 shadow-2xl">
+            {/* Full Width Glassmorphic Overlay Panel at Bottom */}
+            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 flex flex-col gap-3 sm:gap-4 bg-[#00000040] backdrop-blur-[18.3px] border-t border-white/20 shadow-2xl">
               {/* Event Info & Button Row */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="font-poppins text-xs sm:text-[13px] text-white/95 font-medium leading-relaxed drop-shadow-md max-w-xl">

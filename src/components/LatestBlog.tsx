@@ -7,6 +7,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "./MotionWrapper";
 
+import { blogPosts } from "@/data/blogPosts";
+
 interface LatestBlogProps {
   title?: string;
   subtitle?: string;
@@ -24,32 +26,14 @@ export default function LatestBlog({
 }: LatestBlogProps) {
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
-  const posts = [
-    {
-      id: 1,
-      image: "/hero/b1.jpg",
-      category: "Cyber Security",
-      date: "June 10 2026",
-      title: "Industry-Oriented Cybersecurity & Data Privacy Workshop for College Students",
-      link: "/blog",
-    },
-    {
-      id: 2,
-      image: "/hero/b2.jpg",
-      category: "AI & Technology",
-      date: "May 08 2026",
-      title: "How AI Transforming the Future",
-      link: "/blog",
-    },
-    {
-      id: 3,
-      image: "/hero/b3.jpg",
-      category: "Events",
-      date: "June 10 2026",
-      title: "THYNK X 2026 - A Quiz Experience Like Never Before",
-      link: "/blog",
-    },
-  ];
+  const posts = blogPosts.map((post) => ({
+    id: post.id,
+    image: post.image,
+    category: post.category,
+    date: post.date,
+    title: post.title,
+    link: `/blog/${post.slug}`,
+  }));
 
   // Auto cycle cards on mobile every 3.5 seconds
   useEffect(() => {
@@ -79,7 +63,7 @@ export default function LatestBlog({
           <MotionText delay={0.1} duration={0.6}>
             <div className="flex items-center gap-3">
               <div className="w-6 h-[2px] bg-[#00BF63]" />
-              <h3 className="font-clash text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              <h3 className="font-clash text-2xl sm:text-3xl font-normal tracking-tight text-white">
                 {title}
               </h3>
             </div>
@@ -224,16 +208,13 @@ export default function LatestBlog({
           <MotionFadeIn delay={0.2} direction="up" className="flex justify-center pt-6">
             <Link href="/blog">
               <button
-                className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/30 bg-black/80 hover:border-[#00BF63] transition-all duration-300 shadow-xl"
-                style={{
-                  borderRadius: "38px",
-                }}
+                className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[150px] sm:w-[161px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl cursor-pointer"
               >
-                <span className="font-poppins text-sm font-semibold text-white tracking-wide">
+                <span className="font-poppins text-sm sm:text-base font-medium text-white tracking-wide whitespace-nowrap">
                   Read More
                 </span>
-                <div className="w-8 h-8 rounded-full bg-[#00BF63] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                  <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+                <div className="w-[36px] h-[36px] md:w-[32px] md:h-[32px] rounded-full bg-[#00BF63] text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300">
+                  <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
                 </div>
               </button>
             </Link>

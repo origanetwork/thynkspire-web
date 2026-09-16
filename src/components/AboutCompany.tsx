@@ -17,7 +17,7 @@ export default function AboutCompany() {
         <MotionText delay={0.1} duration={0.6}>
           <div className="flex items-center gap-3">
             <div className="w-7 h-[3px] bg-[#00BF63] rounded-full" />
-            <h3 className="font-clash text-xl sm:text-2xl font-bold tracking-tight text-white/70">
+            <h3 className="font-clash text-xl sm:text-2xl font-normal tracking-tight text-white/70">
               About Company
             </h3>
           </div>
@@ -30,9 +30,9 @@ export default function AboutCompany() {
           <MotionFadeIn direction="right" distance={30} duration={0.7} className="w-full lg:w-[296px] flex flex-col gap-3 sm:gap-4 z-20 shrink-0 lg:pt-2">
             
             <div className="flex items-baseline gap-3">
-              <span className="font-clash text-2xl sm:text-3xl font-bold text-white leading-none">01</span>
-              <h4 className="font-clash text-2xl sm:text-[34px] font-semibold text-[#00BF63] leading-none whitespace-nowrap">
-                Wht We Do
+              <span className="font-clash text-2xl sm:text-3xl font-normal text-white leading-none">01</span>
+              <h4 className="font-clash text-2xl sm:text-[34px] font-normal text-[#00BF63] leading-none whitespace-nowrap">
+                What We Do
               </h4>
             </div>
 
@@ -102,11 +102,11 @@ export default function AboutCompany() {
           </MotionScale>
 
           {/* Right Column: 02 What We Aim For (Positioned below the top-right doodle) */}
-          <MotionFadeIn direction="left" distance={30} duration={0.7} className="w-full lg:w-[360px] flex flex-col z-20 shrink-0 lg:pt-6">
+          <MotionFadeIn direction="left" distance={30} duration={0.7} className="w-full lg:w-[360px] flex flex-col z-20 shrink-0 lg:pt-30">
             
             {/* Top-Right Green Ribbon Loop Doodle (Group-1028.png) */}
             <motion.div
-              className="relative w-12 sm:w-16 h-16 sm:h-20 pointer-events-none self-start lg:mb-12 hidden sm:block"
+              className="relative w-12 sm:w-16 h-16 sm:h-20 pointer-events-none self-start lg:mb-30 hidden sm:block"
               animate={{
                 y: [0, 6, 0],
                 rotate: [0, 5, -5, 0],
@@ -127,10 +127,10 @@ export default function AboutCompany() {
             </motion.div>
 
             {/* 02 What We Aim For (Aligned towards the bottom-right of the image) */}
-            <div className="flex flex-col gap-3 sm:gap-4">
+            <div className="flex flex-col gap-3 sm:gap-4 lg:pt-2">
               <div className="flex items-baseline gap-3">
-                <span className="font-clash text-2xl sm:text-3xl font-bold text-white leading-none">02</span>
-                <h4 className="font-clash text-2xl sm:text-[34px] font-semibold text-[#00BF63] leading-none whitespace-nowrap">
+                <span className="font-clash text-2xl sm:text-3xl font-normal text-white leading-none">02</span>
+                <h4 className="font-clash text-2xl sm:text-[34px] font-normal text-[#00BF63] leading-none whitespace-nowrap">
                   What We Aim For
                 </h4>
               </div>
@@ -146,18 +146,15 @@ export default function AboutCompany() {
 
         {/* Bottom Center View More Button */}
         <MotionFadeIn delay={0.2} direction="up" className="flex justify-center pt-2">
-          <Link href="#about-more">
+          <Link href="/about">
             <button
-              className="group flex items-center justify-between gap-4 pl-7 pr-2.5 py-2.5 rounded-full border border-white/40 bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl"
-              style={{
-                borderRadius: "38px",
-              }}
+              className="group flex items-center justify-between gap-[8px] sm:gap-[10px] pl-[18px] sm:pl-[21px] pr-[6px] py-[6px] w-[150px] sm:w-[161px] h-[48px] sm:h-[54px] rounded-[38px] border border-white bg-black hover:border-[#00BF63] transition-all duration-300 shadow-xl cursor-pointer"
             >
-              <span className="font-poppins text-sm font-medium text-white tracking-wide">
+              <span className="font-poppins text-sm sm:text-base font-medium text-white tracking-wide whitespace-nowrap">
                 View More
               </span>
-              <div className="w-[34px] h-[34px] rounded-full bg-[#00BF63] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
-                <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
+              <div className="w-[36px] h-[36px] rounded-full bg-[#00BF63] text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300">
+                <FiArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
               </div>
             </button>
           </Link>

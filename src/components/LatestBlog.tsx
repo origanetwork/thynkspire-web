@@ -26,7 +26,7 @@ export default function LatestBlog({
 }: LatestBlogProps) {
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
-  const posts = blogPosts.map((post) => ({
+  const posts = blogPosts.slice(0, 3).map((post) => ({
     id: post.id,
     image: post.image,
     category: post.category,

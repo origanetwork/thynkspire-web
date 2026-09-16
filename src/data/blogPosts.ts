@@ -153,6 +153,150 @@ export const blogPosts: BlogPost[] = [
       ],
     },
   },
+  {
+    id: 4,
+    slug: "understanding-zero-trust-architecture-in-2026",
+    title: "Understanding Zero Trust Architecture in Modern Cloud Networks",
+    subtitle: "Why 'never trust, always verify' is no longer optional for enterprises navigating multi-cloud environments.",
+    category: "Awareness",
+    date: "March 14, 2026",
+    image: "/hero/f3.jpg",
+    author: {
+      name: "Marcus Vance",
+      role: "Lead Security Architect, ThynkEdge",
+      avatar: "/blog/marcus-vance.jpg",
+      linkedinUrl: "https://linkedin.com",
+    },
+    paragraphs: {
+      intro: [
+        "Traditional perimeter security relied on the assumption that everything inside a network boundary could be trusted. In a world of remote work and cloud infrastructure, that perimeter no longer exists.",
+        "Zero Trust replaces implicit trust with explicit verification at every access point.",
+      ],
+      sectionHeading: "Core Pillars of Zero Trust Implementation",
+      sectionIntro: "Adopting Zero Trust requires aligning identity management, micro-segmentation, and continuous device evaluation.",
+      keyPoints: [
+        {
+          title: "Continuous Verification:",
+          desc: "Always authenticate and authorize based on all available data points, including user identity, location, and device health.",
+        },
+        {
+          title: "Least Privilege Access:",
+          desc: "Limit user access with Just-In-Time and Just-Enough-Access (JTA/JEA) controls to safeguard sensitive data.",
+        },
+      ],
+      conclusion: [
+        "Zero Trust is not a single product—it is a continuous security posture that minimizes risk across modern architectures.",
+      ],
+    },
+  },
+  {
+    id: 5,
+    slug: "student-spotlight-from-campus-to-cyber-lead",
+    title: "Student Spotlight: From Campus Innovator to Lead Security Analyst",
+    subtitle: "How Thynkspire's hands-on incubation helped Ananya Sharma launch her career in enterprise threat defense.",
+    category: "Success Stories",
+    date: "April 02, 2026",
+    image: "/hero/f2.jpg",
+    author: {
+      name: "Sarah Jenkins",
+      role: "Director of Experiential Programs, Thynkspire",
+      avatar: "/blog/sarah-jenkins.jpg",
+      linkedinUrl: "https://linkedin.com",
+    },
+    paragraphs: {
+      intro: [
+        "When Ananya Sharma joined the Thynkspire Cybersecurity Bootcamp in 2025, she had strong theoretical knowledge but wanted practical SOC experience.",
+        "Through intensive red-team exercises and industry mentorship, Ananya developed a novel threat detection script that earned her recognition at national security forums.",
+      ],
+      sectionHeading: "Accelerating Skill Mastery Through Real Projects",
+      sectionIntro: "Practical challenges and peer collaboration formed the backbone of her learning journey.",
+      keyPoints: [
+        {
+          title: "Simulated SOC Incidents:",
+          desc: "Analyzing real malware traces and implementing containment policies under expert guidance.",
+        },
+        {
+          title: "Direct Industry Mentorship:",
+          desc: "Weekly one-on-one sessions with senior security architects from partner tech firms.",
+        },
+      ],
+      conclusion: [
+        "Today, Ananya leads a team of SOC analysts and frequently returns to mentor new Thynkspire cohorts.",
+      ],
+    },
+  },
+  {
+    id: 6,
+    slug: "thynkspire-expands-academic-partnerships",
+    title: "Thynkspire Expands Industry Academic Partnerships Across 50+ Institutions",
+    subtitle: "Bringing cutting-edge AI and cybersecurity labs to engineering campuses nationwide.",
+    category: "Updates",
+    date: "February 28, 2026",
+    image: "/hero/f4.jpg",
+    author: {
+      name: "Dr. Elena Rostova",
+      role: "Head of Threat Intelligence, ThynkEdge",
+      avatar: "/blog/elena-rostova.jpg",
+      linkedinUrl: "https://linkedin.com",
+    },
+    paragraphs: {
+      intro: [
+        "Thynkspire is proud to announce new institutional partnerships with leading universities to establish state-of-the-art practical training centers.",
+        "These partnerships will enable thousands of students to access enterprise-grade simulation environments and industry certifications.",
+      ],
+      sectionHeading: "Empowering Next-Gen Technical Talent",
+      sectionIntro: "Our program integrates industry-relevant curricula with real-world project portfolios.",
+      keyPoints: [
+        {
+          title: "Hands-on Sandbox Labs:",
+          desc: "Students receive access to cloud-hosted security sandboxes and AI evaluation environments.",
+        },
+        {
+          title: "Industry Certification Paths:",
+          desc: "Direct pathways to globally recognized credentials in cloud defense and AI engineering.",
+        },
+      ],
+      conclusion: [
+        "We welcome our new university partners and look forward to fostering the next generation of tech leaders.",
+      ],
+    },
+  },
+  {
+    id: 7,
+    slug: "building-next-gen-cloud-infrastructure",
+    title: "Building Next-Generation Cloud Infrastructure for High-Throughput AI",
+    subtitle: "Insights into optimizing GPU clusters, distributed vector databases, and resilient microservices.",
+    category: "News",
+    date: "April 18, 2026",
+    image: "/hero/f1.jpg",
+    author: {
+      name: "Dr. Elena Rostova",
+      role: "Head of Threat Intelligence, ThynkEdge",
+      avatar: "/blog/elena-rostova.jpg",
+      linkedinUrl: "https://linkedin.com",
+    },
+    paragraphs: {
+      intro: [
+        "As machine learning models scale to hundreds of billions of parameters, infrastructure engineering faces unprecedented performance and latency challenges.",
+        "This article explores key strategies for building resilient, high-throughput cloud architectures tailored for modern AI workloads.",
+      ],
+      sectionHeading: "Optimizing Vector Indexing and Network Topology",
+      sectionIntro: "Low-latency retrieval requires deep co-design of data storage layers and high-bandwidth interconnects.",
+      keyPoints: [
+        {
+          title: "Distributed Vector Search:",
+          desc: "Partitioning embeddings across high-speed RAM caches for sub-millisecond similarity queries.",
+        },
+        {
+          title: "Automated Microservice Resilience:",
+          desc: "Implementing zero-downtime rolling updates and self-healing node clusters.",
+        },
+      ],
+      conclusion: [
+        "Building scale-ready AI infrastructure requires continuous performance benchmarking and adaptive system architecture.",
+      ],
+    },
+  },
 ];
 
 export function getBlogPost(slug: string): BlogPost | undefined {
@@ -162,3 +306,4 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 export function getDefaultPost(): BlogPost {
   return blogPosts[1]; // Default featured: How AI is Transforming Cybersecurity
 }
+

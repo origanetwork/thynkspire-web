@@ -77,7 +77,7 @@ export default function Footer() {
             </Link>
 
             <Link
-              href="https://twitter.com"
+              href="https://x.com/thynkspireInd"
               target="_blank"
               rel="noopener noreferrer"
               className="w-9 h-9 sm:w-10 sm:h-10 rounded-full border border-white/20 bg-black/80 hover:border-[#00BF63] text-slate-200 hover:text-[#00BF63] flex items-center justify-center transition-all shadow-md"

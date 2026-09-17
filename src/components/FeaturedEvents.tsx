@@ -10,7 +10,7 @@ import { MotionFadeIn, MotionText } from "./MotionWrapper";
 const galleryItems = [
   {
     id: 1,
-    src: "/hero/f1.jpg",
+    src: "/events/1.jpg",
     alt: "Event Setup",
     widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
     heightClass: "h-[220px] sm:h-[260px] lg:h-[270px]",
@@ -18,7 +18,7 @@ const galleryItems = [
   },
   {
     id: 2,
-    src: "/hero/f2.jpg",
+    src: "/events/2.jpg",
     alt: "Audience Crowd View",
     widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
     heightClass: "h-[260px] sm:h-[320px] lg:h-[360px]",
@@ -26,7 +26,7 @@ const galleryItems = [
   },
   {
     id: 3,
-    src: "/hero/f3.jpg",
+    src: "/events/3.jpg",
     alt: "Boardroom Group",
     widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
     heightClass: "h-[220px] sm:h-[260px] lg:h-[250px]",
@@ -34,7 +34,7 @@ const galleryItems = [
   },
   {
     id: 4,
-    src: "/hero/f4.jpg",
+    src: "/events/4.jpg",
     alt: "Stage Speaker Event",
     widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
     heightClass: "h-[260px] sm:h-[320px] lg:h-[370px]",
@@ -42,7 +42,7 @@ const galleryItems = [
   },
   {
     id: 5,
-    src: "/hero/f5.jpg",
+    src: "/events/5.jpg",
     alt: "Cybersecurity Workshop",
     widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
     heightClass: "h-[220px] sm:h-[260px] lg:h-[270px]",
@@ -50,7 +50,7 @@ const galleryItems = [
   },
   {
     id: 6,
-    src: "/hero/f6.jpg",
+    src: "/hero/f1.jpg",
     alt: "Tech Conference Crowd",
     widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
     heightClass: "h-[260px] sm:h-[320px] lg:h-[360px]",
@@ -58,7 +58,7 @@ const galleryItems = [
   },
   {
     id: 7,
-    src: "/hero/f7.jpg",
+    src: "/hero/f2.jpg",
     alt: "Hands-on Training Session",
     widthClass: "w-[280px] sm:w-[340px] lg:w-[380px]",
     heightClass: "h-[220px] sm:h-[260px] lg:h-[250px]",
@@ -66,7 +66,7 @@ const galleryItems = [
   },
   {
     id: 8,
-    src: "/hero/f8.jpg",
+    src: "/events/6.jpg",
     alt: "Campus Seminar",
     widthClass: "w-[220px] sm:w-[280px] lg:w-[320px]",
     heightClass: "h-[260px] sm:h-[320px] lg:h-[370px]",

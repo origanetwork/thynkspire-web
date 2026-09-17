@@ -152,9 +152,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom Copyright Text */}
-        <div className="text-center pt-4 lg:pt-8 pb-1 lg:pb-3 border-t border-white/10">
+        <div className="flex flex-col items-center justify-center gap-2 text-center pt-4 lg:pt-8 pb-1 lg:pb-3 border-t border-white/10 lg:flex-row lg:items-center lg:justify-between lg:text-left">
           <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
             © 2026 Thynkspire India Pvt.Ltd. All rights reserved
+          </p>
+          <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
+            Designed and Developed by{" "}
+            <Link
+              href="https://www.origanetworks.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-slate-300 hover:text-[#00BF63] transition-colors"
+            >
+              Origa Networks
+            </Link>
           </p>
         </div>
 

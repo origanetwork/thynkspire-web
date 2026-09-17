@@ -106,7 +106,7 @@ export default function Hero() {
                                     }}
                                 >
                                     <Image
-                                        src="/vector/Vector1.png"
+                                        src="/vector/Vector5.png"
                                         alt="Decorative Line Graphic"
                                         fill
                                         className="object-contain object-left-top"

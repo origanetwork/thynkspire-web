@@ -65,7 +65,7 @@ export default function AlsoOngoing() {
               </div>
 
               <div className="pt-2 relative z-10">
-                <Link href="/contact">
+                <Link href="/programs">
                   <motion.button
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}

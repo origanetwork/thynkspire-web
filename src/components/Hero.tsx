@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import HeroCodeAnimate from "./HeroCodeAnimate";
@@ -262,29 +263,31 @@ export default function Hero() {
                         {/* Action Row Container */}
                         <MotionFadeIn delay={0.45} direction="up" distance={25} className="w-full max-w-[439px] min-h-[60px] sm:h-[74px] flex flex-wrap sm:flex-nowrap items-center gap-4 sm:gap-[26px] opacity-100">
                             {/* Get Started Button */}
-                            <button
-                                className="group flex items-center justify-between shrink-0 transition-all duration-300 hover:border-[#00BF62] w-[170px] sm:w-[193px] h-[54px] sm:h-[63px] px-3 sm:px-[6px] py-[6px] rounded-[38px] border border-white bg-transparent"
-                            >
-                                <span
-                                    className="font-poppins font-normal text-base sm:text-[20px] text-white leading-[100%] whitespace-nowrap shrink-0 pl-3 sm:pl-4"
-                                    style={{
-                                        fontFamily: "'Poppins', sans-serif",
-                                        fontWeight: 400,
-                                        color: "#FFFFFF",
-                                        whiteSpace: "nowrap",
-                                    }}
+                            <Link href="/contact">
+                                <button
+                                    className="group flex items-center justify-between shrink-0 transition-all duration-300 hover:border-[#00BF62] w-[170px] sm:w-[193px] h-[54px] sm:h-[63px] px-3 sm:px-[6px] py-[6px] rounded-[38px] border border-white bg-transparent cursor-pointer"
                                 >
-                                    Get Started
-                                </span>
+                                    <span
+                                        className="font-poppins font-normal text-base sm:text-[20px] text-white leading-[100%] whitespace-nowrap shrink-0 pl-3 sm:pl-4"
+                                        style={{
+                                            fontFamily: "'Poppins', sans-serif",
+                                            fontWeight: 400,
+                                            color: "#FFFFFF",
+                                            whiteSpace: "nowrap",
+                                        }}
+                                    >
+                                        Get Started
+                                    </span>
 
-                                {/* Green Circle Arrow */}
-                                <div
-                                    className="w-[36px] sm:w-[41px] h-[36px] sm:h-[41px] rounded-full text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300"
-                                    style={{ backgroundColor: "#00BF62" }}
-                                >
-                                    <FiArrowUpRight className="w-4 sm:w-5 h-4 sm:h-5 stroke-[2.5]" />
-                                </div>
-                            </button>
+                                    {/* Green Circle Arrow */}
+                                    <div
+                                        className="w-[36px] sm:w-[41px] h-[36px] sm:h-[41px] rounded-full text-black flex items-center justify-center shrink-0 group-hover:rotate-45 transition-transform duration-300"
+                                        style={{ backgroundColor: "#00BF62" }}
+                                    >
+                                        <FiArrowUpRight className="w-4 sm:w-5 h-4 sm:h-5 stroke-[2.5]" />
+                                    </div>
+                                </button>
+                            </Link>
 
                             {/* Avatars Stack & Partner Count */}
                             <div className="flex items-center gap-3 shrink-0">

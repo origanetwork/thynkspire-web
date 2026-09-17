@@ -87,7 +87,7 @@ export default function Header() {
 
         {/* Apply Now CTA Button */}
         <div className="hidden sm:flex items-center gap-3 shrink-0">
-          <Link href="#apply">
+          <Link href="/contact">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
@@ -157,7 +157,7 @@ export default function Header() {
             </div>
 
             <div className="pt-4 border-t border-white/10">
-              <Link href="#apply" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full py-3 px-5 rounded-full bg-[#00BF62] text-black font-bold text-sm flex items-center justify-center gap-2">
                   Apply Now <FiArrowUpRight className="w-4 h-4" />
                 </button>

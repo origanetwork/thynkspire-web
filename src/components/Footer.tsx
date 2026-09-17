@@ -119,23 +119,34 @@ export default function Footer() {
 
           {/* Right Column: Contact Details with line breaks for location */}
           <div className="flex flex-col items-center lg:items-start gap-1.5 font-poppins text-xs sm:text-sm text-slate-200 shrink-0 z-10 text-center lg:text-left">
-            <div className="flex items-center gap-3">
+            <a
+              href="tel:+917907672043"
+              className="flex items-center gap-3 hover:text-[#00BF63] transition-colors"
+            >
               <FiPhone className="w-3.5 h-3.5 text-[#00BF63] shrink-0" />
-              <span>91 790 767 2043</span>
-            </div>
+              <span>+91 790 767 2043</span>
+            </a>
 
-            <div className="flex items-center gap-3">
+            <a
+              href="mailto:support@thynkspire.com"
+              className="flex items-center gap-3 hover:text-[#00BF63] transition-colors"
+            >
               <FiMail className="w-3.5 h-3.5 text-[#00BF63] shrink-0" />
               <span>support@thynkspire.com</span>
-            </div>
+            </a>
 
-            <div className="flex items-start gap-3">
+            <a
+              href="https://www.google.com/maps/dir/?api=1&destination=Kathrikadavu,+Ernakulam,+Kerala+682017"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-start gap-3 hover:text-[#00BF63] transition-colors"
+            >
               <FiMapPin className="w-3.5 h-3.5 text-[#00BF63] shrink-0 mt-0.5" />
               <span className="leading-tight">
                 Kathrikadavu, Ernakulam,<br />
                 Kochi, Kerala - 682017
               </span>
-            </div>
+            </a>
           </div>
 
         </div>

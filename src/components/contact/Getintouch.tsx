@@ -58,7 +58,7 @@ export default function Getintouch() {
       }
 
       // Fallback: Direct Browser FormSubmit AJAX call (Browser supplies native web server origin/referer headers)
-      const directRes = await fetch("https://formsubmit.co/ajax/shamiloriga@gmail.com", {
+      const directRes = await fetch("https://formsubmit.co/ajax/support@thynkspire.com", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -171,7 +171,7 @@ export default function Getintouch() {
 
             {/* Email Card */}
             <Link
-              href="mailto:shamiloriga@gmail.com"
+              href="mailto:support@thynkspire.com"
               className="flex items-center gap-4 group transition-all"
             >
               <div className="w-12 h-12 rounded-[14px] border border-[#00BF62]/50 bg-[#00BF62]/10 flex items-center justify-center text-[#00BF62] shadow-[0_0_18px_rgba(0,191,98,0.2)] group-hover:border-[#00BF62] group-hover:scale-105 transition-all">
@@ -182,7 +182,7 @@ export default function Getintouch() {
                   EMAIL
                 </span>
                 <span className="text-lg font-medium text-white group-hover:text-[#00BF62] transition-colors">
-                  shamiloriga@gmail.com
+                  support@thynkspire.com
                 </span>
               </div>
             </Link>
@@ -212,7 +212,7 @@ export default function Getintouch() {
           <div className="lg:col-span-7 w-full">
             <MotionFadeIn delay={0.3} direction="up">
               <form
-                action="https://formsubmit.co/shamiloriga@gmail.com"
+                action="https://formsubmit.co/support@thynkspire.com"
                 method="POST"
                 onSubmit={handleSubmit}
                 className="space-y-5"

@@ -7,10 +7,10 @@ export interface ContactFormData {
 
 /**
  * Professional service helper to send contact enquiries via FormSubmit.co
- * Receiver target email: shamiloriga@gmail.com
+ * Receiver target email: support@thynkspire.com
  */
 export async function sendViaFormSubmit(data: ContactFormData, reqHeaders?: Headers) {
-  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || "shamiloriga@gmail.com";
+  const targetEmail = process.env.CONTACT_RECEIVER_EMAIL || "support@thynkspire.com";
 
   const payload = {
     Name: data.fullName,

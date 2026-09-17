@@ -126,7 +126,7 @@ export default function Footer() {
 
             <div className="flex items-center gap-3">
               <FiMail className="w-3.5 h-3.5 text-[#00BF63] shrink-0" />
-              <span>Support@thynkspire.com</span>
+              <span>support@thynkspire.com</span>
             </div>
 
             <div className="flex items-start gap-3">

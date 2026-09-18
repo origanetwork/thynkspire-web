@@ -10,6 +10,12 @@ import {
   FiCpu,
   FiActivity,
   FiCheck,
+  FiLayers,
+  FiCode,
+  FiGlobe,
+  FiTarget,
+  FiShield,
+  FiZap,
 } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
 import { ProgramDetail } from "@/data/programsData";
@@ -62,11 +68,51 @@ const DEFAULT_ROADMAP_STEPS: RoadmapStep[] = [
   },
 ];
 
+const ICON_POOL = [
+  FiFlag,
+  FiServer,
+  FiLock,
+  FiCpu,
+  FiActivity,
+  FiLayers,
+  FiCode,
+  FiGlobe,
+  FiTarget,
+  FiShield,
+  FiZap,
+];
+
+function getRoadmapSteps(program?: ProgramDetail): RoadmapStep[] {
+  if (!program || !program.modules || program.modules.length === 0) {
+    return DEFAULT_ROADMAP_STEPS;
+  }
+
+  return program.modules.map((mod, idx) => {
+    const isLast = idx === program.modules.length - 1;
+    const cleanTitle = mod.title.replace(/^Module\s+\d+\s*[\u2014\u2013-]\s*/i, "").trim();
+    const desc =
+      mod.topics && mod.topics.length > 0
+        ? mod.topics.slice(0, 4).join(", ") + "."
+        : "";
+    const icon = isLast ? FiCheck : ICON_POOL[idx % ICON_POOL.length];
+
+    return {
+      month: `Module ${String(mod.number || idx + 1).padStart(2, "0")}`,
+      title: cleanTitle || mod.title,
+      desc,
+      icon,
+      isCompleted: isLast,
+    };
+  });
+}
+
 interface CourseRoadmapTimelineProps {
   program?: ProgramDetail;
 }
 
 export default function CourseRoadmapTimeline({ program }: CourseRoadmapTimelineProps = {}) {
+  const roadmapSteps = getRoadmapSteps(program);
+
   return (
     <section className="relative w-full bg-black text-white py-24 sm:py-32 overflow-hidden">
       
@@ -127,7 +173,7 @@ export default function CourseRoadmapTimeline({ program }: CourseRoadmapTimeline
         <div className="flex flex-col items-center justify-center text-center pb-16 sm:pb-20">
           <MotionText delay={0.1} duration={0.6}>
             <h2 className="font-clash text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
-              6-Month Course <span className="text-[#00BF63]">Roadmap</span>
+              {program?.duration ? `${program.duration}` : "6-Month"} Course <span className="text-[#00BF63]">Roadmap</span>
             </h2>
           </MotionText>
         </div>
@@ -138,7 +184,7 @@ export default function CourseRoadmapTimeline({ program }: CourseRoadmapTimeline
           <div className="absolute left-6 md:left-1/2 top-4 bottom-4 w-[2px] -translate-x-1/2 bg-gradient-to-b from-[#00BF63]/20 via-[#00BF63] to-[#00BF63]/20" />
 
           <div className="space-y-10 sm:space-y-14">
-            {DEFAULT_ROADMAP_STEPS.map((step, idx) => {
+            {roadmapSteps.map((step, idx) => {
               const isEven = idx % 2 !== 0; // Odd index = right side card in desktop layout
               const IconComponent = step.icon;
 
@@ -160,7 +206,7 @@ export default function CourseRoadmapTimeline({ program }: CourseRoadmapTimeline
                     )}
                   </div>
 
-                  {/* Left Column (Desktop - Month 01, 03, 05) */}
+                  {/* Card Container */}
                   <div
                     className={`w-full md:w-[calc(50%-2.5rem)] ${
                       !isEven ? "md:mr-auto" : "md:ml-auto md:order-2"
@@ -192,3 +238,4 @@ export default function CourseRoadmapTimeline({ program }: CourseRoadmapTimeline
     </section>
   );
 }
+

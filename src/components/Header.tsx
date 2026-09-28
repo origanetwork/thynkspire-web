@@ -87,6 +87,12 @@ export default function Header() {
 
         {/* Apply Now CTA Button */}
         <div className="hidden sm:flex items-center gap-3 shrink-0">
+          <Link
+            href="/thynkx/login"
+            className="px-5 py-2.5 rounded-full border border-white/20 text-xs font-semibold tracking-wider text-white hover:border-[#00BF62] hover:text-[#00BF62] transition-colors duration-300"
+          >
+            Teacher Login
+          </Link>
           <Link href="/contact">
             <motion.button
               whileHover={{ scale: 1.03 }}
@@ -156,7 +162,14 @@ export default function Header() {
               })}
             </div>
 
-            <div className="pt-4 border-t border-white/10">
+            <div className="pt-4 border-t border-white/10 space-y-3">
+              <Link
+                href="/thynkx/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="w-full py-3 px-5 rounded-full border border-white/20 text-white font-semibold text-sm flex items-center justify-center"
+              >
+                Teacher Login
+              </Link>
               <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full py-3 px-5 rounded-full bg-[#00BF62] text-black font-bold text-sm flex items-center justify-center gap-2">
                   Apply Now <FiArrowUpRight className="w-4 h-4" />

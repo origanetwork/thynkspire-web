@@ -9,6 +9,7 @@ import Whocanjoin from "@/components/thynkx/Whocanjoin";
 import Upcoming from "@/components/thynkx/Upcoming";
 import Quote from "@/components/thynkx/Quote";
 import AlsoOngoing from "@/components/thynkx/AlsoOngoing";
+import RegistrationSection from "@/components/thynkx/RegistrationSection";
 
 export const metadata: Metadata = {
   title: "Thynk X | India's Biggest Quizzing Event - Thynkspire",
@@ -33,6 +34,7 @@ export default function ThynkxPage() {
         }}
       >
         <ThynkxHero />
+        <RegistrationSection />
         <ThynkxEvents />
         <Whocanjoin />
         <Upcoming />

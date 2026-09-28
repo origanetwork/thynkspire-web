@@ -94,20 +94,30 @@ export default function ThynkxHero() {
               </MotionFadeIn>
 
               {/* CTA Button */}
-              <MotionFadeIn delay={0.3} direction="up" className="pt-0.5">
-                <Link href="/contact">
-                  <motion.button
+              <MotionFadeIn delay={0.3} direction="up" className="pt-0.5 flex flex-wrap items-center gap-2.5 sm:gap-3">
+                <Link href="/thynkx/school-registration">
+                  <motion.span
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.97 }}
-                    className="group/btn flex items-center gap-2.5 sm:gap-3 pl-5 sm:pl-6 pr-2 py-1.5 sm:py-2 rounded-full border border-white/30 bg-black/80 hover:border-[#00BF62] transition-all duration-300 shadow-xl cursor-pointer"
+                    className="group/btn flex items-center gap-2.5 sm:gap-3 pl-5 sm:pl-6 pr-2 py-1.5 sm:py-2 rounded-full bg-[#00BF62] hover:bg-[#00d86f] transition-all duration-300 shadow-xl cursor-pointer"
                   >
-                    <span className="font-poppins text-xs sm:text-sm font-semibold text-white tracking-wide">
-                      Register Now
-                    </span>
-                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#00BF62] text-black flex items-center justify-center group-hover/btn:rotate-45 transition-transform duration-300">
+                    <span className="font-poppins text-xs sm:text-sm font-semibold text-black tracking-wide">Register your school</span>
+                    <span className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-black text-[#00BF62] flex items-center justify-center group-hover/btn:rotate-45 transition-transform duration-300">
                       <FiArrowUpRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
-                    </div>
-                  </motion.button>
+                    </span>
+                  </motion.span>
+                </Link>
+                <Link
+                  href="/thynkx/register"
+                  className="font-poppins text-xs sm:text-sm font-semibold text-white px-5 py-2.5 sm:py-3 rounded-full border border-white/30 bg-black/80 hover:border-[#00BF62] transition-colors"
+                >
+                  Student registration
+                </Link>
+                <Link
+                  href="/thynkx/login"
+                  className="font-poppins text-xs sm:text-sm font-semibold text-white/90 px-3 py-2.5 hover:text-[#00BF62] transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+                >
+                  Teacher login &rarr;
                 </Link>
               </MotionFadeIn>
 

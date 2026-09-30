@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
-import { MotionFadeIn, MotionText } from "../MotionWrapper";
+import { MotionFadeIn } from "../MotionWrapper";
 
 const FEATURE_PILLS = [
   "Massive Competition",
@@ -23,7 +23,7 @@ export default function ThynkxHero() {
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8">
         <MotionFadeIn delay={0.1} direction="up">
           {/* Main Hero Showcase Card with 13-inch screen responsiveness */}
-          <div className="relative w-full min-h-[500px] sm:min-h-[560px] lg:min-h-[580px] xl:min-h-[620px] 2xl:min-h-[660px] rounded-[24px] sm:rounded-[28px] overflow-hidden border border-white/10 shadow-2xl p-5 sm:p-8 lg:p-9 xl:p-10 2xl:p-12 flex flex-col justify-end group">
+          <div className="relative w-full min-h-[500px] sm:min-h-[560px] lg:min-h-[580px] xl:min-h-[620px] 2xl:min-h-[660px] rounded-[24px] sm:rounded-[28px] overflow-hidden border border-white/10 shadow-2xl p-5 sm:p-8 lg:p-9 xl:p-10 2xl:p-12 flex flex-col justify-center group">
 
             {/* Background Animated GIF without dark overlays */}
             <div className="absolute inset-0 z-0 overflow-hidden">
@@ -37,27 +37,40 @@ export default function ThynkxHero() {
               />
             </div>
 
-            {/* Bottom Content Area optimized for 13-inch laptops & desktops */}
-            <div className="relative z-10 space-y-4 sm:space-y-4.5 xl:space-y-5 max-w-3xl lg:max-w-4xl xl:max-w-4xl 2xl:max-w-5xl">
+            {/* Soft left shade so the vertically-centred content stays readable over the GIF */}
+            <div className="absolute inset-0 z-0 bg-gradient-to-r from-black/65 via-black/25 to-transparent pointer-events-none" />
 
-              {/* Headings */}
-              <div className="space-y-2 sm:space-y-2.5">
-                <MotionText delay={0.15}>
-                  <h1 className="font-clash text-2xl sm:text-5xl lg:text-[54px] xl:text-[62px] 2xl:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]">
-                    India&apos;s Biggest <br />
-                    <span className="text-[#00BF62]">Quizzing Event.</span>
-                  </h1>
-                </MotionText>
+            {/* Content Area — vertically centred in the card; animates on mount (not on scroll) so it's visible on first load */}
+            <div className="relative z-10 space-y-4 sm:space-y-5 max-w-3xl lg:max-w-4xl 2xl:max-w-5xl">
+              <motion.h1
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+                className="font-clash text-3xl sm:text-5xl lg:text-[54px] xl:text-[62px] 2xl:text-7xl font-bold tracking-tight text-white leading-[1.08] drop-shadow-[0_3px_12px_rgba(0,0,0,0.9)]"
+              >
+                India&apos;s Biggest <br />
+                <span className="text-[#00BF62]">Quizzing Event.</span>
+              </motion.h1>
 
-                <MotionFadeIn delay={0.2} direction="up">
-                  <p className="font-poppins text-xs sm:text-sm md:text-base xl:text-[15px] 2xl:text-base text-white/95 max-w-2xl xl:max-w-[640px] 2xl:max-w-2xl leading-relaxed font-normal bg-[#00000040] backdrop-blur-[18.3px] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 shadow-lg">
-                    Thynk X Brings Schools And Colleges From Across The Country Into One National Quizzing Arena — Where Knowledge Meets Fun And Bright Minds Compete For The Top Spot.
-                  </p>
-                </MotionFadeIn>
-              </div>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+                className="font-poppins text-xs sm:text-sm md:text-base xl:text-[15px] 2xl:text-base text-white/95 max-w-2xl xl:max-w-[640px] 2xl:max-w-2xl leading-relaxed font-normal bg-[#00000040] backdrop-blur-[18.3px] border border-white/10 rounded-xl sm:rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 shadow-lg"
+              >
+                Thynk X Brings Schools And Colleges From Across The Country Into One National Quizzing Arena — Where Knowledge Meets Fun And Bright Minds Compete For The Top Spot.
+              </motion.p>
+            </div>
 
+            {/* Feature badges, then the CTA buttons below them */}
+            <div className="relative z-10 pt-5 sm:pt-6 max-w-3xl lg:max-w-4xl 2xl:max-w-5xl">
               {/* Feature Badges: Automatically scrolling in 1 line on mobile, static row on 13-inch and larger desktop screens */}
-              <MotionFadeIn delay={0.25} direction="up" className="w-full">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.35, ease: "easeOut" }}
+                className="w-full"
+              >
                 {/* Mobile & Tablet (<1024px): Infinite smooth auto-scrolling ticker in one single line */}
                 <div className="w-full overflow-hidden relative block lg:hidden [mask-image:linear-gradient(to_right,transparent,black_6%,black_94%,transparent)]">
                   <motion.div
@@ -91,10 +104,15 @@ export default function ThynkxHero() {
                     </div>
                   ))}
                 </div>
-              </MotionFadeIn>
+              </motion.div>
 
-              {/* CTA Button */}
-              <MotionFadeIn delay={0.3} direction="up" className="pt-0.5 flex flex-wrap items-center gap-2.5 sm:gap-3">
+              {/* CTA Buttons */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+                className="pt-5 sm:pt-6 flex flex-wrap items-center gap-2.5 sm:gap-3"
+              >
                 <Link href="/thynkx/school-registration">
                   <motion.span
                     whileHover={{ scale: 1.03 }}
@@ -113,14 +131,7 @@ export default function ThynkxHero() {
                 >
                   Student registration
                 </Link>
-                <Link
-                  href="/thynkx/login"
-                  className="font-poppins text-xs sm:text-sm font-semibold text-white/90 px-3 py-2.5 hover:text-[#00BF62] transition-colors drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
-                >
-                  Teacher login &rarr;
-                </Link>
-              </MotionFadeIn>
-
+              </motion.div>
             </div>
 
             {/* Subtle 4-Point Star Sparkle in Bottom Right */}

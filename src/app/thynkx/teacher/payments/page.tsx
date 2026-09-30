@@ -21,7 +21,7 @@ type Row = {
   capturedAt: string | null;
   team: { id: string; teamCode: string | null; draftNo: string; status: TeamStatus; expiresAt: string | null };
 };
-type Summary = { totalPaidPaise: number; successful: number; failedOrAbandoned: number; refunded: number };
+type Summary = { totalPaidPaise: number; successful: number; failedOrAbandoned: number };
 
 export default function PaymentsPage() {
   const [q, setQ] = useState("");
@@ -50,12 +50,11 @@ export default function PaymentsPage() {
       <PageHeading title="Payment history" subtitle="All Razorpay transactions for teams in your section" />
       {error && <Alert tone="error">{error}</Alert>}
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         {[
           ["Total paid", s ? rupees(s.totalPaidPaise) : "…", s ? `${s.successful} teams` : ""],
           ["Successful", s ? String(s.successful) : "…", ""],
           ["Failed / abandoned", s ? String(s.failedOrAbandoned) : "…", "No team created"],
-          ["Refunded", s ? String(s.refunded) : "…", ""],
         ].map(([label, value, sub]) => (
           <div key={label} className="rounded-[20px] border border-white/10 bg-white/[0.04] p-5">
             <p className="text-xs text-slate-400">{label}</p>
@@ -83,7 +82,6 @@ export default function PaymentsPage() {
             <option value="CAPTURED">Success</option>
             <option value="FAILED">Failed</option>
             <option value="CREATED">Abandoned</option>
-            <option value="REFUNDED">Refunded</option>
           </Select>
           <Select value={method} onChange={(e) => (setMethod(e.target.value), setPage(1))} aria-label="Method">
             <option value="">All methods</option>

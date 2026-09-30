@@ -241,18 +241,34 @@ function NewSchoolForm({ districts, initial, onBack, onSubmit }: { districts: Di
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    setError,
+    formState: { errors, isSubmitting },
   } = useForm<NewSchoolInput, unknown, NewSchool>({
     resolver: zodResolver(NewSchoolSchema),
     defaultValues: initial
       ? { ...initial, districtId: String(initial.districtId) }
       : { name: "", address: "", districtId: "", pincode: "", principalName: "", principalPhone: "", email: "", landline: "" },
   });
+  const [formError, setFormError] = useState("");
+
+  // Block duplicates early: same school name in the district, or a principal number already used by another school.
+  const submit = async (s: NewSchool) => {
+    setFormError("");
+    try {
+      await api("/registration/check-school", { method: "POST", body: { name: s.name, districtId: s.districtId, principalPhone: s.principalPhone } });
+      onSubmit(s);
+    } catch (e) {
+      const fields = e instanceof ApiError ? e.fields : {};
+      if (fields.name) setError("name", { message: fields.name }, { shouldFocus: true });
+      if (fields.principalPhone) setError("principalPhone", { message: fields.principalPhone }, { shouldFocus: !fields.name });
+      if (!fields.name && !fields.principalPhone) setFormError(errorMessage(e));
+    }
+  };
 
   return (
     <Card title="New school details">
       <p className="text-sm text-slate-400 -mt-2 mb-6">This school is not in our list yet. Add its details once — the second coordinator will find it in search.</p>
-      <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5" noValidate>
+      <form onSubmit={handleSubmit(submit)} className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5" noValidate>
         <Field label="School name" required error={errors.name?.message} className="sm:col-span-2">
           <Input {...register("name")} invalid={!!errors.name} />
         </Field>
@@ -308,11 +324,12 @@ function NewSchoolForm({ districts, initial, onBack, onSubmit }: { districts: Di
         <Field label="School landline (optional)" error={errors.landline?.message}>
           <Input {...register("landline")} inputMode="tel" />
         </Field>
+        {formError && <Alert tone="error" className="sm:col-span-2">{formError}</Alert>}
         <div className="sm:col-span-2 flex justify-between gap-3 pt-3">
           <Button type="button" variant="secondary" onClick={onBack}>
             <FiArrowLeft className="w-4 h-4" /> Back
           </Button>
-          <Button type="submit">
+          <Button type="submit" loading={isSubmitting}>
             Continue <FiArrowRight className="w-4 h-4" />
           </Button>
         </div>

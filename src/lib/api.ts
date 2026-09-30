@@ -21,7 +21,7 @@ type Options = Omit<RequestInit, "body"> & { body?: unknown; token?: string };
 
 async function raw(path: string, opts: Options = {}) {
   const { body, token, headers, ...rest } = opts;
-  return fetch(`${API_URL}/api${path}`, {
+  return fetch(`${API_URL}/v1${path}`, {
     ...rest,
     credentials: "include",
     headers: {

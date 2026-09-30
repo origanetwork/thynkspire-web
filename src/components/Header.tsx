@@ -85,21 +85,15 @@ export default function Header() {
           })}
         </nav>
 
-        {/* Apply Now CTA Button */}
+        {/* Get Started CTA Button */}
         <div className="hidden sm:flex items-center gap-3 shrink-0">
-          <Link
-            href="/thynkx/login"
-            className="px-5 py-2.5 rounded-full border border-white/20 text-xs font-semibold tracking-wider text-white hover:border-[#00BF62] hover:text-[#00BF62] transition-colors duration-300"
-          >
-            Teacher Login
-          </Link>
-          <Link href="/contact">
+          <Link href="/thynkx/login">
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               className="group flex items-center gap-3 pl-6 pr-2 py-2 rounded-full border border-white/20 bg-[#121514] text-white hover:border-[#00BF62] transition-all duration-300 shadow-lg"
             >
-              <span className="text-xs font-semibold tracking-wider font-poppins">Apply Now</span>
+              <span className="text-xs font-semibold tracking-wider font-poppins">Get Started</span>
               <div className="w-8 h-8 rounded-full bg-[#00BF62] text-black flex items-center justify-center group-hover:rotate-45 transition-transform duration-300">
                 <FiArrowUpRight className="w-4 h-4 stroke-[2.5]" />
               </div>
@@ -163,16 +157,9 @@ export default function Header() {
             </div>
 
             <div className="pt-4 border-t border-white/10 space-y-3">
-              <Link
-                href="/thynkx/login"
-                onClick={() => setMobileMenuOpen(false)}
-                className="w-full py-3 px-5 rounded-full border border-white/20 text-white font-semibold text-sm flex items-center justify-center"
-              >
-                Teacher Login
-              </Link>
-              <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>
+              <Link href="/thynkx/login" onClick={() => setMobileMenuOpen(false)}>
                 <button className="w-full py-3 px-5 rounded-full bg-[#00BF62] text-black font-bold text-sm flex items-center justify-center gap-2">
-                  Apply Now <FiArrowUpRight className="w-4 h-4" />
+                  Get Started <FiArrowUpRight className="w-4 h-4" />
                 </button>
               </Link>
             </div>

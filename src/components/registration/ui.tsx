@@ -1,9 +1,10 @@
 "use client";
 
-import React, { forwardRef, useRef, useState } from "react";
+import React, { forwardRef, useCallback, useEffect, useId, useLayoutEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
 import clsx from "clsx";
-import { FiAlertCircle, FiCheck, FiCheckCircle, FiCopy, FiInfo, FiLoader, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FiAlertCircle, FiCheck, FiCheckCircle, FiCopy, FiInfo, FiLoader, FiChevronDown, FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import type { Fee } from "@/lib/types";
 import { rupees } from "@/lib/format";
 
@@ -133,18 +134,231 @@ export const TextArea = forwardRef<HTMLTextAreaElement, React.TextareaHTMLAttrib
   },
 );
 
+type SelectOption = { value: string; label: React.ReactNode; text: string; disabled?: boolean };
+
+const textOf = (node: React.ReactNode): string => {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(textOf).join("");
+  if (React.isValidElement(node)) return textOf((node.props as { children?: React.ReactNode }).children);
+  return "";
+};
+
+const readOptions = (children: React.ReactNode): SelectOption[] => {
+  const out: SelectOption[] = [];
+  React.Children.forEach(children, (child) => {
+    if (!React.isValidElement(child)) return;
+    const p = child.props as { value?: string | number; disabled?: boolean; children?: React.ReactNode };
+    if (child.type === React.Fragment) out.push(...readOptions(p.children));
+    else if (child.type === "option") {
+      const text = textOf(p.children);
+      out.push({ value: p.value !== undefined ? String(p.value) : text, label: p.children, text, disabled: p.disabled });
+    }
+  });
+  return out;
+};
+
+/**
+ * Themed dropdown with the same API as a native <select> (children are <option>s).
+ * A hidden native <select> keeps the value, so `value/onChange` and react-hook-form `register` both work unchanged.
+ */
 export const Select = forwardRef<HTMLSelectElement, React.SelectHTMLAttributes<HTMLSelectElement> & { invalid?: boolean }>(function Select(
-  { invalid, className, children, ...props },
+  { invalid, className, children, value, defaultValue, disabled, id, "aria-label": ariaLabel, ...props },
   ref,
 ) {
+  const options = readOptions(children);
+  const selectRef = useRef<HTMLSelectElement | null>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const listId = useId();
+  const [domValue, setDomValue] = useState(defaultValue !== undefined ? String(defaultValue) : "");
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
+  const [pos, setPos] = useState<React.CSSProperties>({});
+  const current = value !== undefined ? String(value) : domValue;
+  const selected = options.find((o) => o.value === current) ?? options[0];
+
+  const setSelectRef = useCallback(
+    (el: HTMLSelectElement | null) => {
+      selectRef.current = el;
+      if (typeof ref === "function") ref(el);
+      else if (ref) ref.current = el;
+    },
+    [ref],
+  );
+
+  // Uncontrolled (react-hook-form): the hidden <select> is the source of truth, so pick up defaults and reset().
+  // eslint-disable-next-line react-hooks/exhaustive-deps -- runs every render on purpose; guarded by the equality check
+  useEffect(() => {
+    if (value === undefined && selectRef.current && selectRef.current.value !== domValue) setDomValue(selectRef.current.value);
+  });
+
+  useLayoutEffect(() => {
+    if (!open) return;
+    const place = () => {
+      const r = triggerRef.current?.getBoundingClientRect();
+      if (!r) return;
+      const below = window.innerHeight - r.bottom;
+      const up = below < 240 && r.top > below;
+      setPos({
+        left: r.left,
+        width: r.width,
+        top: up ? undefined : r.bottom + 6,
+        bottom: up ? window.innerHeight - r.top + 6 : undefined,
+        maxHeight: Math.max(120, Math.min(288, (up ? r.top : below) - 16)),
+      });
+    };
+    place();
+    const onDown = (e: PointerEvent) => {
+      const t = e.target as Node;
+      if (!triggerRef.current?.contains(t) && !listRef.current?.contains(t)) setOpen(false);
+    };
+    window.addEventListener("scroll", place, true);
+    window.addEventListener("resize", place);
+    document.addEventListener("pointerdown", onDown);
+    return () => {
+      window.removeEventListener("scroll", place, true);
+      window.removeEventListener("resize", place);
+      document.removeEventListener("pointerdown", onDown);
+    };
+  }, [open]);
+
+  useEffect(() => {
+    if (open && active >= 0) listRef.current?.children[active]?.scrollIntoView({ block: "nearest" });
+  }, [open, active]);
+
+  const openList = () => {
+    if (disabled) return;
+    setActive(Math.max(0, options.findIndex((o) => o.value === current)));
+    setOpen(true);
+  };
+
+  const choose = (opt: SelectOption) => {
+    setOpen(false);
+    triggerRef.current?.focus();
+    const el = selectRef.current;
+    if (!el || opt.disabled || opt.value === current) return;
+    el.value = opt.value;
+    if (value === undefined) setDomValue(opt.value);
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+
+  const step = (from: number, dir: 1 | -1) => {
+    for (let i = from + dir; i >= 0 && i < options.length; i += dir) if (!options[i].disabled) return i;
+    return from;
+  };
+
+  const onKeyDown = (e: React.KeyboardEvent) => {
+    if (!open) {
+      if (["ArrowDown", "ArrowUp", "Enter", " "].includes(e.key)) {
+        e.preventDefault();
+        openList();
+      }
+      return;
+    }
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      e.preventDefault();
+      setActive((i) => step(i, e.key === "ArrowDown" ? 1 : -1));
+    } else if (e.key === "Home" || e.key === "End") {
+      e.preventDefault();
+      setActive(e.key === "Home" ? step(-1, 1) : step(options.length, -1));
+    } else if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      if (options[active]) choose(options[active]);
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      e.stopPropagation();
+      setOpen(false);
+    } else if (e.key === "Tab") {
+      setOpen(false);
+    } else if (e.key.length === 1) {
+      const k = e.key.toLowerCase();
+      const order = options.map((_, i) => (active + 1 + i) % options.length);
+      const hit = order.find((i) => !options[i].disabled && options[i].text.trim().toLowerCase().startsWith(k));
+      if (hit !== undefined) setActive(hit);
+    }
+  };
+
   return (
-    <select
-      ref={ref}
-      className={clsx(inputBase, "appearance-none bg-[url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2212%22 height=%2212%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%2394a3b8%22 stroke-width=%222%22><path d=%22M6 9l6 6 6-6%22/></svg>')] bg-no-repeat bg-[right_14px_center] pr-10", invalid ? "border-red-500/60" : "border-white/15", className)}
-      {...props}
-    >
-      {children}
-    </select>
+    <div className={clsx("relative", className ?? "w-full")}>
+      <button
+        ref={triggerRef}
+        type="button"
+        id={id}
+        role="combobox"
+        aria-label={ariaLabel}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-activedescendant={open && active >= 0 ? `${listId}-${active}` : undefined}
+        aria-invalid={invalid || undefined}
+        disabled={disabled}
+        onClick={() => (open ? setOpen(false) : openList())}
+        onKeyDown={onKeyDown}
+        onBlur={() => {
+          setOpen(false);
+          // Let react-hook-form see the blur (onTouched validation) through the hidden select.
+          selectRef.current?.dispatchEvent(new FocusEvent("focusout", { bubbles: true }));
+        }}
+        className={clsx(
+          inputBase,
+          "flex items-center justify-between gap-2 pr-3.5 text-left cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed",
+          invalid ? "border-red-500/60" : open ? "border-[#00BF62] ring-2 ring-[#00BF62]/20" : "border-white/15 hover:border-white/30",
+        )}
+      >
+        <span className={clsx("truncate", !selected?.value && "text-slate-400")}>{selected?.label}</span>
+        <FiChevronDown className={clsx("w-4 h-4 shrink-0 text-slate-400 transition-transform duration-200", open && "rotate-180 text-[#00BF62]")} />
+      </button>
+      <select
+        ref={setSelectRef}
+        {...props}
+        value={value}
+        defaultValue={defaultValue}
+        disabled={disabled}
+        tabIndex={-1}
+        aria-hidden
+        onFocus={() => triggerRef.current?.focus()}
+        className="sr-only"
+      >
+        {children}
+      </select>
+      {open &&
+        createPortal(
+          <ul
+            ref={listRef}
+            id={listId}
+            role="listbox"
+            style={{ position: "fixed", ...pos }}
+            onMouseDown={(e) => e.preventDefault()}
+            className="scroll-thin z-[1000] overflow-y-auto overscroll-contain rounded-2xl border border-white/10 bg-[#0d110f]/95 backdrop-blur-xl p-1.5 shadow-[0_20px_50px_rgba(0,0,0,0.6)] font-poppins"
+          >
+            {options.map((o, i) => {
+              const isSelected = o.value === selected?.value;
+              return (
+                <li
+                  key={`${o.value}-${i}`}
+                  id={`${listId}-${i}`}
+                  role="option"
+                  aria-selected={isSelected}
+                  aria-disabled={o.disabled || undefined}
+                  onMouseEnter={() => setActive(i)}
+                  onClick={() => choose(o)}
+                  className={clsx(
+                    "flex items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-sm transition-colors",
+                    o.disabled ? "opacity-40 cursor-not-allowed" : "cursor-pointer",
+                    i === active && !o.disabled && "bg-white/[0.07]",
+                    isSelected ? "text-[#00BF62] font-medium" : "text-slate-200",
+                  )}
+                >
+                  <span className="truncate">{o.label}</span>
+                  {isSelected && <FiCheck className="w-4 h-4 shrink-0" />}
+                </li>
+              );
+            })}
+          </ul>,
+          document.body,
+        )}
+    </div>
   );
 });
 
@@ -287,8 +501,6 @@ export function PaymentBadge({ status }: { status: string }) {
     CREATED: ["amber", "Abandoned"],
     DRAFT: ["amber", "Draft"],
     PAYMENT_PENDING: ["amber", "Payment pending"],
-    REFUNDED: ["blue", "Refunded"],
-    PARTIALLY_REFUNDED: ["blue", "Part refunded"],
     CANCELLED: ["gray", "Cancelled"],
     EXPIRED: ["gray", "Expired"],
   };

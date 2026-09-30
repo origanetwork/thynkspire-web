@@ -1,7 +1,7 @@
 export type Section = "SECONDARY" | "HIGHER_SECONDARY";
 export type TeamStatus = "DRAFT" | "PAYMENT_PENDING" | "CONFIRMED" | "CANCELLED" | "EXPIRED";
 export type TeamSource = "TEACHER" | "STUDENT_LINK";
-export type PaymentStatus = "CREATED" | "CAPTURED" | "FAILED" | "REFUNDED" | "PARTIALLY_REFUNDED";
+export type PaymentStatus = "CREATED" | "CAPTURED" | "FAILED";
 
 export type Fee = {
   studentCount: number;

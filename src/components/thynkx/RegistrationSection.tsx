@@ -56,7 +56,7 @@ export default function RegistrationSection() {
   ];
 
   return (
-    <section id="register" className="relative w-full text-white py-16 sm:py-24 overflow-hidden scroll-mt-28">
+    <section id="register" className="relative w-full text-white sm:py-10 overflow-hidden scroll-mt-28">
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[360px] bg-[#00BF62]/8 blur-[160px] -z-10 pointer-events-none" />
 
       <div className="max-w-[1353px] 2xl:max-w-[1440px] mx-auto px-4 sm:px-8 space-y-12 sm:space-y-16">

@@ -94,6 +94,8 @@ export type Duplicate = { fullName: string; classLevel: number; division: string
 export type DraftResponse = { team: Team; duplicates: Duplicate[]; fee: Fee; token?: string };
 
 export type CheckoutOrder = {
+  /** Server runs with PAYMENT_MOCK=true — show the test payment window instead of Razorpay. */
+  mock?: boolean;
   keyId: string;
   orderId: string;
   amount: number;

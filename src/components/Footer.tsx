@@ -156,6 +156,15 @@ export default function Footer() {
           <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
             © 2026 Thynkspire India Pvt.Ltd. All rights reserved
           </p>
+          <div className="flex items-center gap-4 font-poppins text-xs sm:text-sm">
+            <Link href="/privacy-policy" className="text-slate-300 hover:text-[#00BF63] transition-colors">
+              Privacy Policy
+            </Link>
+            <span className="text-white/20">|</span>
+            <Link href="/terms-and-conditions" className="text-slate-300 hover:text-[#00BF63] transition-colors">
+              Terms &amp; Conditions
+            </Link>
+          </div>
           <p className="font-poppins text-xs sm:text-sm text-slate-400 font-normal">
             Designed and Developed by{" "}
             <Link

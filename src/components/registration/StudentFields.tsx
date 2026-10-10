@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import clsx from "clsx";
 import type { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import type { StudentFormInput } from "@/lib/schemas";
 import { Field, Input, PhoneInput, Select } from "./ui";
@@ -12,16 +13,19 @@ export default function StudentFields({
   allowedClasses,
   showGender = true,
   parentHint,
+  wide = false,
 }: {
   reg: (field: keyof StudentFormInput) => UseFormRegisterReturn;
   errors?: FieldErrors<StudentFormInput>;
   allowedClasses: number[];
   showGender?: boolean;
   parentHint?: string;
+  /** Three columns on large screens (shorter form on desktop). */
+  wide?: boolean;
 }) {
   const classHint = `Limited to your section (${allowedClasses.join(", ")})`;
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+    <div className={clsx("grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5", wide && "lg:grid-cols-3")}>
       <Field label="Full name" required error={errors?.fullName?.message} className="sm:col-span-2" hint="As it should appear on the certificate">
         <Input {...reg("fullName")} autoComplete="off" invalid={!!errors?.fullName} />
       </Field>

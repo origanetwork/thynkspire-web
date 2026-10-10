@@ -6,18 +6,16 @@ import { useParams } from "next/navigation";
 import { FiArrowLeft, FiDownload } from "react-icons/fi";
 import { api, download, errorMessage } from "@/lib/api";
 import { SOURCE_LABEL, dateTime, initials, phone, rupees } from "@/lib/format";
-import type { PublicSettings, Team } from "@/lib/types";
+import type { Team } from "@/lib/types";
 import { Alert, Badge, Button, Card, InfoRows, LoadingBlock, PaymentBadge } from "@/components/registration/ui";
 
 export default function TeamDetailPage() {
   const { id } = useParams<{ id: string }>();
   const [team, setTeam] = useState<Team | null>(null);
-  const [settings, setSettings] = useState<PublicSettings | null>(null);
   const [error, setError] = useState("");
 
   useEffect(() => {
     api<Team>(`/teacher/teams/${id}`).then(setTeam).catch((e) => setError(errorMessage(e)));
-    api<PublicSettings>("/public/settings").then(setSettings).catch(() => undefined);
   }, [id]);
 
   if (error) return <Alert tone="error">{error}</Alert>;
@@ -92,8 +90,7 @@ export default function TeamDetailPage() {
             ]}
           />
           <p className="mt-4 text-xs text-slate-500">
-            Student details can be corrected by contacting the ThynkX admin
-            {settings?.editDeadline ? ` until ${dateTime(settings.editDeadline)}` : ""}.
+            Student details can be corrected by contacting the ThynkX admin.
           </p>
         </Card>
       </div>

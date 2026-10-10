@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function StudentRegisterPage() {
   return (
-    <RegShell showLogin={false} width="max-w-[520px]">
+    <RegShell showLogin={false} width="max-w-[1180px]">
       <Suspense fallback={<LoadingBlock />}>
         <StudentRegistration />
       </Suspense>

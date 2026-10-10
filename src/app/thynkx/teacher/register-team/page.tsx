@@ -189,7 +189,7 @@ function RegisterTeam() {
                     ["Class / Division", `${s.classLevel} / ${s.division}`],
                     ["Age", String(s.age)],
                     ["Parent / Guardian", s.parentName],
-                    ["Parent mobile", maskPhone(s.parentMobile)],
+                    ["Student / Parent mobile", maskPhone(s.parentMobile)],
                   ]}
                 />
               </Card>

@@ -78,7 +78,7 @@ export default function StudentsPage() {
           <EmptyState title="No students yet">Students appear here once their team is paid and confirmed.</EmptyState>
         ) : (
           <>
-            <Table head={["#", "Student name", "Class", "Age", "Team ID", "Parent / Guardian", "Parent mobile", "Registered via"]}>
+            <Table head={["#", "Student name", "Class", "Age", "Team ID", "Parent / Guardian", "Student / Parent mobile", "Registered via"]}>
               {data.items.map((s, i) => (
                 <tr key={s.id} className="hover:bg-white/[0.02]">
                   <Td className="text-slate-500">{(data.meta.page - 1) * data.meta.pageSize + i + 1}</Td>

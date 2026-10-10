@@ -56,7 +56,7 @@ export default function TeamDetailPage() {
               rows={[
                 ["Class / Division", `${s.classLevel} / ${s.division}`],
                 ["Parent / Guardian", s.parentName],
-                ["Parent mobile", phone(s.parentMobile)],
+                ["Student / Parent mobile", phone(s.parentMobile)],
               ]}
             />
           </Card>

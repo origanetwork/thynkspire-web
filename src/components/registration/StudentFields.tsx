@@ -63,7 +63,7 @@ export default function StudentFields({
       <Field label="Parent / Guardian name" required error={errors?.parentName?.message}>
         <Input {...reg("parentName")} invalid={!!errors?.parentName} />
       </Field>
-      <Field label="Parent mobile" required error={errors?.parentMobile?.message} hint={parentHint}>
+      <Field label="Student / Parent mobile" required error={errors?.parentMobile?.message} hint={parentHint}>
         <PhoneInput {...reg("parentMobile")} invalid={!!errors?.parentMobile} />
       </Field>
     </div>

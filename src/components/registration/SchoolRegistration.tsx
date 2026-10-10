@@ -429,7 +429,7 @@ function CoordinatorForm({
           <Field label="Designation / Subject" required error={errors.designation?.message}>
             <Input {...register("designation")} placeholder="e.g. HST English" invalid={!!errors.designation} />
           </Field>
-          <Field label="Email" error={errors.email?.message} hint="Optional — for email copies of confirmations & updates">
+          <Field label="Email" error={errors.email?.message} hint="Optional — contact email (all ThynkX messages come on WhatsApp)">
             <Input type="email" autoComplete="email" {...register("email")} invalid={!!errors.email} />
           </Field>
           <Field label="Mobile number" required error={errors.mobile?.message} hint="Must be on WhatsApp — used for OTP login & confirmations">
@@ -698,8 +698,7 @@ function Success({ done }: { done: Done }) {
           <CopyButton value={done.studentLink} label="Copy link" />
         </div>
         <p className="mt-4 text-sm text-slate-400">
-          Share the code or link with students of your section. Teams they register (and pay for) appear automatically in your dashboard. The code and link were also sent to your WhatsApp
-          {done.coordinator.email ? " and email" : ""}.
+          Share the code or link with students of your section. Teams they register (and pay for) appear automatically in your dashboard. The code and link were also sent to your WhatsApp.
         </p>
       </Card>
 

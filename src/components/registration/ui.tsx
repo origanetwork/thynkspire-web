@@ -500,7 +500,7 @@ export function PaymentBadge({ status }: { status: string }) {
     CAPTURED: ["green", "Paid"],
     CONFIRMED: ["green", "Paid"],
     FAILED: ["red", "Failed"],
-    CREATED: ["amber", "Not completed"],
+    CREATED: ["amber", "Cancelled"],
     DRAFT: ["amber", "Draft"],
     PAYMENT_PENDING: ["amber", "Payment pending"],
     CANCELLED: ["gray", "Cancelled"],

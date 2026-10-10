@@ -140,7 +140,7 @@ export default function ProfilePage() {
               <Field label="Designation / Subject" required error={errors.designation?.message}>
                 <Input {...register("designation")} invalid={!!errors.designation} />
               </Field>
-              <Field label="Email" error={errors.email?.message} hint="Optional — for email copies of ThynkX updates">
+              <Field label="Email" error={errors.email?.message} hint="Optional — contact email (all ThynkX messages come on WhatsApp)">
                 <Input type="email" autoComplete="email" {...register("email")} invalid={!!errors.email} placeholder="you@school.in" />
               </Field>
               <p className="text-xs text-slate-500">To change your WhatsApp login number, use &ldquo;Change&rdquo; next to it on your profile.</p>

@@ -68,7 +68,7 @@ export default function PaymentsPage() {
             <option value="">All statuses</option>
             <option value="CAPTURED">Success</option>
             <option value="FAILED">Failed</option>
-            <option value="CREATED">Cancelled / not completed</option>
+            <option value="CREATED">Cancelled</option>
           </Select>
           <Select value={method} onChange={(e) => (setMethod(e.target.value), setPage(1))} aria-label="Method">
             <option value="">All methods</option>

@@ -5,14 +5,12 @@ export type PaymentStatus = "CREATED" | "CAPTURED" | "FAILED";
 
 export type Fee = {
   studentCount: number;
-  feePerStudentPaise: number;
-  gstPerStudentPaise: number;
+  registrationFeePaise: number; // per student, tax included
+  platformFeePaise: number; // per student
   totalPerStudentPaise: number;
-  subtotalPaise: number;
-  gatewayFeePaise: number;
+  registrationTotalPaise: number;
+  platformTotalPaise: number;
   totalPaise: number;
-  gstPercent: number;
-  gatewayFeePercent: number;
 };
 
 export type PublicSettings = {
@@ -57,9 +55,8 @@ export type Payment = {
   razorpayPaymentId: string | null;
   status: PaymentStatus;
   paidBy: TeamSource;
-  baseAmountPaise: number;
-  gstAmountPaise: number;
-  gatewayFeePaise: number;
+  registrationFeePaise: number;
+  platformFeePaise: number;
   totalPaise: number;
   method: string | null;
   failureReason: string | null;
@@ -76,7 +73,7 @@ export type Team = {
   source: TeamSource;
   section: Section;
   sectionLabel: string;
-  contactEmail: string;
+  contactEmail: string | null;
   contactMobile: string;
   termsAccepted: boolean;
   expiresAt: string | null;
@@ -91,7 +88,8 @@ export type Team = {
 
 export type Duplicate = { fullName: string; classLevel: number; division: string; teamCode: string | null };
 
-export type DraftResponse = { team: Team; duplicates: Duplicate[]; fee: Fee; token?: string };
+/** Review step response — nothing is saved until payment is captured. */
+export type PreviewResponse = { duplicates: Duplicate[]; fee: Fee };
 
 export type CheckoutOrder = {
   /** Server runs with PAYMENT_MOCK=true — show the test payment window instead of Razorpay. */
@@ -102,15 +100,17 @@ export type CheckoutOrder = {
   currency: string;
   name: string;
   description: string;
-  prefill: { email: string; contact: string };
+  prefill: { email?: string; contact: string };
   fee: Fee;
+  /** Student-link checkouts: lets this browser read the team once payment creates it. */
+  token?: string;
 };
 
 export type TeacherMe = {
   id: string;
   fullName: string;
   designation: string;
-  email: string;
+  email: string | null;
   mobile: string;
   section: Section;
   sectionLabel: string;

@@ -5,8 +5,6 @@ import type { FieldErrors, UseFormRegisterReturn } from "react-hook-form";
 import type { StudentFormInput } from "@/lib/schemas";
 import { Field, Input, PhoneInput, Select } from "./ui";
 
-const DIVISIONS = ["A", "B", "C", "D", "E", "F", "G", "H"];
-
 /** The fields for one team member. Used by the teacher portal and the student flow. */
 export default function StudentFields({
   reg,
@@ -38,14 +36,7 @@ export default function StudentFields({
         </Select>
       </Field>
       <Field label="Division" required error={errors?.division?.message}>
-        <Select {...reg("division")} invalid={!!errors?.division}>
-          <option value="">Select</option>
-          {DIVISIONS.map((d) => (
-            <option key={d} value={d}>
-              {d}
-            </option>
-          ))}
-        </Select>
+        <Input {...reg("division")} maxLength={3} autoComplete="off" placeholder="e.g. A" className="uppercase" invalid={!!errors?.division} />
       </Field>
       <Field label="Age" required error={errors?.age?.message}>
         <Input type="number" inputMode="numeric" min={10} max={20} {...reg("age")} invalid={!!errors?.age} />

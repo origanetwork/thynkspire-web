@@ -10,7 +10,7 @@ import { FiGrid, FiUsers, FiUserPlus, FiBookOpen, FiCreditCard, FiHome, FiHelpCi
 import { api, ApiError } from "@/lib/api";
 import { initials } from "@/lib/format";
 import type { TeacherMe } from "@/lib/types";
-import { LoadingBlock } from "@/components/registration/ui";
+import { Button, LoadingBlock } from "@/components/registration/ui";
 
 const TeacherContext = createContext<{ me: TeacherMe; reload: () => Promise<void> } | null>(null);
 
@@ -34,6 +34,8 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
   const pathname = usePathname();
   const [me, setMe] = useState<TeacherMe | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [confirmLogout, setConfirmLogout] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
 
   const load = useCallback(async () => {
     try {
@@ -56,9 +58,18 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
   }, [router]);
 
   const logout = async () => {
+    setLoggingOut(true);
     await api("/auth/teacher/logout", { method: "POST" }).catch(() => undefined);
     router.replace("/thynkx/login");
   };
+
+  // Esc closes the logout confirmation
+  useEffect(() => {
+    if (!confirmLogout) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && !loggingOut && setConfirmLogout(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [confirmLogout, loggingOut]);
 
   if (!me) {
     return (
@@ -69,6 +80,12 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
   }
 
   const isActive = (href: string, exact?: boolean) => (exact ? pathname === href : pathname.startsWith(href));
+  const pageTitle =
+    pathname === "/thynkx/teacher"
+      ? `Welcome, ${me.fullName}!`
+      : pathname.startsWith("/thynkx/teacher/support")
+        ? "Help & Support"
+        : (NAV.find((n) => isActive(n.href, n.exact))?.label ?? "Dashboard");
 
   const nav = (
     <nav className="flex flex-col gap-1">
@@ -86,10 +103,23 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
         </Link>
       ))}
       <div className="my-3 h-px bg-white/10" />
-      <a href="mailto:support@thynkspire.com?subject=ThynkX%20coordinator%20support" className="flex items-center gap-3 h-11 px-4 rounded-xl text-sm text-slate-300 hover:bg-white/5 hover:text-white">
+      <Link
+        href="/thynkx/teacher/support"
+        onClick={() => setMenuOpen(false)}
+        className={clsx(
+          "flex items-center gap-3 h-11 px-4 rounded-xl text-sm font-medium transition-colors",
+          isActive("/thynkx/teacher/support") ? "bg-[#00BF62] text-black" : "text-slate-300 hover:bg-white/5 hover:text-white",
+        )}
+      >
         <FiHelpCircle className="w-4.5 h-4.5" /> Help &amp; Support
-      </a>
-      <button onClick={logout} className="flex items-center gap-3 h-11 px-4 rounded-xl text-sm text-slate-300 hover:bg-white/5 hover:text-red-300 cursor-pointer">
+      </Link>
+      <button
+        onClick={() => {
+          setMenuOpen(false);
+          setConfirmLogout(true);
+        }}
+        className="flex items-center gap-3 h-11 px-4 rounded-xl text-sm text-slate-300 hover:bg-white/5 hover:text-red-300 cursor-pointer"
+      >
         <FiLogOut className="w-4.5 h-4.5" /> Logout
       </button>
     </nav>
@@ -149,12 +179,7 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
                 <button onClick={() => setMenuOpen(true)} className="lg:hidden p-2 -ml-2 text-slate-300 cursor-pointer" aria-label="Open menu">
                   <FiMenu className="w-5 h-5" />
                 </button>
-                <div className="min-w-0">
-                  <p className="font-semibold text-sm sm:text-base truncate">{me.school.name}</p>
-                  <p className="text-[11px] sm:text-xs text-slate-400 truncate">
-                    {me.schoolCode} · {me.school.district}, Kerala
-                  </p>
-                </div>
+                <h1 className="min-w-0 font-clash font-semibold text-lg sm:text-xl truncate">{pageTitle}</h1>
               </div>
               <div className="flex items-center gap-3 shrink-0">
                 <div className="hidden sm:block text-right">
@@ -167,6 +192,47 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
           </header>
           <main className="px-4 sm:px-8 py-6 sm:py-10 max-w-[1280px]">{children}</main>
         </div>
+
+        {/* Logout confirmation */}
+        <AnimatePresence>
+          {confirmLogout && (
+            <motion.div
+              className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => !loggingOut && setConfirmLogout(false)}
+            >
+              <motion.div
+                role="alertdialog"
+                aria-modal="true"
+                aria-labelledby="logout-title"
+                initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 8 }}
+                transition={{ duration: 0.15 }}
+                className="w-full max-w-sm rounded-[24px] border border-white/10 bg-[#0b0f0d] p-6 sm:p-7 text-center shadow-[0_20px_50px_rgba(0,0,0,0.6)]"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span className="mx-auto w-12 h-12 rounded-full bg-red-500/10 border border-red-500/40 text-red-300 flex items-center justify-center">
+                  <FiLogOut className="w-5 h-5" />
+                </span>
+                <h2 id="logout-title" className="mt-4 font-clash text-xl font-semibold text-white">
+                  Log out?
+                </h2>
+                <p className="mt-2 text-sm text-slate-400">You&apos;ll need a WhatsApp OTP to log in to your ThynkX dashboard again.</p>
+                <div className="mt-6 grid grid-cols-2 gap-3">
+                  <Button variant="secondary" full onClick={() => setConfirmLogout(false)} disabled={loggingOut} autoFocus>
+                    Cancel
+                  </Button>
+                  <Button variant="danger" full onClick={logout} loading={loggingOut}>
+                    Log out
+                  </Button>
+                </div>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </TeacherContext.Provider>
   );

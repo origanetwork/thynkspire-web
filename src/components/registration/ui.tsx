@@ -39,7 +39,7 @@ export function Card({
 
 type ButtonVariant = "primary" | "secondary" | "ghost" | "danger";
 
-const buttonClasses = (variant: ButtonVariant, size: "sm" | "md" | "lg", full?: boolean) =>
+export const buttonClasses = (variant: ButtonVariant, size: "sm" | "md" | "lg", full?: boolean) =>
   clsx(
     "inline-flex items-center justify-center gap-2 rounded-full font-poppins font-semibold transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap cursor-pointer",
     size === "sm" && "h-9 px-4 text-xs",
@@ -386,17 +386,19 @@ export function Checkbox({ label, error, ...props }: React.InputHTMLAttributes<H
   );
 }
 
-export function Stepper({ steps, current }: { steps: string[]; current: number }) {
+/** `full` stretches the stepper across the container (connectors grow to fill the gaps). */
+export function Stepper({ steps, current, full }: { steps: string[]; current: number; full?: boolean }) {
   return (
-    <ol className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1">
+    <ol className={clsx("flex items-center gap-2 sm:gap-3 overflow-x-auto pb-1", full && "w-full")}>
       {steps.map((label, i) => {
         const done = i < current;
         const active = i === current;
+        const last = i === steps.length - 1;
         return (
-          <li key={label} className="flex items-center gap-2 sm:gap-3 shrink-0">
+          <li key={label} className={clsx("flex items-center gap-2 sm:gap-3", full && !last ? "flex-1 min-w-0" : "shrink-0")}>
             <span
               className={clsx(
-                "flex items-center gap-2 h-9 pl-1.5 pr-3.5 rounded-full border text-xs sm:text-[13px] font-medium",
+                "flex items-center gap-2 h-9 pl-1.5 pr-3.5 rounded-full border text-xs sm:text-[13px] font-medium shrink-0",
                 done && "border-[#00BF62]/40 bg-[#00BF62]/10 text-[#00BF62]",
                 active && "border-[#00BF62] bg-[#00BF62] text-black",
                 !done && !active && "border-white/10 text-slate-400",
@@ -407,7 +409,7 @@ export function Stepper({ steps, current }: { steps: string[]; current: number }
               </span>
               <span className={clsx(!active && "hidden sm:inline")}>{label}</span>
             </span>
-            {i < steps.length - 1 && <span className={clsx("w-4 sm:w-8 h-px", done ? "bg-[#00BF62]/50" : "bg-white/10")} />}
+            {!last && <span className={clsx("h-px", full ? "flex-1 min-w-4" : "w-4 sm:w-8", done ? "bg-[#00BF62]/50" : "bg-white/10")} />}
           </li>
         );
       })}
@@ -546,11 +548,10 @@ export function InfoRows({ rows, className }: { rows: [React.ReactNode, React.Re
 
 export function FeeBreakdown({ fee }: { fee: Fee }) {
   const rows: [string, string, boolean?][] = [
-    ["Registration fee (per student)", rupees(fee.feePerStudentPaise)],
-    [`GST @ ${fee.gstPercent}%`, rupees(fee.gstPerStudentPaise)],
-    ["Total per student (incl. GST)", rupees(fee.totalPerStudentPaise)],
-    [`Total for ${fee.studentCount} students`, rupees(fee.subtotalPaise)],
-    [`Payment gateway fee @ ${fee.gatewayFeePercent}%`, rupees(fee.gatewayFeePaise)],
+    ["Registration fee per student (incl. tax)", rupees(fee.registrationFeePaise)],
+    ["Platform fee per student", rupees(fee.platformFeePaise)],
+    ["Total per student", rupees(fee.totalPerStudentPaise)],
+    [`Students in team`, `× ${fee.studentCount}`],
   ];
   return (
     <div className="space-y-1">
@@ -673,12 +674,14 @@ export const Td = ({ children, className }: { children?: React.ReactNode; classN
   <td className={clsx("px-4 sm:px-5 py-3.5 text-slate-200 whitespace-nowrap", className)}>{children}</td>
 );
 
-export function PageHeading({ title, subtitle, action }: { title: string; subtitle?: React.ReactNode; action?: React.ReactNode }) {
+/** Page intro. The teacher panel header already shows the tab name, so `title` is only for extra context (e.g. a step name). */
+export function PageHeading({ title, subtitle, action }: { title?: string; subtitle?: React.ReactNode; action?: React.ReactNode }) {
+  if (!title && !subtitle && !action) return null;
   return (
     <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-6 sm:mb-8">
       <div>
-        <h1 className="font-clash text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">{title}</h1>
-        {subtitle && <p className="mt-1.5 text-sm text-slate-400">{subtitle}</p>}
+        {title && <h1 className="font-clash text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">{title}</h1>}
+        {subtitle && <p className={title ? "mt-1.5 text-sm text-slate-400" : "text-sm text-slate-400"}>{subtitle}</p>}
       </div>
       {action}
     </div>

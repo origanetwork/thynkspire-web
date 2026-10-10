@@ -24,7 +24,7 @@ const SECTIONS: { value: Section; title: string; classes: string }[] = [
 type SchoolChoice = { mode: "existing"; school: SchoolSearchResult } | { mode: "new"; school: NewSchool };
 
 type Done = {
-  coordinator: { fullName: string; email: string; mobile: string; sectionLabel: string };
+  coordinator: { fullName: string; email: string | null; mobile: string; sectionLabel: string };
   school: { name: string; address: string; district: string; pincode: string };
   schoolCode: string;
   studentLink: string;
@@ -371,7 +371,7 @@ function CoordinatorForm({
     formState: { errors },
   } = useForm<CoordinatorInput, unknown, Coordinator>({
     resolver: zodResolver(CoordinatorSchema),
-    defaultValues: initial ?? { section: firstOpen, fullName: "", designation: "", email: "", mobile: "", whatsappOptIn: true },
+    defaultValues: initial ?? { section: firstOpen, fullName: "", designation: "", email: "", mobile: "" },
   });
   const section = watch("section");
   const summary = schoolSummary(school, districtName);
@@ -429,15 +429,12 @@ function CoordinatorForm({
           <Field label="Designation / Subject" required error={errors.designation?.message}>
             <Input {...register("designation")} placeholder="e.g. HST English" invalid={!!errors.designation} />
           </Field>
-          <Field label="Email" required error={errors.email?.message} hint="For registration confirmations & ThynkX updates">
+          <Field label="Email" error={errors.email?.message} hint="Optional — for email copies of confirmations & updates">
             <Input type="email" autoComplete="email" {...register("email")} invalid={!!errors.email} />
           </Field>
           <Field label="Mobile number" required error={errors.mobile?.message} hint="Must be on WhatsApp — used for OTP login & confirmations">
             <PhoneInput {...register("mobile")} invalid={!!errors.mobile} />
           </Field>
-          <div className="sm:col-span-2">
-            <Checkbox {...register("whatsappOptIn")} label="Also send me ThynkX updates on WhatsApp" />
-          </div>
         </div>
       </Card>
 
@@ -502,9 +499,8 @@ function Review({
         coordinator: {
           fullName: coordinator.fullName,
           designation: coordinator.designation,
-          email: coordinator.email,
+          email: coordinator.email || null,
           mobile: coordinator.mobile,
-          whatsappOptIn: coordinator.whatsappOptIn,
         },
         termsAccepted: true,
         replaceRegistrationId: registrationId,
@@ -548,8 +544,8 @@ function Review({
             ["Name", coordinator.fullName],
             ["Designation", coordinator.designation],
             ["Section", SECTIONS.find((s) => s.value === coordinator.section)!.title + ` (${SECTIONS.find((s) => s.value === coordinator.section)!.classes})`],
-            ["Email", coordinator.email],
-            ["Mobile", `${phone(coordinator.mobile)}${coordinator.whatsappOptIn ? " · WhatsApp" : ""}`],
+            ["Email", coordinator.email || "—"],
+            ["WhatsApp", phone(coordinator.mobile)],
           ]}
         />
       </Card>
@@ -690,7 +686,7 @@ function Success({ done }: { done: Done }) {
           rows={[
             ["School", done.school.name],
             ["Section", done.coordinator.sectionLabel],
-            ["Coordinator", `${done.coordinator.fullName} · ${done.coordinator.email}`],
+            ["Coordinator", `${done.coordinator.fullName} · ${done.coordinator.email ?? phone(done.coordinator.mobile)}`],
             ["Registered on", dateTime(done.registeredAt)],
           ]}
         />
@@ -702,8 +698,8 @@ function Success({ done }: { done: Done }) {
           <CopyButton value={done.studentLink} label="Copy link" />
         </div>
         <p className="mt-4 text-sm text-slate-400">
-          Share the code or link with students of your section. Teams they register (and pay for) appear automatically in your dashboard. The code and link were also sent to your email
-          and WhatsApp.
+          Share the code or link with students of your section. Teams they register (and pay for) appear automatically in your dashboard. The code and link were also sent to your WhatsApp
+          {done.coordinator.email ? " and email" : ""}.
         </p>
       </Card>
 

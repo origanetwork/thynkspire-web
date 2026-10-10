@@ -11,7 +11,7 @@ import { api, download, errorMessage } from "@/lib/api";
 import { ContactSchema, TeamSchema, emptyStudent, toApiStudent } from "@/lib/schemas";
 import { payWithRazorpay } from "@/lib/razorpay";
 import { dateTime, phone, rupees } from "@/lib/format";
-import type { CheckoutOrder, DraftResponse, Fee, PublicSettings, Section, Team } from "@/lib/types";
+import type { CheckoutOrder, Fee, PublicSettings, Section, Team } from "@/lib/types";
 import StudentFields from "./StudentFields";
 import { PaymentFailed } from "./PaymentResult";
 import { Alert, Button, Card, Checkbox, CodeHighlight, CopyButton, FeeBreakdown, Field, InfoRows, Input, PhoneInput } from "./ui";
@@ -46,15 +46,14 @@ function MiniStepper({ step }: { step: number }) {
   );
 }
 
-const draftKey = "thx_student_draft";
-
 export default function StudentRegistration() {
   const params = useSearchParams();
   const [step, setStep] = useState(0);
   const [code, setCode] = useState(params.get("code")?.toUpperCase() ?? "");
   const [info, setInfo] = useState<SchoolInfo | null>(null);
   const [fee, setFee] = useState<Fee | null>(null);
-  const [draft, setDraft] = useState<{ id: string; token: string } | null>(null);
+  /** Token from checkout — lets this browser read the team (and its confirmation PDF) once payment creates it. */
+  const [token, setToken] = useState<string | null>(null);
   const [result, setResult] = useState<{ kind: "success"; team: Team } | { kind: "failed"; reason: string; orderId: string; amount: number } | null>(null);
   const [error, setError] = useState("");
   const [busy, setBusy] = useState(false);
@@ -69,18 +68,12 @@ export default function StudentRegistration() {
     formState: { errors },
   } = useForm<FormIn, unknown, FormOut>({
     resolver: zodResolver(FormSchema),
-    defaultValues: { students: [emptyStudent(), emptyStudent()], contactEmail: "", contactMobile: "", terms: false as unknown as true },
+    defaultValues: { students: [emptyStudent(), emptyStudent()], contactMobile: "", terms: false as unknown as true },
     mode: "onTouched",
   });
 
   useEffect(() => {
     api<PublicSettings>("/public/settings").then((s) => setFee(s.fee)).catch(() => undefined);
-    try {
-      const saved = sessionStorage.getItem(draftKey);
-      if (saved) setDraft(JSON.parse(saved));
-    } catch {
-      /* storage unavailable */
-    }
   }, []);
 
   useEffect(() => {
@@ -124,32 +117,15 @@ export default function StudentRegistration() {
     setError("");
     setBusy(true);
     try {
-      const body = { students: v.students.map(toApiStudent), contactEmail: v.contactEmail, contactMobile: v.contactMobile, termsAccepted: true };
-      let current = draft;
-      if (current) {
-        await api<DraftResponse>(`/public/teams/${current.id}`, { method: "PUT", body, token: current.token }).catch(() => (current = null));
-      }
-      if (!current) {
-        const res = await api<DraftResponse>("/public/teams", { method: "POST", body: { ...body, schoolCode: info.schoolCode } });
-        current = { id: res.team.id, token: res.token! };
-        setDraft(current);
-        try {
-          sessionStorage.setItem(draftKey, JSON.stringify(current));
-        } catch {
-          /* ignore */
-        }
-      }
+      // Pay-first: nothing is saved until the payment is captured — then the server creates the team.
+      const body = { schoolCode: info.schoolCode, students: v.students.map(toApiStudent), contactMobile: v.contactMobile, termsAccepted: true };
       setStep(4);
-      const order = await api<CheckoutOrder>(`/public/teams/${current.id}/checkout`, { method: "POST", token: current.token });
+      const order = await api<CheckoutOrder>("/public/teams/checkout", { method: "POST", body });
       const pay = await payWithRazorpay(order);
       if (pay.status === "success") {
-        const team = await api<Team>(`/public/teams/${current.id}`, { token: current.token });
+        const team = await api<Team>(`/public/teams/${pay.teamId}`, { token: order.token });
+        setToken(order.token ?? null);
         setResult({ kind: "success", team });
-        try {
-          sessionStorage.removeItem(draftKey);
-        } catch {
-          /* ignore */
-        }
       } else if (pay.status === "failed") {
         setResult({ kind: "failed", reason: pay.reason, orderId: pay.orderId, amount: pay.amount });
       } else {
@@ -164,7 +140,7 @@ export default function StudentRegistration() {
   };
 
   // ── Result screens ──
-  if (result?.kind === "success" && draft) {
+  if (result?.kind === "success" && token) {
     const t = result.team;
     return (
       <div className="space-y-6">
@@ -187,19 +163,19 @@ export default function StudentRegistration() {
             ]}
           />
           <p className="mt-4 text-sm text-slate-400">
-            Details were sent to <b className="text-white">{t.contactEmail}</b> and WhatsApp {phone(t.contactMobile)}. There is no student login — please save this Team ID.
+            Your registration confirmation and program ticket were sent on WhatsApp to <b className="text-white">{phone(t.contactMobile)}</b>. There is no student login — please save this Team ID.
           </p>
         </Card>
         <div className="grid gap-3">
-          <Button variant="secondary" full onClick={() => download(`/public/teams/${t.id}/confirmation.pdf`, `${t.teamCode}.pdf`, { token: draft.token }).catch((e) => setError(errorMessage(e)))}>
+          <Button variant="secondary" full onClick={() => download(`/public/teams/${t.id}/confirmation.pdf`, `${t.teamCode}.pdf`, { token }).catch((e) => setError(errorMessage(e)))}>
             <FiDownload className="w-4 h-4" /> Download confirmation
           </Button>
           <Button
             full
             onClick={() => {
               setResult(null);
-              setDraft(null);
-              reset({ students: [emptyStudent(), emptyStudent()], contactEmail: getValues("contactEmail"), contactMobile: getValues("contactMobile"), terms: false as unknown as true });
+              setToken(null);
+              reset({ students: [emptyStudent(), emptyStudent()], contactMobile: getValues("contactMobile"), terms: false as unknown as true });
               setStep(1);
             }}
           >
@@ -221,7 +197,7 @@ export default function StudentRegistration() {
           amount={result.amount}
           orderId={result.orderId}
           reason={result.reason}
-          note="Your details are saved on this device. You can retry the payment now."
+          note="No team was registered and nothing was charged. Your details are still filled in — you can retry the payment now."
           actions={
             <>
               <Button
@@ -280,7 +256,7 @@ export default function StudentRegistration() {
             >
               <Field label="School code" required hint="Pre-filled from your teacher's link. You can also type it.">
                 <div className="flex gap-2">
-                  <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="THX-ERK-004821-S" className="font-mono uppercase" />
+                  <Input value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="THX-MLP-123-S" className="font-mono uppercase" />
                   <Button type="submit" variant="secondary" loading={busy}>
                     Verify
                   </Button>
@@ -381,12 +357,9 @@ export default function StudentRegistration() {
             </Card>
           ))}
 
-          <Card title="Your contact details">
-            <p className="-mt-2 mb-4 text-xs text-slate-400">We send the Team ID and payment receipt here.</p>
+          <Card title="Your WhatsApp number">
+            <p className="-mt-2 mb-4 text-xs text-slate-400">We send the registration confirmation and your program ticket here on WhatsApp.</p>
             <div className="space-y-4">
-              <Field label="Email" required error={errors.contactEmail?.message}>
-                <Input type="email" autoComplete="email" {...register("contactEmail")} invalid={!!errors.contactEmail} />
-              </Field>
               <Field label="WhatsApp number" required error={errors.contactMobile?.message}>
                 <PhoneInput {...register("contactMobile")} invalid={!!errors.contactMobile} />
               </Field>

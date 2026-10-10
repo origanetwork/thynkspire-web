@@ -2,11 +2,10 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { FiPlus, FiUsers, FiBookOpen, FiCreditCard, FiClock } from "react-icons/fi";
+import { FiPlus, FiUsers, FiBookOpen, FiCreditCard } from "react-icons/fi";
 import { api, errorMessage } from "@/lib/api";
 import { SOURCE_LABEL, dateOnly, rupees } from "@/lib/format";
 import type { Fee, Section, TeamSource } from "@/lib/types";
-import { useTeacher } from "@/components/teacher/TeacherShell";
 import ShareCard from "@/components/teacher/ShareCard";
 import { Alert, Badge, ButtonLink, Card, EmptyState, LoadingBlock, PageHeading, PaymentBadge, Table, Td } from "@/components/registration/ui";
 
@@ -17,8 +16,7 @@ type Dashboard = {
   studentLink: string;
   acceptSelfRegistration: boolean;
   allowedClasses: number[];
-  stats: { teams: number; students: number; amountPaidPaise: number; successfulPayments: number; pendingTeams: number };
-  pending: { id: string; draftNo: string; source: TeamSource; createdAt: string; expiresAt: string; students: { fullName: string; classLevel: number; division: string }[] }[];
+  stats: { teams: number; students: number; amountPaidPaise: number; successfulPayments: number };
   fee: Fee;
   recentTeams: { id: string; teamCode: string; source: TeamSource; confirmedAt: string; students: { fullName: string; classLevel: number; division: string }[] }[];
 };
@@ -36,7 +34,6 @@ function Stat({ icon: Icon, label, value, sub }: { icon: React.ComponentType<{ c
 }
 
 export default function TeacherDashboardPage() {
-  const { me } = useTeacher();
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState("");
 
@@ -51,40 +48,13 @@ export default function TeacherDashboardPage() {
 
   return (
     <div className="space-y-6 sm:space-y-8">
-      <PageHeading
-        title={`Welcome, ${me.fullName}!`}
-        subtitle={`Here's your ThynkX summary for ${data.school.name} · ${data.coordinator.section === "SECONDARY" ? "Secondary" : "Higher Secondary"} section`}
-        action={
-          <ButtonLink href="/thynkx/teacher/register-team">
-            <FiPlus className="w-4 h-4" /> Register new team
-          </ButtonLink>
-        }
-      />
+      <PageHeading subtitle={`Here's your ThynkX summary for ${data.school.name} · ${data.coordinator.section === "SECONDARY" ? "Secondary" : "Higher Secondary"} section`} />
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
         <Stat icon={FiUsers} label="Teams registered" value={String(data.stats.teams)} sub="Paid & confirmed" />
         <Stat icon={FiBookOpen} label="Students" value={String(data.stats.students)} sub={`Classes ${classes}`} />
         <Stat icon={FiCreditCard} label="Amount paid" value={rupees(data.stats.amountPaidPaise)} sub={`${data.stats.successfulPayments} successful payments`} />
-        <Stat icon={FiClock} label="Pending payment" value={String(data.stats.pendingTeams)} sub="Draft teams — not yet created" />
       </div>
-
-      {data.pending.length > 0 && (
-        <Alert tone="warning" title={`${data.pending.length} team${data.pending.length > 1 ? "s are" : " is"} waiting for payment`}>
-          <p>Teams are created only after payment is completed.</p>
-          <div className="mt-3 flex flex-col gap-2">
-            {data.pending.slice(0, 3).map((p) => (
-              <div key={p.id} className="flex flex-wrap items-center gap-3">
-                <span className="text-white">
-                  {p.draftNo} · {p.students.map((s) => s.fullName).join(" + ")} · expires {dateOnly(p.expiresAt)}
-                </span>
-                <Link href={`/thynkx/teacher/register-team?draft=${p.id}`} className="text-[#00BF62] font-semibold underline">
-                  Complete payment
-                </Link>
-              </div>
-            ))}
-          </div>
-        </Alert>
-      )}
 
       <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
         <Card title="Share with students">
@@ -104,7 +74,7 @@ export default function TeacherDashboardPage() {
           <p className="-mt-2 text-sm text-slate-400">Add two students from Classes {classes} and pay the registration fee to confirm the team.</p>
           <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4 text-sm">
             <p className="text-slate-300">
-              Fee: <span className="text-white font-semibold">{rupees(data.fee.totalPerStudentPaise)}</span> per student (incl. GST) + {data.fee.gatewayFeePercent}% gateway fee
+              Fee: <span className="text-white font-semibold">{rupees(data.fee.totalPerStudentPaise)}</span> per student ({rupees(data.fee.registrationFeePaise)} registration incl. tax + {rupees(data.fee.platformFeePaise)} platform fee)
             </p>
             <p className="mt-1 text-slate-400">
               Total per team: <span className="text-[#00BF62] font-semibold">{rupees(data.fee.totalPaise)}</span>
@@ -133,9 +103,10 @@ export default function TeacherDashboardPage() {
         {data.recentTeams.length === 0 ? (
           <EmptyState title="No teams yet">Register a team or share your link with students.</EmptyState>
         ) : (
-          <Table head={["Team ID", "Student 1", "Student 2", "Class", "Registered via", "Date", "Payment", ""]}>
-            {data.recentTeams.map((t) => (
+          <Table head={["Sl. No.", "Team ID", "Student 1", "Student 2", "Class", "Registered via", "Date", "Payment", ""]}>
+            {data.recentTeams.map((t, i) => (
               <tr key={t.id} className="hover:bg-white/[0.02]">
+                <Td className="text-slate-500">{i + 1}</Td>
                 <Td className="font-medium text-white">{t.teamCode}</Td>
                 <Td>{t.students[0]?.fullName}</Td>
                 <Td>{t.students[1]?.fullName}</Td>

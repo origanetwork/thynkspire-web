@@ -2,10 +2,17 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { FiPhone } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa6";
 
+/** App-style screens (login, registration forms, teacher panel) — the widget is for public pages only. */
+const HIDDEN_ON = ["/thynkx/login", "/thynkx/register", "/thynkx/school-registration", "/thynkx/teacher"];
+
 export default function StickyContactWidget() {
+  const pathname = usePathname();
+  if (HIDDEN_ON.some((p) => pathname === p || pathname.startsWith(`${p}/`))) return null;
+
   return (
     <aside 
       aria-label="Quick Contact Actions"

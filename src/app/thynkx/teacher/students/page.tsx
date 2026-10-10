@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { FiSearch } from "react-icons/fi";
 import { api, errorMessage } from "@/lib/api";
-import { SOURCE_LABEL, maskPhone } from "@/lib/format";
+import { SOURCE_LABEL, phone } from "@/lib/format";
 import type { Paged, TeamSource } from "@/lib/types";
 import { useTeacher } from "@/components/teacher/TeacherShell";
-import { Alert, Badge, Card, EmptyState, Input, LoadingBlock, PageHeading, Pagination, Select, Table, Td } from "@/components/registration/ui";
+import { Alert, Badge, Card, EmptyState, Input, LoadingBlock, Pagination, Select, Table, Td } from "@/components/registration/ui";
 
 type Row = {
   id: string;
@@ -41,7 +41,6 @@ export default function StudentsPage() {
 
   return (
     <div className="space-y-6">
-      <PageHeading title="Students" subtitle={data ? `${data.meta.total} students across ${data.confirmedTeams} confirmed teams` : " "} />
       {error && <Alert tone="error">{error}</Alert>}
       <Card padded={false}>
         <form
@@ -78,7 +77,7 @@ export default function StudentsPage() {
           <EmptyState title="No students yet">Students appear here once their team is paid and confirmed.</EmptyState>
         ) : (
           <>
-            <Table head={["#", "Student name", "Class", "Age", "Team ID", "Parent / Guardian", "Student / Parent mobile", "Registered via"]}>
+            <Table head={["Sl. No.", "Student name", "Class", "Age", "Team ID", "Parent / Guardian", "Student / Parent mobile", "Registered via", ""]}>
               {data.items.map((s, i) => (
                 <tr key={s.id} className="hover:bg-white/[0.02]">
                   <Td className="text-slate-500">{(data.meta.page - 1) * data.meta.pageSize + i + 1}</Td>
@@ -93,9 +92,14 @@ export default function StudentsPage() {
                     </Link>
                   </Td>
                   <Td>{s.parentName}</Td>
-                  <Td>{maskPhone(s.parentMobile)}</Td>
+                  <Td className="whitespace-nowrap">{phone(s.parentMobile)}</Td>
                   <Td>
                     <Badge tone={s.team.source === "TEACHER" ? "gray" : "blue"}>{SOURCE_LABEL[s.team.source]}</Badge>
+                  </Td>
+                  <Td>
+                    <Link href={`/thynkx/teacher/students/${s.id}`} className="text-[#00BF62] hover:underline">
+                      View
+                    </Link>
                   </Td>
                 </tr>
               ))}

@@ -51,7 +51,7 @@ export default function RegistrationSection() {
   const facts = [
     ["Eligibility", "Classes 8 – 12"],
     ["Team size", "2 students, same section"],
-    ["Fee", settings ? `${rupeesShort(settings.fee.totalPerStudentPaise)} / student (incl. GST)` : "₹99 / student (incl. GST)"],
+    ["Fee", settings ? `${rupeesShort(settings.fee.registrationFeePaise)} / student (incl. tax)${settings.fee.platformFeePaise ? ` + ${rupeesShort(settings.fee.platformFeePaise)} platform fee` : ""}` : "₹99 / student (incl. tax)"],
     ["Last date", settings?.closingDate ? dateOnly(settings.closingDate) : "To be announced"],
   ];
 

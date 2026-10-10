@@ -75,7 +75,7 @@ export default function TeamDetailPage() {
                 ["Razorpay payment ID", p.razorpayPaymentId ?? "—"],
                 ["Razorpay order ID", p.razorpayOrderId],
                 ["Receipt no.", p.receiptNo ?? "—"],
-                ["Paid by", team.source === "TEACHER" ? `Teacher (${team.coordinator.fullName})` : `Student (${team.contactEmail})`],
+                ["Paid by", team.source === "TEACHER" ? `Teacher (${team.coordinator.fullName})` : `Student (WhatsApp ${phone(team.contactMobile)})`],
               ]}
             />
           ) : (
@@ -88,8 +88,7 @@ export default function TeamDetailPage() {
               ["Registered via", team.source === "TEACHER" ? "Teacher dashboard" : SOURCE_LABEL[team.source]],
               ["Registered on", dateTime(team.confirmedAt ?? team.createdAt)],
               ["Section", team.sectionLabel],
-              ["Confirmation sent to", `${team.contactEmail} · ${phone(team.contactMobile)}`],
-              ["Exam venue / slot", "To be announced"],
+              ["Confirmation sent to", `WhatsApp ${phone(team.contactMobile)}`],
             ]}
           />
           <p className="mt-4 text-xs text-slate-500">

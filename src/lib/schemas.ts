@@ -39,9 +39,8 @@ export const CoordinatorSchema = z.object({
   section: z.enum(["SECONDARY", "HIGHER_SECONDARY"], { error: "Choose your section." }),
   fullName: personName("Full name"),
   designation: z.string().trim().min(2, "Enter your designation / subject.").max(80),
-  email,
+  email: z.union([z.literal(""), email]).optional(),
   mobile,
-  whatsappOptIn: z.boolean(),
 });
 export type CoordinatorInput = z.input<typeof CoordinatorSchema>;
 export type Coordinator = z.output<typeof CoordinatorSchema>;
@@ -49,7 +48,7 @@ export type Coordinator = z.output<typeof CoordinatorSchema>;
 export const StudentSchema = z.object({
   fullName: personName("Full name"),
   classLevel: z.coerce.number<string>().int().min(8, "Select a class.").max(12),
-  division: z.string().trim().toUpperCase().regex(/^[A-Z0-9]{1,3}$/, "Select a division."),
+  division: z.string().trim().toUpperCase().regex(/^[A-Z0-9]{1,3}$/, "Enter the division — letters or numbers, up to 3 (e.g. A)."),
   age: z.coerce.number<string>().int().min(10, "Age must be 10–20.").max(20, "Age must be 10–20."),
   gender: z.union([z.literal(""), z.enum(["FEMALE", "MALE", "UNDISCLOSED"])]).optional(),
   parentName: personName("Parent / guardian name"),
@@ -65,7 +64,7 @@ export const TeamSchema = z
     { message: "Both team members have the same details.", path: ["students", "1", "fullName"] },
   );
 
-export const ContactSchema = z.object({ contactEmail: email, contactMobile: mobile });
+export const ContactSchema = z.object({ contactMobile: mobile });
 
 export const emptyStudent = (): StudentFormInput => ({
   fullName: "",

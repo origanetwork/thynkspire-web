@@ -24,7 +24,7 @@ export default function Location() {
               <div className="relative w-[calc(100%+160px)] h-[calc(100%+180px)] -top-[80px] -left-[80px]">
                 <iframe
                   title="Thynkspire Edu Experience Hub Map"
-                  src={`https://maps.google.com/maps?q=Mayanad,+Kozhikode,+Kerala+673008&t=&z=${zoomLevel}&ie=UTF8&iwloc=&output=embed`}
+                  src={`https://maps.google.com/maps?q=9.9920,76.2990&t=&z=${zoomLevel}&ie=UTF8&iwloc=&output=embed`}
                   className="w-full h-full border-0 filter invert-[93%] hue-rotate-180 contrast-[130%] brightness-[78%] grayscale-[30%]"
                   loading="lazy"
                 />
@@ -35,7 +35,7 @@ export default function Location() {
               <div className="absolute inset-0 bg-black/15 pointer-events-none" />
             </div>
 
-            {/* Neon Green Dashed Region Boundary Overlay (Enclosing Mayanad) */}
+            {/* Neon Green Dashed Region Boundary Overlay (Enclosing Kathrikadavu & Kaloor) */}
             <div className="absolute inset-0 pointer-events-none z-10">
               <svg 
                 className="w-full h-full"
@@ -55,23 +55,23 @@ export default function Location() {
                 />
               </svg>
 
-              {/* Upper Mayanad Label inside green boundary */}
+              {/* Upper Kathrikadavu Label inside green boundary */}
               <div className="absolute top-[42%] left-[54%] -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none select-none space-y-0.5">
                 <span className="block font-poppins text-xs sm:text-sm font-semibold text-white/90 tracking-wider uppercase">
-                  MAYANAD
+                  KATHRIKADAVU
                 </span>
                 <span className="block font-poppins text-[10px] sm:text-xs font-medium text-white/60">
-                  മായനാട്
+                  കുത്രികടവ്
                 </span>
               </div>
 
-              {/* Kozhikode Center Label under green lines */}
+              {/* Ernakulam Center Label under green lines */}
               <div className="absolute top-[68%] left-[54%] -translate-x-1/2 -translate-y-1/2 text-center pointer-events-none select-none">
                 <span className="block font-clash text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#00BF62] tracking-wide">
-                  Kozhikode
+                  Ernakulam
                 </span>
                 <span className="block font-poppins text-lg sm:text-2xl font-bold text-[#00BF62]">
-                  കോഴിക്കോട്
+                  എറണാകുളം
                 </span>
               </div>
             </div>
@@ -90,14 +90,14 @@ export default function Location() {
                     Thynkspire Edu Experience Hub
                   </h3>
                   <p className="font-poppins text-[11px] sm:text-xs text-slate-300 font-normal leading-tight">
-                    1st Floor, 18/1283, Snehatheeram, Myladikunnummal, Near Health Centre Mayanad, Mayanad, Kozhikode, Kerala – 673008, India
+                    Kathrikadavu, Ernakulam, Kerala 682017
                   </p>
                 </div>
 
                 {/* Get Directions Action Button */}
                 <div className="pt-0.5 sm:pt-1">
                   <Link
-                    href="https://www.google.com/maps/dir/?api=1&destination=Snehatheeram,+Myladikunnummal,+Mayanad,+Kozhikode,+Kerala+673008"
+                    href="https://www.google.com/maps/dir/?api=1&destination=Kathrikadavu,+Ernakulam,+Kerala+682017"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

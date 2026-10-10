@@ -35,7 +35,7 @@ const CARDS = [
   {
     icon: FiLogIn,
     title: "Teacher Login",
-    body: "Already registered? Log in with your email (OTP) to manage teams, students and payments.",
+    body: "Already registered? Log in with your mobile number (WhatsApp OTP) to manage teams, students and payments.",
     cta: "Login with OTP",
     href: "/thynkx/login",
   },

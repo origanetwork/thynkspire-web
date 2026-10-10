@@ -5,7 +5,8 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
-import { FiSearch, FiPlus, FiArrowLeft, FiArrowRight, FiMail, FiCheckCircle } from "react-icons/fi";
+import { FiSearch, FiPlus, FiArrowLeft, FiArrowRight, FiCheckCircle } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { api, ApiError, errorMessage } from "@/lib/api";
 import { CoordinatorSchema, NewSchoolSchema, otp as otpSchema, type Coordinator, type CoordinatorInput, type NewSchool, type NewSchoolInput } from "@/lib/schemas";
 import type { District, SchoolSearchResult, Section } from "@/lib/types";
@@ -122,7 +123,7 @@ export default function SchoolRegistration() {
 
       {step === 3 && coordinator && (
         <VerifyOtp
-          email={coordinator.email}
+          mobile={coordinator.mobile}
           onEdit={() => setStep(1)}
           onVerified={(d) => {
             setDone(d);
@@ -428,14 +429,14 @@ function CoordinatorForm({
           <Field label="Designation / Subject" required error={errors.designation?.message}>
             <Input {...register("designation")} placeholder="e.g. HST English" invalid={!!errors.designation} />
           </Field>
-          <Field label="Email" required error={errors.email?.message} hint="Used for OTP login & all ThynkX updates">
+          <Field label="Email" required error={errors.email?.message} hint="For registration confirmations & ThynkX updates">
             <Input type="email" autoComplete="email" {...register("email")} invalid={!!errors.email} />
           </Field>
-          <Field label="Mobile number" required error={errors.mobile?.message} hint="For WhatsApp confirmations & contact">
+          <Field label="Mobile number" required error={errors.mobile?.message} hint="Must be on WhatsApp — used for OTP login & confirmations">
             <PhoneInput {...register("mobile")} invalid={!!errors.mobile} />
           </Field>
           <div className="sm:col-span-2">
-            <Checkbox {...register("whatsappOptIn")} label="This number is on WhatsApp — send me updates there" />
+            <Checkbox {...register("whatsappOptIn")} label="Also send me ThynkX updates on WhatsApp" />
           </div>
         </div>
       </Card>
@@ -587,7 +588,7 @@ function Review({
           <FiArrowLeft className="w-4 h-4" /> Edit details
         </Button>
         <Button onClick={send} loading={loading} disabled={!agreed}>
-          <FiMail className="w-4 h-4" /> Send OTP to {coordinator.email}
+          <FaWhatsapp className="w-4 h-4" /> Send OTP on WhatsApp to {phone(coordinator.mobile)}
         </Button>
       </div>
     </div>
@@ -596,7 +597,7 @@ function Review({
 
 // ─── Step 4: verify OTP ──────────────────────────────
 
-function VerifyOtp({ email, onEdit, onVerified }: { email: string; onEdit: () => void; onVerified: (d: Done) => void }) {
+function VerifyOtp({ mobile, onEdit, onVerified }: { mobile: string; onEdit: () => void; onVerified: (d: Done) => void }) {
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -610,7 +611,7 @@ function VerifyOtp({ email, onEdit, onVerified }: { email: string; onEdit: () =>
     setError("");
     setLoading(true);
     try {
-      onVerified(await api<Done>("/registration/verify-otp", { method: "POST", body: { email, code } }));
+      onVerified(await api<Done>("/registration/verify-otp", { method: "POST", body: { mobile, code } }));
     } catch (err) {
       setError(errorMessage(err));
       setCode("");
@@ -623,7 +624,7 @@ function VerifyOtp({ email, onEdit, onVerified }: { email: string; onEdit: () =>
     setError("");
     setInfo("");
     try {
-      await api("/registration/resend-otp", { method: "POST", body: { email } });
+      await api("/registration/resend-otp", { method: "POST", body: { mobile } });
       setInfo("A new OTP has been sent.");
       setLeft(30);
     } catch (err) {
@@ -635,12 +636,12 @@ function VerifyOtp({ email, onEdit, onVerified }: { email: string; onEdit: () =>
     <Card className="max-w-xl mx-auto text-center">
       <form onSubmit={verify} className="space-y-6 py-2">
         <div className="mx-auto w-14 h-14 rounded-full bg-[#00BF62]/10 border border-[#00BF62]/40 flex items-center justify-center">
-          <FiMail className="w-6 h-6 text-[#00BF62]" />
+          <FaWhatsapp className="w-6 h-6 text-[#00BF62]" />
         </div>
         <div>
-          <h2 className="font-clash text-2xl font-semibold">Verify your email</h2>
+          <h2 className="font-clash text-2xl font-semibold">Verify your mobile number</h2>
           <p className="mt-2 text-sm text-slate-400">
-            Enter the 6-digit OTP sent to <span className="text-white font-medium">{email}</span>
+            Enter the 6-digit OTP sent on WhatsApp to <span className="text-white font-medium">{phone(mobile)}</span>
           </p>
         </div>
         <OtpInput value={code} onChange={setCode} invalid={!!error} autoFocus />
@@ -660,10 +661,10 @@ function VerifyOtp({ email, onEdit, onVerified }: { email: string; onEdit: () =>
           )}{" "}
           ·{" "}
           <button type="button" onClick={onEdit} className="text-slate-200 hover:text-[#00BF62] underline cursor-pointer">
-            Wrong email? Edit
+            Wrong number? Edit
           </button>
         </p>
-        <p className="text-xs text-slate-500">OTP valid for 5 minutes · max 3 attempts · check your spam folder too</p>
+        <p className="text-xs text-slate-500">OTP valid for 5 minutes · max 3 attempts</p>
       </form>
     </Card>
   );

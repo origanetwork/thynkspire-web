@@ -5,15 +5,17 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FiArrowLeft, FiArrowRight, FiUsers } from "react-icons/fi";
+import { FaWhatsapp } from "react-icons/fa";
 import { api, errorMessage } from "@/lib/api";
-import { email as emailSchema } from "@/lib/schemas";
+import { mobile as mobileSchema } from "@/lib/schemas";
+import { phone } from "@/lib/format";
 import { useCountdown } from "@/lib/hooks";
-import { Button, ButtonLink, Field, Input, LoadingBlock, OtpInput } from "./ui";
+import { Button, ButtonLink, Field, LoadingBlock, OtpInput, PhoneInput } from "./ui";
 
 export default function TeacherLogin() {
   const router = useRouter();
-  const [stage, setStage] = useState<"email" | "otp">("email");
-  const [email, setEmail] = useState("");
+  const [stage, setStage] = useState<"mobile" | "otp">("mobile");
+  const [mobile, setMobile] = useState("");
   const [code, setCode] = useState("");
   const [error, setError] = useState("");
   const [info, setInfo] = useState("");
@@ -34,14 +36,14 @@ export default function TeacherLogin() {
 
   const sendOtp = async (e?: React.FormEvent) => {
     e?.preventDefault();
-    const parsed = emailSchema.safeParse(email);
+    const parsed = mobileSchema.safeParse(mobile);
     if (!parsed.success) return setError(parsed.error.issues[0]!.message);
     setError("");
     setInfo("");
     setLoading(true);
     try {
-      await api("/auth/teacher/otp", { method: "POST", body: { email: parsed.data } });
-      setEmail(parsed.data);
+      await api("/auth/teacher/otp", { method: "POST", body: { mobile: parsed.data } });
+      setMobile(parsed.data);
       setStage("otp");
       setCode("");
       setLeft(30);
@@ -58,7 +60,7 @@ export default function TeacherLogin() {
     setError("");
     setLoading(true);
     try {
-      await api("/auth/teacher/verify", { method: "POST", body: { email, code } });
+      await api("/auth/teacher/verify", { method: "POST", body: { mobile, code } });
       router.replace("/thynkx/teacher");
     } catch (err) {
       setError(errorMessage(err));
@@ -84,17 +86,17 @@ export default function TeacherLogin() {
 
       <div className="space-y-5">
         <div className="rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-          {stage === "email" ? (
+          {stage === "mobile" ? (
             <form onSubmit={sendOtp} className="space-y-6" noValidate>
               <div>
                 <h1 className="font-clash text-3xl font-bold">Teacher Login</h1>
                 <p className="mt-2 text-sm text-slate-400">Access your school&apos;s ThynkX dashboard</p>
               </div>
-              <Field label="Registered email" required error={error}>
-                <Input type="email" autoComplete="email" autoFocus value={email} onChange={(e) => setEmail(e.target.value)} invalid={!!error} placeholder="you@school.in" />
+              <Field label="Registered mobile number" required error={error} hint="We'll send a 6-digit OTP to this number on WhatsApp">
+                <PhoneInput autoFocus value={mobile} onChange={(e) => setMobile(e.target.value)} invalid={!!error} placeholder="98765 43210" />
               </Field>
               <Button type="submit" size="lg" full loading={loading}>
-                Send OTP <FiArrowRight className="w-4 h-4" />
+                <FaWhatsapp className="w-4 h-4" /> Send OTP on WhatsApp
               </Button>
               <div className="pt-4 border-t border-white/10 text-sm text-slate-400">
                 <p>
@@ -107,13 +109,13 @@ export default function TeacherLogin() {
             </form>
           ) : (
             <form onSubmit={verify} className="space-y-6 text-center" noValidate>
-              <button type="button" onClick={() => setStage("email")} className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-[#00BF62] cursor-pointer">
+              <button type="button" onClick={() => setStage("mobile")} className="flex items-center gap-1.5 text-sm text-slate-400 hover:text-[#00BF62] cursor-pointer">
                 <FiArrowLeft className="w-4 h-4" /> Back to login
               </button>
               <div>
                 <h1 className="font-clash text-3xl font-bold">Verify OTP</h1>
                 <p className="mt-2 text-sm text-slate-400">
-                  We&apos;ve sent a 6-digit OTP to <span className="text-white font-medium">{email}</span>
+                  We&apos;ve sent a 6-digit OTP on WhatsApp to <span className="text-white font-medium">{phone(mobile)}</span>
                 </p>
               </div>
               <OtpInput value={code} onChange={setCode} invalid={!!error} autoFocus />

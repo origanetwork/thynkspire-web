@@ -4,7 +4,7 @@ import TeacherLogin from "@/components/registration/TeacherLogin";
 
 export const metadata: Metadata = {
   title: "Teacher Login | ThynkX 2026 - Thynkspire",
-  description: "Log in with your email OTP to manage your ThynkX teams, students and payments.",
+  description: "Log in with a WhatsApp OTP to manage your ThynkX teams, students and payments.",
 };
 
 export default function TeacherLoginPage() {

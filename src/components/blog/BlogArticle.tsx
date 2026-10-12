@@ -5,15 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiCheck, FiShare2 } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
-import { BlogPost, getDefaultPost } from "@/data/blogPosts";
+import { FALLBACK_IMAGE, formatBlogDate, type BlogPost } from "@/lib/blog";
 
 interface BlogArticleProps {
-  post?: BlogPost;
+  post: BlogPost;
 }
 
-export default function BlogArticle({ post }: BlogArticleProps) {
+export default function BlogArticle({ post: article }: BlogArticleProps) {
   const [copied, setCopied] = useState(false);
-  const article = post || getDefaultPost();
 
   const handleShare = () => {
     if (typeof window !== "undefined") {
@@ -91,9 +90,11 @@ export default function BlogArticle({ post }: BlogArticleProps) {
           {/* Category & Date Meta Tag */}
           <MotionText delay={0.1} duration={0.5}>
             <div className="flex items-center gap-2.5 font-poppins text-xs sm:text-sm font-medium tracking-wide">
-              <span className="text-[#00BF63] font-semibold">{article.category}</span>
+              <span className="text-[#00BF63] font-semibold">{article.category.name}</span>
               <span className="text-zinc-600">|</span>
-              <span className="text-zinc-300">{article.date}</span>
+              <span className="text-zinc-300">{formatBlogDate(article.publishedAt)}</span>
+              <span className="text-zinc-600">|</span>
+              <span className="text-zinc-400">{article.readingMinutes} min read</span>
             </div>
           </MotionText>
 
@@ -121,29 +122,33 @@ export default function BlogArticle({ post }: BlogArticleProps) {
 
             {/* Author Info */}
             <div className="flex items-center gap-3.5 sm:gap-4">
-              <Link
-                href={article.author.linkedinUrl || "https://linkedin.com"}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group/author flex items-center gap-3.5 sm:gap-4 hover:opacity-95 transition-opacity"
-              >
+              <AuthorLink href={article.author.linkedinUrl}>
                 <div className="relative w-11 h-11 sm:w-12 sm:h-12 rounded-full overflow-hidden border border-[#00BF63]/40 shadow-[0_0_15px_rgba(0,191,99,0.2)] shrink-0 group-hover/author:border-[#00BF63] group-hover/author:shadow-[0_0_20px_rgba(0,191,99,0.4)] transition-all">
-                  <Image
-                    src={article.author.avatar}
-                    alt={article.author.name}
-                    fill
-                    className="object-cover group-hover/author:scale-105 transition-transform duration-300"
-                  />
+                  {article.author.avatar ? (
+                    <Image
+                      src={article.author.avatar}
+                      alt={article.author.name}
+                      fill
+                      sizes="48px"
+                      className="object-cover group-hover/author:scale-105 transition-transform duration-300"
+                    />
+                  ) : (
+                    <span className="absolute inset-0 flex items-center justify-center bg-[#00BF63]/15 font-clash text-sm font-semibold text-[#00BF63]">
+                      {initials(article.author.name)}
+                    </span>
+                  )}
                 </div>
                 <div>
                   <h4 className="font-clash text-sm sm:text-base font-semibold text-white tracking-tight group-hover/author:text-[#00BF63] transition-colors">
                     {article.author.name}
                   </h4>
-                  <p className="font-poppins text-xs text-zinc-400">
-                    {article.author.role}
-                  </p>
+                  {article.author.role && (
+                    <p className="font-poppins text-xs text-zinc-400">
+                      {article.author.role}
+                    </p>
+                  )}
                 </div>
-              </Link>
+              </AuthorLink>
             </div>
 
             {/* Share Button */}
@@ -174,7 +179,7 @@ export default function BlogArticle({ post }: BlogArticleProps) {
         <MotionFadeIn delay={0.4} direction="up" distance={25} className="w-full">
           <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] md:aspect-[16/8] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
             <Image
-              src={article.heroImage || article.image}
+              src={article.heroImage || article.coverImage || FALLBACK_IMAGE}
               alt={article.title}
               fill
               priority
@@ -184,68 +189,35 @@ export default function BlogArticle({ post }: BlogArticleProps) {
           </div>
         </MotionFadeIn>
 
-        {/* Article Main Body Text Content - Left & Right Padding applied to bottom content without changing image */}
-        <div className="max-w-[860px] mx-auto px-3 sm:px-8 md:px-12 lg:px-16 pt-4 sm:pt-6 space-y-6 sm:space-y-8 font-poppins text-zinc-300 text-sm sm:text-base font-light leading-[1.8] sm:leading-[1.9]">
-
-          {article.paragraphs.intro.map((p, idx) => (
-            <MotionFadeIn key={`intro-${idx}`} delay={0.2} direction="up">
-              <p>{p}</p>
-            </MotionFadeIn>
-          ))}
-
-          {/* Section Heading */}
-          {article.paragraphs.sectionHeading && (
-            <MotionFadeIn delay={0.2} direction="up">
-              <div className="pt-4 pb-1">
-                <h2 className="font-clash text-2xl sm:text-3xl font-bold text-[#00BF63] tracking-tight">
-                  {article.paragraphs.sectionHeading}
-                </h2>
-              </div>
-            </MotionFadeIn>
-          )}
-
-          {article.paragraphs.sectionIntro && (
-            <MotionFadeIn delay={0.2} direction="up">
-              <p>{article.paragraphs.sectionIntro}</p>
-            </MotionFadeIn>
-          )}
-
-          {/* Key Points Bullet List with Green Check Circles */}
-          {article.paragraphs.keyPoints && article.paragraphs.keyPoints.length > 0 && (
-            <div className="space-y-4 pt-2 pb-2">
-              {article.paragraphs.keyPoints.map((point, index) => (
-                <MotionFadeIn
-                  key={index}
-                  delay={0.15 * (index + 1)}
-                  direction="up"
-                  className="flex items-start gap-3.5 sm:gap-4 group p-3 sm:p-4 rounded-xl hover:bg-white/[0.02] border border-transparent hover:border-white/5 transition-colors"
-                >
-                  <div className="mt-1 shrink-0 w-5 h-5 rounded-full border border-[#00BF63] bg-[#00BF63]/10 flex items-center justify-center text-[#00BF63]">
-                    <FiCheck className="w-3 h-3 stroke-[3]" />
-                  </div>
-                  <div>
-                    <p className="font-poppins text-sm sm:text-base text-zinc-300 leading-relaxed">
-                      <strong className="font-semibold text-white mr-1.5 font-clash">
-                        {point.title}
-                      </strong>
-                      {point.desc}
-                    </p>
-                  </div>
-                </MotionFadeIn>
-              ))}
-            </div>
-          )}
-
-          {article.paragraphs.conclusion.map((p, idx) => (
-            <MotionFadeIn key={`concl-${idx}`} delay={0.2} direction="up">
-              <p>{p}</p>
-            </MotionFadeIn>
-          ))}
-
-        </div>
+        {/* Article body — HTML from the admin rich-text editor, sanitized by the API on save */}
+        <MotionFadeIn delay={0.2} direction="up">
+          <div
+            className="blog-article max-w-[860px] mx-auto px-3 sm:px-8 md:px-12 lg:px-16 pt-4 sm:pt-6 font-poppins text-zinc-300 text-sm sm:text-base font-light leading-[1.8] sm:leading-[1.9]"
+            dangerouslySetInnerHTML={{ __html: article.content }}
+          />
+        </MotionFadeIn>
 
       </div>
 
     </article>
+  );
+}
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter((w) => !/^(dr|mr|ms|mrs)\.?$/i.test(w))
+    .slice(0, 2)
+    .map((w) => w[0]?.toUpperCase())
+    .join("");
+
+/** Author block links to LinkedIn only when the post has a LinkedIn URL. */
+function AuthorLink({ href, children }: { href: string | null; children: React.ReactNode }) {
+  const className = "group/author flex items-center gap-3.5 sm:gap-4 hover:opacity-95 transition-opacity";
+  if (!href) return <div className={className}>{children}</div>;
+  return (
+    <Link href={href} target="_blank" rel="noopener noreferrer" className={className}>
+      {children}
+    </Link>
   );
 }

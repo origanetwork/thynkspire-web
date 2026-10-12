@@ -6,10 +6,10 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "./MotionWrapper";
-
-import { blogPosts } from "@/data/blogPosts";
+import { FALLBACK_IMAGE, formatBlogDate, type BlogPostSummary } from "@/lib/blog";
 
 interface LatestBlogProps {
+  posts: BlogPostSummary[];
   title?: string;
   subtitle?: string;
   showSubtitle?: boolean;
@@ -18,6 +18,7 @@ interface LatestBlogProps {
 }
 
 export default function LatestBlog({
+  posts: source,
   title = "Latest Blog",
   subtitle = "Thought leadership, industry trends, and stories from our community of learners.",
   showSubtitle = true,
@@ -26,23 +27,26 @@ export default function LatestBlog({
 }: LatestBlogProps) {
   const [activeMobileIdx, setActiveMobileIdx] = useState(0);
 
-  const posts = blogPosts.slice(0, 3).map((post) => ({
+  const posts = source.slice(0, 3).map((post) => ({
     id: post.id,
-    image: post.image,
-    category: post.category,
-    date: post.date,
+    image: post.coverImage || FALLBACK_IMAGE,
+    category: post.category.name,
+    date: formatBlogDate(post.publishedAt),
     title: post.title,
     link: `/blog/${post.slug}`,
   }));
 
   // Auto cycle cards on mobile every 3.5 seconds
   useEffect(() => {
+    if (posts.length < 2) return;
     const timer = setInterval(() => {
       setActiveMobileIdx((prev) => (prev + 1) % posts.length);
     }, 3500);
 
     return () => clearInterval(timer);
   }, [posts.length]);
+
+  if (!posts.length) return null;
 
   return (
     <section className={`relative w-full text-white py-16 sm:py-20 overflow-hidden ${className}`}>

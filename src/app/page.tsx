@@ -9,9 +9,6 @@ import ConsultationCTA from "@/components/ConsultationCTA";
 import Footer from "@/components/Footer";
 import { getLatestPostsSafe } from "@/lib/blog";
 
-// Latest blog posts are re-fetched at most every 5 minutes (and on demand via /api/revalidate).
-export const revalidate = 300;
-
 export default async function Home() {
   const latestPosts = await getLatestPostsSafe(3);
 

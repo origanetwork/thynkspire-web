@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
-import { FALLBACK_IMAGE, formatBlogDate, type BlogPostSummary } from "@/lib/blog";
+import { formatBlogDate, type BlogPostSummary } from "@/lib/blog";
 
 interface BlogHeroSectionProps {
   featuredPost: BlogPostSummary | null;
@@ -86,13 +86,15 @@ export default function BlogHeroSection({ featuredPost: post }: BlogHeroSectionP
               <div className="flex flex-col lg:flex-row min-h-[360px] lg:min-h-[460px] xl:min-h-[500px]">
                 {/* Left Side: Full height image flush to left edge */}
                 <div className="relative w-full lg:w-[48%] xl:w-[46%] h-[260px] sm:h-[340px] lg:h-auto shrink-0 overflow-hidden">
-                  <Image
-                    src={post.coverImage || FALLBACK_IMAGE}
-                    alt={post.title}
-                    fill
-                    priority
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  />
+                  {post.coverImage && (
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      priority
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    />
+                  )}
                 </div>
 
                 {/* Right Side: Card Details with padding */}

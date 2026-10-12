@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "./MotionWrapper";
-import { FALLBACK_IMAGE, formatBlogDate, type BlogPostSummary } from "@/lib/blog";
+import { formatBlogDate, type BlogPostSummary } from "@/lib/blog";
 
 interface LatestBlogProps {
   posts: BlogPostSummary[];
@@ -29,7 +29,7 @@ export default function LatestBlog({
 
   const posts = source.slice(0, 3).map((post) => ({
     id: post.id,
-    image: post.coverImage || FALLBACK_IMAGE,
+    image: post.coverImage,
     category: post.category.name,
     date: formatBlogDate(post.publishedAt),
     title: post.title,
@@ -97,13 +97,15 @@ export default function LatestBlog({
                 {/* Blog Image Container with Bottom-Right Category Pill */}
                 <Link href={posts[activeMobileIdx].link} className="block">
                   <div className="relative w-full h-[220px] rounded-[16px] overflow-hidden shadow-xl border border-white/10 group-hover:border-[#00BF63]/60 transition-all duration-300">
-                    <Image
-                      src={posts[activeMobileIdx].image}
-                      alt={posts[activeMobileIdx].title}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                      priority
-                    />
+                    {posts[activeMobileIdx].image && (
+                      <Image
+                        src={posts[activeMobileIdx].image}
+                        alt={posts[activeMobileIdx].title}
+                        fill
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        priority
+                      />
+                    )}
                     
                     {/* Category Pill Tag attached near bottom right */}
                     <div className="absolute right-0 bottom-0 bg-white text-black backdrop-blur-md px-4 py-1.5 rounded-tl-[14px] rounded-br-[16px] shadow-lg">
@@ -165,13 +167,15 @@ export default function LatestBlog({
                 {/* Blog Image Container with Bottom-Right Category Pill */}
                 <Link href={post.link} className="block">
                   <div className="relative w-full h-[220px] lg:h-[240px] rounded-[14px] overflow-hidden shadow-xl border border-white/10 group-hover:border-[#00BF63]/60 transition-all duration-300">
-                    <Image
-                      src={post.image}
-                      alt={post.title}
-                      fill
-                      className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                      priority
-                    />
+                    {post.image && (
+                      <Image
+                        src={post.image}
+                        alt={post.title}
+                        fill
+                        className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                        priority
+                      />
+                    )}
                     
                     {/* Category Pill Tag attached near bottom right */}
                     <div className="absolute right-0 bottom-0 bg-white text-black backdrop-blur-md px-5 py-2 rounded-tl-[16px] rounded-br-[14px] shadow-lg">

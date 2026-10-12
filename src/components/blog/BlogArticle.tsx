@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiCheck, FiShare2 } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
-import { FALLBACK_IMAGE, formatBlogDate, type BlogPost } from "@/lib/blog";
+import { formatBlogDate, type BlogPost } from "@/lib/blog";
 
 interface BlogArticleProps {
   post: BlogPost;
@@ -22,6 +22,7 @@ export default function BlogArticle({ post: article }: BlogArticleProps) {
     }
   };
 
+  const headerImage = article.heroImage || article.coverImage;
   const titleWords = article.title.split(" ");
   const lastWord = titleWords.pop();
   const mainTitle = titleWords.join(" ");
@@ -176,18 +177,20 @@ export default function BlogArticle({ post: article }: BlogArticleProps) {
         </MotionFadeIn>
 
         {/* Featured Hero Article Image - Full width of container */}
-        <MotionFadeIn delay={0.4} direction="up" distance={25} className="w-full">
-          <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] md:aspect-[16/8] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
-            <Image
-              src={article.heroImage || article.coverImage || FALLBACK_IMAGE}
-              alt={article.title}
-              fill
-              priority
-              className="object-cover object-center"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
-          </div>
-        </MotionFadeIn>
+        {headerImage && (
+          <MotionFadeIn delay={0.4} direction="up" distance={25} className="w-full">
+            <div className="relative w-full aspect-[16/9] sm:aspect-[16/8.5] md:aspect-[16/8] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.8)]">
+              <Image
+                src={headerImage}
+                alt={article.title}
+                fill
+                priority
+                className="object-cover object-center"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
+            </div>
+          </MotionFadeIn>
+        )}
 
         {/* Article body — HTML from the admin rich-text editor, sanitized by the API on save */}
         <MotionFadeIn delay={0.2} direction="up">

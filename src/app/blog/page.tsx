@@ -8,9 +8,6 @@ import BlogGridSection from "@/components/blog/BlogGridSection";
 import BlogSubscribeSection from "@/components/blog/BlogSubscribeSection";
 import { getCategories, getFeaturedPost, getPosts } from "@/lib/blog";
 
-// Re-fetched at most every 5 minutes; the API also triggers /api/revalidate on every change.
-export const revalidate = 300;
-
 export const metadata: Metadata = {
   title: "Blog & Insights | Thynkspire",
   description:

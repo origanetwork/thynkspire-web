@@ -74,7 +74,7 @@ export default function ConsultationCTA() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Unknown@gmail.com"
+                    placeholder="support@thynkspire.com"
                     required
                     className="w-full sm:w-[280px] lg:w-[300px] rounded-full border-2 border-white/30 bg-white/20 px-5 py-3.5 pr-20 text-sm font-poppins text-white placeholder-slate-200 focus:outline-none focus:border-[#00BF62] backdrop-blur-md transition-all shadow-inner"
                   />

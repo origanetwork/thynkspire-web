@@ -6,23 +6,10 @@ import Footer from "@/components/Footer";
 import StickyContactWidget from "@/components/StickyContactWidget";
 import LatestBlog from "@/components/LatestBlog";
 import BlogArticle from "@/components/blog/BlogArticle";
-import { getPost, getSlugs } from "@/lib/blog";
+import { getPost } from "@/lib/blog";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
-}
-
-// Re-fetched at most every 5 minutes; the API also triggers /api/revalidate on every change.
-export const revalidate = 300;
-
-/** Pre-renders published posts at build time; newer slugs render on first visit. */
-export async function generateStaticParams() {
-  try {
-    return (await getSlugs()).map((slug) => ({ slug }));
-  } catch (err) {
-    console.error("Blog slugs unavailable at build time:", err);
-    return [];
-  }
 }
 
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {

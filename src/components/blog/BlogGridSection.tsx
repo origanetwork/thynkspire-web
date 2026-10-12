@@ -6,7 +6,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "@/components/MotionWrapper";
-import { FALLBACK_IMAGE, formatBlogDate, type BlogCategory, type BlogPostSummary } from "@/lib/blog";
+import { formatBlogDate, type BlogCategory, type BlogPostSummary } from "@/lib/blog";
 
 const ALL = "all";
 
@@ -91,12 +91,14 @@ export default function BlogGridSection({ posts, categories }: BlogGridSectionPr
                     {/* Blog Image Container with Bottom-Right Category Pill */}
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="relative w-full h-[220px] sm:h-[230px] rounded-[16px] overflow-hidden border border-white/10 group-hover:border-[#00BF63]/60 transition-all duration-300">
-                        <Image
-                          src={post.coverImage || FALLBACK_IMAGE}
-                          alt={post.title}
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        />
+                        {post.coverImage && (
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                          />
+                        )}
 
                         {/* Category Pill attached near bottom right */}
                         <div className="absolute right-0 bottom-0 bg-white text-black backdrop-blur-md px-4 py-1.5 rounded-tl-[14px] rounded-br-[16px] shadow-lg">

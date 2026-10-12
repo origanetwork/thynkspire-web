@@ -1,11 +1,7 @@
 import { API_URL } from "./api";
 
 // Blog content comes from the API (managed in the admin console). These helpers run on the
-// server only: responses are cached for REVALIDATE seconds and dropped immediately when the
-// API calls /api/revalidate after an admin edits a post.
-
-const REVALIDATE = 300;
-export const BLOG_TAG = "blog";
+// server only and are never cached: every page load reads the current posts.
 
 export interface BlogCategory {
   id: string;
@@ -41,16 +37,13 @@ export interface BlogPost extends BlogPostSummary {
   metaDescription: string | null;
 }
 
-/** Shown when a post has no cover image. */
-export const FALLBACK_IMAGE = "/blog/blog.jpeg";
-
 export const formatBlogDate = (d: string | null) =>
   d ? new Date(d).toLocaleDateString("en-US", { month: "long", day: "2-digit", year: "numeric", timeZone: "Asia/Kolkata" }) : "";
 
-async function get<T>(path: string, tags: string[] = []): Promise<T | null> {
-  const res = await fetch(`${API_URL}/v1/blog${path}`, { next: { revalidate: REVALIDATE, tags: [BLOG_TAG, ...tags] } });
+async function get<T>(path: string): Promise<T | null> {
+  const res = await fetch(`${API_URL}/v1/blog${path}`, { cache: "no-store" });
   if (res.status === 404) return null;
-  // Throwing keeps the previously generated page in place instead of caching an empty one.
+  // Throwing shows the error page rather than an empty blog.
   if (!res.ok) throw new Error(`Blog API ${path} responded ${res.status}`);
   return (await res.json()) as T;
 }
@@ -68,16 +61,11 @@ export async function getFeaturedPost() {
 }
 
 export async function getPost(slug: string) {
-  return get<{ post: BlogPost; related: BlogPostSummary[] }>(`/posts/${encodeURIComponent(slug)}`, [`${BLOG_TAG}:${slug}`]);
+  return get<{ post: BlogPost; related: BlogPostSummary[] }>(`/posts/${encodeURIComponent(slug)}`);
 }
 
 export async function getCategories() {
   const data = await get<{ items: BlogCategory[] }>("/categories");
-  return data?.items ?? [];
-}
-
-export async function getSlugs() {
-  const data = await get<{ items: string[] }>("/slugs");
   return data?.items ?? [];
 }
 

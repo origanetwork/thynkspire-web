@@ -133,7 +133,7 @@ export default function TeacherLogin() {
                   </button>
                 )}
               </p>
-              <p className="text-xs text-slate-500">OTP valid for 5 minutes · max 3 attempts</p>
+              <p className="text-xs text-slate-500">OTP valid for 5 minutes</p>
             </form>
           )}
         </div>

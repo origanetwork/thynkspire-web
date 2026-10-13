@@ -6,7 +6,7 @@ import { MotionFadeIn, MotionText } from "../MotionWrapper";
 
 export default function Whocanjoin() {
   return (
-    <section className="relative w-full text-white py-16 sm:py-24 overflow-hidden">
+    <section className="relative w-full text-white sm:py-10 overflow-hidden">
       {/* Ambient background glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] sm:w-[700px] h-[350px] bg-[#00BF62]/8 blur-[160px] -z-10 pointer-events-none" />
 

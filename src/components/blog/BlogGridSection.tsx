@@ -6,19 +6,22 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiArrowUpRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText, MotionStagger, MotionStaggerItem } from "@/components/MotionWrapper";
-import { blogPosts, BlogPost } from "@/data/blogPosts";
+import { formatBlogDate, type BlogCategory, type BlogPostSummary } from "@/lib/blog";
 
-const CATEGORIES = ["All", "News", "Awareness", "Success Stories", "Updates"];
+const ALL = "all";
 
-export default function BlogGridSection() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+interface BlogGridSectionProps {
+  posts: BlogPostSummary[];
+  categories: BlogCategory[];
+}
+
+export default function BlogGridSection({ posts, categories }: BlogGridSectionProps) {
+  const [selectedCategory, setSelectedCategory] = useState(ALL);
   const [visibleCount, setVisibleCount] = useState(3);
+  const filters = [{ slug: ALL, name: "All" }, ...categories];
 
   // Filter posts based on selected category
-  const filteredPosts = blogPosts.filter((post) => {
-    if (selectedCategory === "All") return true;
-    return post.category.toLowerCase() === selectedCategory.toLowerCase();
-  });
+  const filteredPosts = posts.filter((post) => selectedCategory === ALL || post.category.slug === selectedCategory);
 
   const displayedPosts = filteredPosts.slice(0, visibleCount);
   const hasMore = filteredPosts.length > visibleCount;
@@ -46,13 +49,13 @@ export default function BlogGridSection() {
           {/* Filter Pills */}
           <MotionFadeIn delay={0.2} direction="left" distance={20}>
             <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto pb-2 md:pb-0 scrollbar-none">
-              {CATEGORIES.map((category) => {
-                const isActive = selectedCategory === category;
+              {filters.map((category) => {
+                const isActive = selectedCategory === category.slug;
                 return (
                   <button
-                    key={category}
+                    key={category.slug}
                     onClick={() => {
-                      setSelectedCategory(category);
+                      setSelectedCategory(category.slug);
                       setVisibleCount(3);
                     }}
                     className={`px-4 sm:px-5 py-1.5 sm:py-2 rounded-full font-poppins text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap cursor-pointer ${
@@ -61,7 +64,7 @@ export default function BlogGridSection() {
                         : "bg-[#101411] text-zinc-300 border border-white/10 hover:border-[#00BF63]/50 hover:text-white"
                     }`}
                   >
-                    {category}
+                    {category.name}
                   </button>
                 );
               })}
@@ -88,17 +91,19 @@ export default function BlogGridSection() {
                     {/* Blog Image Container with Bottom-Right Category Pill */}
                     <Link href={`/blog/${post.slug}`} className="block">
                       <div className="relative w-full h-[220px] sm:h-[230px] rounded-[16px] overflow-hidden border border-white/10 group-hover:border-[#00BF63]/60 transition-all duration-300">
-                        <Image
-                          src={post.image}
-                          alt={post.title}
-                          fill
-                          className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                        />
+                        {post.coverImage && (
+                          <Image
+                            src={post.coverImage}
+                            alt={post.title}
+                            fill
+                            className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                          />
+                        )}
 
                         {/* Category Pill attached near bottom right */}
                         <div className="absolute right-0 bottom-0 bg-white text-black backdrop-blur-md px-4 py-1.5 rounded-tl-[14px] rounded-br-[16px] shadow-lg">
                           <span className="font-clash text-xs font-semibold text-slate-900">
-                            {post.category}
+                            {post.category.name}
                           </span>
                         </div>
                       </div>
@@ -108,7 +113,7 @@ export default function BlogGridSection() {
                     <div className="space-y-2.5 px-2 pb-2 flex-1 flex flex-col justify-between">
                       <div className="space-y-2">
                         <span className="font-poppins text-xs font-medium text-slate-400 block">
-                          {post.date}
+                          {formatBlogDate(post.publishedAt)}
                         </span>
 
                         <Link href={`/blog/${post.slug}`}>
@@ -132,13 +137,17 @@ export default function BlogGridSection() {
               </MotionStagger>
             ) : (
               <div className="text-center py-16 space-y-3">
-                <p className="font-clash text-xl text-zinc-400">No articles found in this category.</p>
+                <p className="font-clash text-xl text-zinc-400">
+                  {posts.length ? "No articles found in this category." : "No articles published yet. Check back soon."}
+                </p>
+                {posts.length > 0 && (
                 <button
-                  onClick={() => setSelectedCategory("All")}
+                  onClick={() => setSelectedCategory(ALL)}
                   className="font-poppins text-sm text-[#00BF63] underline"
                 >
                   View all articles
                 </button>
+                )}
               </div>
             )}
           </motion.div>

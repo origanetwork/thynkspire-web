@@ -6,41 +6,49 @@ import Footer from "@/components/Footer";
 import StickyContactWidget from "@/components/StickyContactWidget";
 import LatestBlog from "@/components/LatestBlog";
 import BlogArticle from "@/components/blog/BlogArticle";
-import { blogPosts, getBlogPost } from "@/data/blogPosts";
+import { getPost } from "@/lib/blog";
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
-}
-
 export async function generateMetadata({ params }: BlogPostPageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const data = await getPost(slug);
 
-  if (!post) {
+  if (!data) {
     return {
       title: "Article Not Found | Thynkspire",
     };
   }
 
+  const { post } = data;
+  const title = post.metaTitle || post.title;
+  const description = post.metaDescription || post.subtitle;
+  const image = post.coverImage || post.heroImage;
   return {
-    title: `${post.title} | Thynkspire`,
-    description: post.subtitle,
+    title: `${title} | Thynkspire`,
+    description,
+    openGraph: {
+      type: "article",
+      title,
+      description,
+      publishedTime: post.publishedAt ?? undefined,
+      authors: [post.author.name],
+      images: image ? [{ url: image }] : undefined,
+    },
+    twitter: { card: image ? "summary_large_image" : "summary", title, description, images: image ? [image] : undefined },
   };
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  const data = await getPost(slug);
 
-  if (!post) {
+  if (!data) {
     notFound();
   }
+  const { post, related } = data;
 
   return (
     <main className="relative min-h-screen bg-black text-white selection:bg-[#00BF62] selection:text-black overflow-x-hidden">
@@ -59,14 +67,17 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
         <BlogArticle post={post} />
 
         {/* Related Articles Section */}
-        <div className="border-t border-white/10 mt-8">
-          <LatestBlog
-            title="Related Articles"
-            showSubtitle={false}
-            showButton={false}
-            className="pt-12 pb-24"
-          />
-        </div>
+        {related.length > 0 && (
+          <div className="border-t border-white/10 mt-8">
+            <LatestBlog
+              posts={related}
+              title="Related Articles"
+              showSubtitle={false}
+              showButton={false}
+              className="pt-12 pb-24"
+            />
+          </div>
+        )}
       </div>
 
       {/* Footer */}

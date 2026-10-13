@@ -263,7 +263,7 @@ export default function Hero() {
                         {/* Action Row Container */}
                         <MotionFadeIn delay={0.45} direction="up" distance={25} className="w-full max-w-[439px] min-h-[60px] sm:h-[74px] flex flex-wrap sm:flex-nowrap items-center gap-4 sm:gap-[26px] opacity-100">
                             {/* Get Started Button */}
-                            <Link href="/contact">
+                            <Link href="/thynkx/school-registration">
                                 <button
                                     className="group flex items-center justify-between shrink-0 transition-all duration-300 hover:border-[#00BF62] w-[170px] sm:w-[193px] h-[54px] sm:h-[63px] px-3 sm:px-[6px] py-[6px] rounded-[38px] border border-white bg-transparent cursor-pointer"
                                 >

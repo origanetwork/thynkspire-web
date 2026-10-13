@@ -5,14 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { FiArrowRight } from "react-icons/fi";
 import { MotionFadeIn, MotionText } from "@/components/MotionWrapper";
-import { BlogPost, getDefaultPost } from "@/data/blogPosts";
+import { formatBlogDate, type BlogPostSummary } from "@/lib/blog";
 
 interface BlogHeroSectionProps {
-  featuredPost?: BlogPost;
+  featuredPost: BlogPostSummary | null;
 }
 
-export default function BlogHeroSection({ featuredPost }: BlogHeroSectionProps) {
-  const post = featuredPost || getDefaultPost();
+export default function BlogHeroSection({ featuredPost: post }: BlogHeroSectionProps) {
 
   return (
     <section className="relative z-10 pt-32 sm:pt-40 pb-12 px-4 sm:px-6 lg:px-8 max-w-[1353px] 2xl:max-w-[1440px] mx-auto">
@@ -80,19 +79,22 @@ export default function BlogHeroSection({ featuredPost }: BlogHeroSectionProps) 
         </div>
 
         {/* Main Featured Blog Post Card */}
+        {post && (
         <MotionFadeIn delay={0.35} direction="up" distance={30}>
           <Link href={`/blog/${post.slug}`} className="group block">
             <div className="relative w-full rounded-[24px] sm:rounded-[28px] lg:rounded-[36px] border border-[#00BF63]/35 bg-[#0b0e0c] shadow-[0_0_35px_rgba(0,191,99,0.18)] group-hover:border-[#00BF63]/60 group-hover:shadow-[0_0_50px_rgba(0,191,99,0.28)] transition-all duration-500 overflow-hidden">
               <div className="flex flex-col lg:flex-row min-h-[360px] lg:min-h-[460px] xl:min-h-[500px]">
                 {/* Left Side: Full height image flush to left edge */}
                 <div className="relative w-full lg:w-[48%] xl:w-[46%] h-[260px] sm:h-[340px] lg:h-auto shrink-0 overflow-hidden">
-                  <Image
-                    src={post.heroImage || post.image}
-                    alt={post.title}
-                    fill
-                    priority
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
-                  />
+                  {post.coverImage && (
+                    <Image
+                      src={post.coverImage}
+                      alt={post.title}
+                      fill
+                      priority
+                      className="object-cover object-center group-hover:scale-105 transition-transform duration-700"
+                    />
+                  )}
                 </div>
 
                 {/* Right Side: Card Details with padding */}
@@ -100,7 +102,7 @@ export default function BlogHeroSection({ featuredPost }: BlogHeroSectionProps) 
                   <div className="space-y-4 lg:space-y-6">
                     {/* Category Tag */}
                     <div className="font-poppins text-xs sm:text-sm font-semibold tracking-wider text-[#00BF63]">
-                      <span>Featured / {post.category.replace("AI & ", "")}</span>
+                      <span>Featured / {post.category.name.replace("AI & ", "")}</span>
                     </div>
 
                     {/* Title */}
@@ -117,7 +119,7 @@ export default function BlogHeroSection({ featuredPost }: BlogHeroSectionProps) 
                   {/* Divider Line and Footer */}
                   <div className="pt-4 lg:pt-6 border-t border-white/10 flex items-center justify-between">
                     <span className="font-poppins text-xs sm:text-sm text-slate-400">
-                      {post.date}
+                      {formatBlogDate(post.publishedAt)}
                     </span>
 
                     <div className="inline-flex items-center gap-2 font-poppins text-xs sm:text-sm lg:text-base font-semibold text-[#00BF63] group-hover:translate-x-1.5 transition-transform duration-300">
@@ -130,6 +132,7 @@ export default function BlogHeroSection({ featuredPost }: BlogHeroSectionProps) 
             </div>
           </Link>
         </MotionFadeIn>
+        )}
       </div>
     </section>
   );

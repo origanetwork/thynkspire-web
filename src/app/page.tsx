@@ -7,8 +7,11 @@ import FeaturedEvents from "@/components/FeaturedEvents";
 import LatestBlog from "@/components/LatestBlog";
 import ConsultationCTA from "@/components/ConsultationCTA";
 import Footer from "@/components/Footer";
+import { getLatestPostsSafe } from "@/lib/blog";
 
-export default function Home() {
+export default async function Home() {
+  const latestPosts = await getLatestPostsSafe(3);
+
   return (
     <main className="relative min-h-screen bg-black text-white selection:bg-[#00BF62] selection:text-black overflow-hidden">
       <Header />
@@ -24,7 +27,7 @@ export default function Home() {
       </div>
         <OurPrograms />
         <FeaturedEvents />
-        <LatestBlog />
+        <LatestBlog posts={latestPosts} />
         <ConsultationCTA />
       <Footer />
     </main>

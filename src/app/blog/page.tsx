@@ -6,6 +6,7 @@ import StickyContactWidget from "@/components/StickyContactWidget";
 import BlogHeroSection from "@/components/blog/BlogHeroSection";
 import BlogGridSection from "@/components/blog/BlogGridSection";
 import BlogSubscribeSection from "@/components/blog/BlogSubscribeSection";
+import { getCategories, getFeaturedPost, getPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Blog & Insights | Thynkspire",
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
     "Explore the latest news, awareness content, success stories, and updates from Thynkspire.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const [featured, posts, categories] = await Promise.all([getFeaturedPost(), getPosts(), getCategories()]);
+
   return (
     <main className="relative min-h-screen bg-black text-white selection:bg-[#00BF62] selection:text-black overflow-x-hidden">
       {/* Universal Navigation Header */}
@@ -28,10 +31,10 @@ export default function BlogPage() {
         }}
       >
         {/* Top Hero with Featured Blog Card */}
-        <BlogHeroSection />
+        <BlogHeroSection featuredPost={featured} />
 
         {/* Blog Posts Grid with Category Filter */}
-        <BlogGridSection />
+        <BlogGridSection posts={posts} categories={categories} />
 
         {/* Stay Updated Newsletter Subscription */}
         <BlogSubscribeSection />

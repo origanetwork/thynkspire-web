@@ -40,7 +40,7 @@ export default function TeamDetailPage() {
         )}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         {team.students.map((s) => (
           <Card key={s.id} title={`Team member ${s.position}`} action={<Badge>Class {s.classLevel} {s.division}</Badge>}>
             <div className="flex items-center gap-3 mb-4">
@@ -61,7 +61,7 @@ export default function TeamDetailPage() {
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <Card title="Payment">
           {p ? (
             <InfoRows

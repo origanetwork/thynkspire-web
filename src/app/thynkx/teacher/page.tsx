@@ -47,7 +47,7 @@ export default function TeacherDashboardPage() {
   const classes = `${data.allowedClasses[0]}–${data.allowedClasses[data.allowedClasses.length - 1]}`;
 
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-6 sm:space-y-8 min-w-0">
       <PageHeading subtitle={`Here's your ThynkX summary for ${data.school.name} · ${data.coordinator.section === "SECONDARY" ? "Secondary" : "Higher Secondary"} section`} />
 
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
@@ -56,7 +56,7 @@ export default function TeacherDashboardPage() {
         <Stat icon={FiCreditCard} label="Amount paid" value={rupees(data.stats.amountPaidPaise)} sub={`${data.stats.successfulPayments} successful payments`} />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         <Card title="Share with students">
           <p className="-mt-2 mb-4 text-sm text-slate-400">Students can register teams themselves using this code or link — no login needed.</p>
           {!data.acceptSelfRegistration && (

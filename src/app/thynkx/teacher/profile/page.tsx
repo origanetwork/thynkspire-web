@@ -11,7 +11,7 @@ import { CoordinatorSchema, mobile as mobileSchema } from "@/lib/schemas";
 import { useCountdown } from "@/lib/hooks";
 import { useTeacher } from "@/components/teacher/TeacherShell";
 import ShareCard from "@/components/teacher/ShareCard";
-import { Alert, Button, Card, Checkbox, Field, InfoRows, Input, LoadingBlock, OtpInput, PhoneInput, TextArea } from "@/components/registration/ui";
+import { Alert, Button, Card, Checkbox, Field, InfoRows, Input, LoadingBlock, OtpInput, PhoneInput } from "@/components/registration/ui";
 
 type Profile = {
   school: { name: string; address: string; district: string; pincode: string; board: keyof typeof BOARD_LABEL; type: keyof typeof SCHOOL_TYPE_LABEL; principalName: string; principalPhone: string; baseCode: string };
@@ -31,8 +31,6 @@ export default function ProfilePage() {
   const [data, setData] = useState<Profile | null>(null);
   const [editing, setEditing] = useState(false);
   const [changingMobile, setChangingMobile] = useState(false);
-  const [requesting, setRequesting] = useState(false);
-  const [message, setMessage] = useState("");
   const [notice, setNotice] = useState<{ tone: "success" | "error"; text: string } | null>(null);
 
   const load = useCallback(() => api<Profile>("/teacher/profile").then(setData), []);
@@ -69,30 +67,12 @@ export default function ProfilePage() {
     }
   };
 
-  const sendChangeRequest = async () => {
-    try {
-      await api("/teacher/school-change-request", { method: "POST", body: { message } });
-      setRequesting(false);
-      setMessage("");
-      setNotice({ tone: "success", text: "Your request was sent to the ThynkX team." });
-    } catch (e) {
-      setNotice({ tone: "error", text: errorMessage(e) });
-    }
-  };
-
   return (
     <div className="space-y-6">
       {notice && <Alert tone={notice.tone}>{notice.text}</Alert>}
 
       <div className="grid lg:grid-cols-2 gap-4 sm:gap-6">
-        <Card
-          title="School details"
-          action={
-            <Button variant="ghost" size="sm" onClick={() => setRequesting((r) => !r)}>
-              Request change
-            </Button>
-          }
-        >
+        <Card title="School details">
           <InfoRows
             rows={[
               ["School name", data.school.name],
@@ -102,16 +82,6 @@ export default function ProfilePage() {
               ["Base code", data.school.baseCode],
             ]}
           />
-          {requesting && (
-            <div className="mt-5 space-y-3">
-              <Field label="What should be changed?">
-                <TextArea value={message} onChange={(e) => setMessage(e.target.value)} placeholder="e.g. Principal name should be …" />
-              </Field>
-              <Button size="sm" disabled={message.trim().length < 10} onClick={sendChangeRequest}>
-                Send request
-              </Button>
-            </div>
-          )}
         </Card>
 
         <Card

@@ -111,7 +111,6 @@ export default function RegisterTeamPage() {
                   reg={(f) => register(`students.${i as 0 | 1}.${f}`)}
                   errors={errors.students?.[i]}
                   allowedClasses={allowed}
-                  parentHint="Confirmation and ticket are sent to your WhatsApp"
                 />
               </Card>
             ))}

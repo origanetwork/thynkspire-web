@@ -136,7 +136,7 @@ export default function Footer() {
             </a>
  
             <a
-              href="https://www.google.com/maps/dir/?api=1&destination=Snehatheeram,+Myladikunnummal,+Mayanad,+Kozhikode,+Kerala+673008"
+              href="https://www.google.com/maps/dir/?api=1&destination=Gandhinagar,+Kathrikadavu,+Kochi,+Kerala+682017"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-3 hover:text-[#00BF63] transition-colors"

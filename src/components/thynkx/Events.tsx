@@ -59,9 +59,9 @@ function AnimatedStat({
 export default function ThynkxEvents() {
   const stats = [
     { value: 500, suffix: "+", label: "Schools" },
-    { value: 20000, suffix: "+", label: "Teams" },
-    { value: 3, suffix: "", label: "Levels" },
-    { prefix: "₹", value: 10, suffix: "L+", label: "Prizes" },
+    { value: 15000, suffix: "+", label: "Teams" },
+    { value: 4, suffix: "", label: "Levels" },
+    { prefix: "₹", value: 15, suffix: "L+", label: "Worth Prizes & Gifts" },
   ];
 
   return (
@@ -125,11 +125,11 @@ export default function ThynkxEvents() {
           </div>
 
           {/* Layer 3: Center Main Featured Card (2.jpg) - Elevated with thick crisp white border */}
-          <div className="relative z-10 w-full sm:w-[88%] lg:w-[82%] max-w-[880px] h-[380px] sm:h-[420px] lg:h-[460px] overflow-hidden border-[3.5px] sm:border-[4px] border-white shadow-[0_25px_60px_rgba(0,0,0,0.95)] flex flex-col justify-end group">
+          <div className="relative z-10 w-full sm:w-[88%] lg:w-[82%] max-w-[880px] overflow-hidden border-[3.5px] sm:border-[4px] border-white shadow-[0_25px_60px_rgba(0,0,0,0.95)] flex flex-col group">
             {/* Main Background Image */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
+            <div className="relative w-full aspect-video z-0 overflow-hidden">
               <Image
-                src="/thynkx/2.jpg"
+                src="/thynkx/Group-1.png"
                 alt="Thynk X Students Competing"
                 fill
                 className="object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
@@ -138,18 +138,19 @@ export default function ThynkxEvents() {
             </div>
 
             {/* Full Width Glassmorphic Overlay Panel at Bottom */}
-            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 flex flex-col gap-3 sm:gap-4 bg-[#00000040] backdrop-blur-[18.3px] border-t border-white/20 shadow-2xl">
+            <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-3.5 sm:py-5 flex flex-col gap-3 sm:gap-4 bg-black/80 border-t border-white/20 shadow-2xl">
+
               {/* Event Info & Button Row */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                 <div className="font-poppins text-xs sm:text-[13px] text-white/95 font-medium leading-relaxed drop-shadow-md max-w-xl">
-                  <p>Registration Opens: Sept 15, 2026 · Grand Finale: Dec 6, 2026 ·</p>
+                  <p>Registration Opens: October 10, 2026 - Grand Finale: January 17, 2027 ·</p>
                   <p className="text-white/80">
                     Inter-School Competitions across three regional rounds.
                   </p>
                 </div>
 
                 <div className="shrink-0">
-                  <Link href="#details">
+                  <Link href="/thynkx/login">
                     <motion.button
                       whileHover={{ scale: 1.03 }}
                       whileTap={{ scale: 0.97 }}

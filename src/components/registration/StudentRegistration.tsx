@@ -277,7 +277,7 @@ export default function StudentRegistration() {
             <CodeHighlight label="Your Team ID" value={t.teamCode ?? ""}>
               <CopyButton value={t.teamCode ?? ""} label="Copy Team ID" />
             </CodeHighlight>
-            <div className="grid sm:grid-cols-2 gap-x-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8">
               <InfoRows
                 rows={[
                   ["School", t.school.name],
@@ -450,7 +450,7 @@ export default function StudentRegistration() {
           title: STEP_HEAD[Math.min(step, 4)][0],
           subtitle: STEP_HEAD[Math.min(step, 4)][1],
           body: (
-            <div className="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-5 lg:gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] gap-5 lg:gap-6">
               <div className="space-y-3">
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm font-semibold text-white">Team</p>

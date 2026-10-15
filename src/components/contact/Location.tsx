@@ -90,10 +90,10 @@ export default function Location() {
                     Thynkspire Edu Experience Hub
                   </h3>
                   <p className="font-poppins text-[11px] sm:text-xs text-slate-300 font-normal leading-tight">
-                    1st Floor, 18/1283, Snehatheeram, Myladikunnummal, Near Health Centre Mayanad, Mayanad, Kozhikode, Kerala – 673008, India
-                  </p>
+                    Thynkspire Edu Experience Hub , First floor , Gandhinagar , Kathrikadav , Ernakulam, Kerala - 682017 , India
+                  </p> 
                 </div>
-
+ 
                 {/* Get Directions Action Button */}
                 <div className="pt-0.5 sm:pt-1">
                   <Link

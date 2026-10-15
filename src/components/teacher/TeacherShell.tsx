@@ -190,7 +190,7 @@ export default function TeacherShell({ children }: { children: React.ReactNode }
               </div>
             </div>
           </header>
-          <main className="px-4 sm:px-8 py-6 sm:py-10 max-w-[1280px]">{children}</main>
+          <main className="px-4 sm:px-8 py-6 sm:py-10 max-w-[1280px] min-w-0">{children}</main>
         </div>
 
         {/* Logout confirmation */}

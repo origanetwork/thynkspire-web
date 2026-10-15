@@ -25,7 +25,7 @@ export function Card({
   padded?: boolean;
 }) {
   return (
-    <section className={clsx("rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]", padded && "p-5 sm:p-7", className)}>
+    <section className={clsx("min-w-0 rounded-[24px] border border-white/10 bg-white/[0.04] backdrop-blur-xl shadow-[0_20px_50px_rgba(0,0,0,0.5)]", padded && "p-5 sm:p-7", className)}>
       {(title || action) && (
         <div className={clsx("flex items-center justify-between gap-4", padded ? "mb-5" : "px-5 sm:px-7 pt-5 sm:pt-7 mb-4")}>
           {title && <h2 className="font-clash text-lg sm:text-xl font-semibold text-white">{title}</h2>}
@@ -428,7 +428,7 @@ export function OtpInput({ value, onChange, invalid, autoFocus }: { value: strin
   };
 
   return (
-    <div className="flex gap-2 sm:gap-3 justify-center">
+    <div className="flex gap-1.5 min-[400px]:gap-2 sm:gap-3 justify-center w-full">
       {digits.map((d, i) => (
         <input
           key={i}
@@ -466,7 +466,7 @@ export function OtpInput({ value, onChange, invalid, autoFocus }: { value: strin
             }
           }}
           className={clsx(
-            "w-11 h-13 sm:w-14 sm:h-16 rounded-xl border bg-black/50 text-center font-clash text-xl sm:text-2xl font-semibold text-white outline-none focus:border-[#00BF62] focus:ring-2 focus:ring-[#00BF62]/25",
+            "min-w-0 flex-1 max-w-11 sm:max-w-14 h-12 sm:h-16 rounded-xl border bg-black/50 text-center font-clash text-xl sm:text-2xl font-semibold text-white outline-none focus:border-[#00BF62] focus:ring-2 focus:ring-[#00BF62]/25",
             invalid ? "border-red-500/60" : "border-white/15",
           )}
         />
@@ -539,7 +539,7 @@ export function InfoRows({ rows, className }: { rows: [React.ReactNode, React.Re
       {rows.map(([k, v], i) => (
         <div key={i} className="flex flex-col sm:flex-row sm:items-center gap-0.5 sm:gap-6 py-2.5 text-sm">
           <dt className="sm:w-44 shrink-0 text-slate-400">{k}</dt>
-          <dd className="text-white font-medium break-words">{v}</dd>
+          <dd className="min-w-0 text-white font-medium break-words">{v}</dd>
         </div>
       ))}
     </dl>

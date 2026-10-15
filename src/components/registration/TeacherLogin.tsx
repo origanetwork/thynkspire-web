@@ -72,7 +72,7 @@ export default function TeacherLogin() {
   if (checking) return <LoadingBlock />;
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center w-full min-w-0">
       <div className="relative hidden lg:block h-[520px] rounded-[28px] overflow-hidden border border-white/10">
         <Image src="/thynkx/hero.gif" alt="ThynkX quiz event" fill className="object-cover" unoptimized />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
@@ -84,8 +84,8 @@ export default function TeacherLogin() {
         </div>
       </div>
 
-      <div className="space-y-5">
-        <div className="rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-6 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+      <div className="space-y-5 min-w-0">
+        <div className="rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur-xl p-5 sm:p-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
           {stage === "mobile" ? (
             <form onSubmit={sendOtp} className="space-y-6" noValidate>
               <div>
@@ -144,12 +144,12 @@ export default function TeacherLogin() {
             <span className="w-11 h-11 shrink-0 rounded-2xl bg-[#00BF62]/15 border border-[#00BF62]/40 text-[#00BF62] flex items-center justify-center">
               <FiUsers className="w-5 h-5" />
             </span>
-            <div>
+            <div className="min-w-0">
               <h2 className="font-clash text-lg font-semibold text-white">Are you a student?</h2>
               <p className="mt-1 text-sm text-slate-400">Register your team with the school code from your teacher.</p>
             </div>
           </div>
-          <ButtonLink href="/thynkx/register" className="shrink-0">
+          <ButtonLink href="/thynkx/register" className="sm:shrink-0 w-full sm:w-auto">
             Register your team <FiArrowRight className="w-4 h-4" />
           </ButtonLink>
         </section>

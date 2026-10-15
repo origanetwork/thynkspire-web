@@ -134,7 +134,7 @@ export default function Footer() {
               <FiMail className="w-3.5 h-3.5 text-[#00BF63] shrink-0" />
               <span>support@thynkspire.com</span>
             </a>
-
+ 
             <a
               href="https://www.google.com/maps/dir/?api=1&destination=Snehatheeram,+Myladikunnummal,+Mayanad,+Kozhikode,+Kerala+673008"
               target="_blank"
@@ -143,9 +143,9 @@ export default function Footer() {
             >
               <FiMapPin className="w-3.5 h-3.5 text-[#00BF63] shrink-0 mt-0.5" />
               <span className="leading-tight">
-                1st Floor, 18/1283, Snehatheeram,<br />
-                Myladikunnummal, Near Health Centre Mayanad,<br />
-                Mayanad, Kozhikode, Kerala – 673008, India
+                Thynkspire Edu Experience Hub ,<br />
+                First floor , Gandhinagar , Kathrikadav ,<br />
+                Ernakulam, Kerala - 682017 , India
               </span>
             </a>
           </div>

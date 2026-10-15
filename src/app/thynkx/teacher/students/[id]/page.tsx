@@ -51,7 +51,7 @@ export default function StudentDetailPage() {
         </Button>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
         <Card title="Student details">
           <InfoRows
             rows={[
@@ -87,7 +87,7 @@ export default function StudentDetailPage() {
       </div>
 
       <Card title="Registration details">
-        <div className="grid md:grid-cols-2 gap-x-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8">
           <InfoRows
             rows={[
               ["Registered via", team.source === "TEACHER" ? "Teacher dashboard" : SOURCE_LABEL[team.source]],

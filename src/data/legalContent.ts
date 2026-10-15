@@ -17,7 +17,7 @@ export interface LegalDocument {
 export const companyDetails = {
   name: "ThynkSpire India Private Limited",
   address:
-    "1st Floor, 18/1283, Snehatheeram, Myladikunnummal, Near Health Centre Mayanad, Mayanad, Kozhikode, Kerala – 673008, India",
+    "Thynkspire Edu Experience Hub , First floor , Gandhinagar , Kathrikadav , Ernakulam, Kerala - 682017 , India",
   website: "www.thynkspire.com",
   email: "support@thynkspire.com",
 };
@@ -29,7 +29,7 @@ export const privacyPolicy: LegalDocument = {
   lastUpdated: LAST_UPDATED,
   intro: [
     "This Privacy Policy explains how ThynkSpire India Private Limited (“ThynkSpire”, “Company”, “we”, “us”, or “our”) collects, uses, stores, processes, shares, and protects information when you access our website, use our services, or use WhatsApp Business API and related communication services provided or facilitated by us.",
-    "Our website is www.thynkspire.com. ThynkSpire India Private Limited is a private limited company registered in India. Our principal place of business is 1st Floor, 18/1283, Snehatheeram, Myladikunnummal, Near Health Centre Mayanad, Mayanad, Kozhikode, Kerala – 673008, India.",
+    "Our website is www.thynkspire.com. ThynkSpire India Private Limited is a private limited company registered in India. Our principal place of business is Thynkspire Edu Experience Hub , First floor , Gandhinagar , Kathrikadav , Ernakulam, Kerala - 682017 , India",
     "By accessing or using our website or services, you acknowledge that you have read and understood this Privacy Policy.",
   ],
   sections: [
@@ -277,7 +277,7 @@ export const termsAndConditions: LegalDocument = {
     {
       title: "About ThynkSpire",
       paragraphs: [
-        "ThynkSpire India Private Limited is a private limited company registered in India. Our principal place of business is 1st Floor, 18/1283, Snehatheeram, Myladikunnummal, Near Health Centre Mayanad, Mayanad, Kozhikode, Kerala – 673008, India. Website: www.thynkspire.com.",
+        "ThynkSpire India Private Limited is a private limited company registered in India. Our principal place of business is Thynkspire Edu Experience Hub , First floor , Gandhinagar , Kathrikadav , Ernakulam, Kerala - 682017 , India Website: www.thynkspire.com.",
       ],
     },
     {
